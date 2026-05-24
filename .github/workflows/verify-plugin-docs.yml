@@ -1,0 +1,47 @@
+name: Verify bundled plugin docs
+
+# The SignalK plugin ships the built MkDocs site under plugin/public/.
+# This job rebuilds it and fails if the committed copy is stale, so a
+# developer is reminded to run `npm run build-docs` (in plugin/) and commit.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+      - 'plugin/public/**'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+      - 'plugin/public/**'
+  workflow_dispatch:
+
+jobs:
+  verify-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild bundled docs
+        run: mkdocs build --strict -d plugin/public/
+
+      - name: Check for drift
+        run: |
+          if [ -n "$(git status --porcelain -- plugin/public/)" ]; then
+            echo "::error::plugin/public/ is out of date. Run 'npm run build-docs' in plugin/ and commit the result."
+            git status --porcelain -- plugin/public/
+            git diff --stat -- plugin/public/
+            exit 1
+          fi
+          echo "plugin/public/ is up to date."
