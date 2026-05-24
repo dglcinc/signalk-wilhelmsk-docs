@@ -1,0 +1,56 @@
+site_name: WilhelmSK Documentation
+site_url: https://dglcinc.github.io/signalk-wilhelmsk-docs/
+site_description: User guide and developer documentation for WilhelmSK — marine instrument display for iOS, watchOS, tvOS, and CarPlay
+repo_url: https://github.com/dglcinc/signalk-wilhelmsk-docs
+repo_name: dglcinc/signalk-wilhelmsk-docs
+edit_uri: ""
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: light blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.tabs          # top-level nav as tabs
+    - navigation.tabs.sticky   # tabs stay visible on scroll
+    - navigation.sections      # group subsections in left nav
+    - navigation.top           # back-to-top button
+    - navigation.indexes       # section index pages
+    - search.highlight         # highlight search terms in results
+    - search.suggest           # autocomplete search
+    - toc.follow               # active anchor follows scroll
+    - content.code.copy        # copy button on code blocks
+
+nav:
+  - Home: index.md
+  - User Guide: user-guide.md
+  - For Contributors:
+    - Architecture: architecture.md
+    - Contributing: contributing.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - attr_list
