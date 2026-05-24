@@ -1,0 +1,54 @@
+const path = require('path')
+const express = require('express')
+
+const PLUGIN_ID = 'signalk-wilhelmsk-docs'
+const DOCS_MOUNT = '/wilhelmsk-docs'
+
+module.exports = function (app) {
+  const pkg = require('./package.json')
+  const publicDir = path.join(__dirname, 'public')
+
+  const plugin = {
+    id: PLUGIN_ID,
+    name: 'WilhelmSK Documentation',
+    description:
+      'Serves the WilhelmSK documentation site at ' +
+      DOCS_MOUNT +
+      '/ and exposes an info endpoint the WilhelmSK iOS app uses to detect the plugin.',
+
+    // No user-configurable options; the schema is intentionally empty.
+    schema: {
+      type: 'object',
+      properties: {}
+    },
+
+    start: function () {
+      // Serve the bundled MkDocs site as static files.
+      app.use(DOCS_MOUNT, express.static(publicDir))
+      app.debug && app.debug('Serving WilhelmSK docs from %s at %s', publicDir, DOCS_MOUNT)
+      app.setPluginStatus &&
+        app.setPluginStatus('Serving docs at ' + DOCS_MOUNT + '/')
+    },
+
+    stop: function () {
+      // express.static routes registered via app.use cannot be cleanly
+      // unregistered on the SignalK app; a server restart clears them.
+      app.setPluginStatus && app.setPluginStatus('Stopped')
+    }
+  }
+
+  // Detection endpoint. registerWithRouter mounts these routes under
+  // /plugins/signalk-wilhelmsk-docs/, so this responds at
+  // GET /plugins/signalk-wilhelmsk-docs/info
+  plugin.registerWithRouter = function (router) {
+    router.get('/info', function (req, res) {
+      res.json({
+        id: PLUGIN_ID,
+        version: pkg.version,
+        docsPath: DOCS_MOUNT + '/'
+      })
+    })
+  }
+
+  return plugin
+}

@@ -1,0 +1,29 @@
+{
+  "name": "signalk-wilhelmsk-docs",
+  "version": "0.1.0",
+  "description": "SignalK plugin that serves the WilhelmSK documentation site and an installation-detection endpoint for the WilhelmSK iOS app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "signalk-node-server-plugin",
+    "signalk-webapp",
+    "wilhelmsk",
+    "documentation"
+  ],
+  "author": "David Lewis",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dglcinc/signalk-wilhelmsk-docs.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "index.js",
+    "public/",
+    "README.md"
+  ]
+}
