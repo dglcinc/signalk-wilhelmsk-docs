@@ -1,0 +1,4115 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User guide and developer documentation for WilhelmSK — marine instrument display for iOS, watchOS, tvOS, and CarPlay">
+      
+      
+      
+        <link rel="canonical" href="https://dglcinc.github.io/signalk-wilhelmsk-docs/user-guide/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>User Guide - WilhelmSK Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wilhelmsk-user-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="WilhelmSK Documentation" class="md-header__button md-logo" aria-label="WilhelmSK Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            WilhelmSK Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dglcinc/signalk-wilhelmsk-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dglcinc/signalk-wilhelmsk-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  User Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../architecture/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  For Contributors
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="WilhelmSK Documentation" class="md-nav__button md-logo" aria-label="WilhelmSK Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    WilhelmSK Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dglcinc/signalk-wilhelmsk-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dglcinc/signalk-wilhelmsk-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-signalk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is SignalK?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-a-signalk-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running a SignalK Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-wilhelmsk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing WilhelmSK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-just-for-boats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not Just for Boats
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-a-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to a Data Source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connecting to a Data Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-types-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Types at a Glance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signalk-rest-websocket-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SignalK (REST + WebSocket Streaming)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ikommunicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iKommunicate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#victronvenus-mqtt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Victron/Venus MQTT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raymarine-mfd-bonjour-discovered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Raymarine MFD (Bonjour-Discovered)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-remotely-outside-the-boats-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting Remotely (Outside the Boat's Network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Tips
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ios-and-ipados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS and iPadOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iOS and iPadOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pages-and-the-gauge-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pages and the Gauge Grid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interacting-with-gauges-in-the-live-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interacting with Gauges in the Live View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-manager-and-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layout Manager and Editor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-layout-files-on-your-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing Layout Files on Your Computer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidebar-additional-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidebar: Additional Items
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipad-specific-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iPad-Specific Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetkit-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetKit Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Push Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watchos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        watchOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="watchOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-watch-gauges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring Watch Gauges
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-gauge-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Gauge Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complications-and-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complications and Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-quirks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Quirks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tvos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tvOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tvOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-app-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the App Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-vs-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations vs iOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigating-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigating the App
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-signalk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to SignalK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Pagination
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-layouts-from-iphone-or-ipad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring Layouts from iPhone or iPad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theme
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauge Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gauges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauges
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gauges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-and-removing-gauges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding and Removing Gauges
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-a-gauge-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing a Gauge Type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-screen-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full-Screen Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Display Modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-generic-gauge-any-signalk-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Generic Gauge (Any SignalK Path)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauge Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alarms-and-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alarms and Notifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alarms and Notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-alarm-indicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Alarm Indicator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-side-alarms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-Side Alarms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-zone-alarms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local Zone Alarms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anchor-alarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anchor Alarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-notifications_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Push Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Plugins
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-dependency-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin dependency matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-signalk-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom SignalK Paths
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom SignalK Paths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signalk-path-naming-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SignalK Path Naming Conventions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge-types-for-custom-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauge Types for Custom Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-a-generic-number-gauge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring a Generic Number Gauge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-home-hvac-and-utility-monitoring-with-pivac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example: Home HVAC and Utility Monitoring with pivac
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tips-for-working-with-custom-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips for Working with Custom Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    For Contributors
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    For Contributors
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-signalk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is SignalK?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-a-signalk-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running a SignalK Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-wilhelmsk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing WilhelmSK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-just-for-boats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not Just for Boats
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-a-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to a Data Source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connecting to a Data Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-types-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Types at a Glance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signalk-rest-websocket-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SignalK (REST + WebSocket Streaming)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ikommunicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iKommunicate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#victronvenus-mqtt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Victron/Venus MQTT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raymarine-mfd-bonjour-discovered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Raymarine MFD (Bonjour-Discovered)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-remotely-outside-the-boats-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting Remotely (Outside the Boat's Network)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Tips
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ios-and-ipados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS and iPadOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iOS and iPadOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pages-and-the-gauge-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pages and the Gauge Grid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interacting-with-gauges-in-the-live-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interacting with Gauges in the Live View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-manager-and-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layout Manager and Editor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-layout-files-on-your-computer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing Layout Files on Your Computer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sidebar-additional-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sidebar: Additional Items
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipad-specific-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iPad-Specific Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetkit-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetKit Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Push Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watchos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        watchOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="watchOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-watch-gauges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring Watch Gauges
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-gauge-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Gauge Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Rate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complications-and-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complications and Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-quirks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Quirks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tvos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tvOS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tvOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-app-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the App Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-vs-ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations vs iOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigating-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigating the App
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-signalk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to SignalK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Pagination
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-layouts-from-iphone-or-ipad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring Layouts from iPhone or iPad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theme
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauge Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gauges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauges
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gauges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-and-removing-gauges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding and Removing Gauges
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changing-a-gauge-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing a Gauge Type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-screen-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full-Screen Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Display Modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-generic-gauge-any-signalk-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Generic Gauge (Any SignalK Path)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauge Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alarms-and-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alarms and Notifications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alarms and Notifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-alarm-indicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Alarm Indicator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-side-alarms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-Side Alarms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-zone-alarms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local Zone Alarms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anchor-alarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anchor Alarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-notifications_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Push Notifications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Plugins
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Plugins">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugin-dependency-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin dependency matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing plugins
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-signalk-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom SignalK Paths
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom SignalK Paths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signalk-path-naming-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SignalK Path Naming Conventions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gauge-types-for-custom-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauge Types for Custom Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-a-generic-number-gauge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring a Generic Number Gauge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-home-hvac-and-utility-monitoring-with-pivac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example: Home HVAC and Utility Monitoring with pivac
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tips-for-working-with-custom-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips for Working with Custom Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="wilhelmsk-user-guide">WilhelmSK User Guide<a class="headerlink" href="#wilhelmsk-user-guide" title="Permanent link">&para;</a></h1>
+<p>Everything you need to set up and use WilhelmSK across all supported platforms.</p>
+<h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#connecting-to-a-data-source">Connecting to a Data Source</a></li>
+<li><a href="#ios-and-ipados">iOS and iPadOS</a></li>
+<li><a href="#watchos">watchOS</a></li>
+<li><a href="#tvos">tvOS</a></li>
+<li><a href="#gauges">Gauges</a></li>
+<li><a href="#alarms-and-notifications">Alarms and Notifications</a></li>
+<li><a href="#server-plugins">Server Plugins</a></li>
+<li><a href="#custom-signalk-paths">Custom SignalK Paths</a></li>
+</ul>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>WilhelmSK is a display client. Before you launch the app for the first time, you need a data source it can connect to. This guide covers everything you need to have in place.</p>
+<hr />
+<h3 id="what-is-signalk">What Is SignalK?<a class="headerlink" href="#what-is-signalk" title="Permanent link">&para;</a></h3>
+<p><a href="https://signalk.org">SignalK</a> is an open-source data server that aggregates readings from your boat's instruments — GPS, wind sensors, depth sounder, engine gauges, tank monitors, AIS, and more — and makes them available over your local network using a standard JSON protocol.</p>
+<p>WilhelmSK speaks SignalK. It connects to a running SignalK server, subscribes to the data streams you care about, and renders them as live gauges on your iPhone, iPad, Apple Watch, or Apple TV. Without a SignalK server (or compatible data source), the app has nothing to display.</p>
+<p>If you already have a SignalK server running on your boat and know its IP address or hostname, you can skip straight to the <a href="#connecting-to-a-data-source">Connecting to a Data Source</a> section.</p>
+<hr />
+<h3 id="running-a-signalk-server">Running a SignalK Server<a class="headerlink" href="#running-a-signalk-server" title="Permanent link">&para;</a></h3>
+<p>SignalK runs on any machine that supports Node.js. Common options on boats:</p>
+<p><strong>Raspberry Pi (most common)</strong>
+A dedicated Pi is the most popular choice. It draws very little power, handles the 24/7 server load easily, and can be wired directly to the boat's NMEA backbone. A Pi 3B+ or newer running Raspberry Pi OS is sufficient. The official installation instructions are at <a href="https://github.com/SignalK/signalk-server">https://github.com/SignalK/signalk-server</a>.</p>
+<p><strong>NAS or existing boat computer</strong>
+If you already have a network-attached storage device or a Linux/Windows machine running continuously, SignalK can run there. Anything that can run Node.js works.</p>
+<p><strong>Mac or PC on the same network</strong>
+A laptop or desktop on the boat's Wi-Fi is a valid option for testing or temporary use. You would not normally leave a laptop running 24/7 at the nav station, but it is a convenient way to try the setup before committing to a Pi.</p>
+<p><strong>iKommunicate gateway</strong>
+An iKommunicate device from Digital Yacht is a self-contained NMEA-to-SignalK bridge with its own built-in SignalK server. WilhelmSK supports its REST and streaming APIs directly with auto-discovery via Bonjour.</p>
+<hr />
+<h3 id="network-requirements">Network Requirements<a class="headerlink" href="#network-requirements" title="Permanent link">&para;</a></h3>
+<p>WilhelmSK discovers and connects to your SignalK server over Wi-Fi. Two things must be true:</p>
+<ul>
+<li>
+<p><strong>Same local network.</strong> Your iPhone or iPad and the SignalK server must be on the same LAN or Wi-Fi network. Connections across the internet or through a VPN are technically possible with the right port forwarding, but the typical case is a boat router or access point with everything on the same subnet.</p>
+</li>
+<li>
+<p><strong>mDNS/Bonjour works on your network.</strong> WilhelmSK can find your server automatically using Bonjour (mDNS). SignalK advertises itself on the local network, and the app picks it up without any manual configuration. Most routers support this; some enterprise or managed switches block mDNS between clients. If auto-discovery does not work, you can always enter the server's IP address and port manually — see <a href="#connecting-to-a-data-source">Connecting to a Data Source</a>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="device-requirements">Device Requirements<a class="headerlink" href="#device-requirements" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Minimum Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPhone / iPad</td>
+<td>iOS 13</td>
+</tr>
+<tr>
+<td>Apple Watch</td>
+<td>watchOS 10.6</td>
+</tr>
+<tr>
+<td>Apple TV</td>
+<td>tvOS 17.6</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="installing-wilhelmsk">Installing WilhelmSK<a class="headerlink" href="#installing-wilhelmsk" title="Permanent link">&para;</a></h3>
+<p>Search "WilhelmSK" on the App Store. The app is a universal binary — one purchase covers iPhone, iPad, and Apple TV. The Apple Watch app installs automatically from the iPhone app.</p>
+<hr />
+<h3 id="not-just-for-boats">Not Just for Boats<a class="headerlink" href="#not-just-for-boats" title="Permanent link">&para;</a></h3>
+<p>WilhelmSK works with any SignalK data source, not only marine instruments. SignalK is a generic key-value protocol with a defined path namespace; anything that can push data to a SignalK server can be displayed in the app.</p>
+<p>A concrete example is <a href="https://github.com/dglc/pivac">pivac</a>, a Raspberry Pi sensor collector for HVAC and home automation. pivac reads temperature sensors, relay states, thermostat data (via a Honeywell RedLink cloud API), hydronic pressure gauges, and power monitors, then pushes delta messages to a local SignalK server over WebSocket. WilhelmSK connects to the same server and displays all of that data using the same gauge system as a marine installation — water temperature gauges showing HVAC supply/return/outdoor temperatures, a switch bank showing relay states, and custom text gauges for thermostat setpoints.</p>
+<p>If you have sensors or automation equipment that can push data to SignalK, WilhelmSK can display it. See <a href="#custom-signalk-paths">Custom SignalK Paths</a> for how to configure gauges for non-marine SignalK paths.</p>
+<hr />
+<h2 id="connecting-to-a-data-source">Connecting to a Data Source<a class="headerlink" href="#connecting-to-a-data-source" title="Permanent link">&para;</a></h2>
+<p>WilhelmSK can connect to several types of data sources. The most common is a SignalK server, but the app also supports Victron/Venus devices, Raymarine MFDs, and others. This guide covers the four primary connection types in detail.</p>
+<hr />
+<h3 id="connection-types-at-a-glance">Connection Types at a Glance<a class="headerlink" href="#connection-types-at-a-glance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SignalK</td>
+<td>Most boat setups; connects to any SignalK server over your local network</td>
+</tr>
+<tr>
+<td>iKommunicate</td>
+<td>B&amp;G/Simrad users with an iKommunicate NMEA gateway</td>
+</tr>
+<tr>
+<td>Victron/Venus MQTT</td>
+<td>Victron Energy installations — monitoring batteries, inverters, solar</td>
+</tr>
+<tr>
+<td>Raymarine MFD</td>
+<td>Raymarine chart plotter owners who want phone/tablet as a secondary display</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="signalk-rest-websocket-streaming">SignalK (REST + WebSocket Streaming)<a class="headerlink" href="#signalk-rest-websocket-streaming" title="Permanent link">&para;</a></h3>
+<h4 id="what-it-is">What it is<a class="headerlink" href="#what-it-is" title="Permanent link">&para;</a></h4>
+<p>SignalK is an open marine data standard. A SignalK server (typically running on a Raspberry Pi, NAS, or boat computer) collects NMEA data from your instruments and makes it available over your local network. WilhelmSK connects to that server, subscribes to live data, and drives its gauges from the stream.</p>
+<p>Two protocols are used together:</p>
+<ul>
+<li><strong>REST</strong> — used at startup to discover the server's endpoints and fetch initial values.</li>
+<li><strong>WebSocket</strong> — used for live streaming of instrument data (deltas). This is how gauges update in real time.</li>
+</ul>
+<h4 id="auto-discovery-bonjour">Auto-discovery (Bonjour)<a class="headerlink" href="#auto-discovery-bonjour" title="Permanent link">&para;</a></h4>
+<p>If your SignalK server advertises itself via mDNS/Bonjour (which signalk-server-node does by default), WilhelmSK discovers it automatically. Open <strong>Settings → Connections</strong> and the server appears in the list within a few seconds. Tap it to connect — no manual entry required.</p>
+<p>The app browses for four service types: <code>_signalk-http._tcp</code>, <code>_signalk-https._tcp</code>, <code>_signalk-ws._tcp</code>, and <code>_signalk-wss._tcp</code>. Discovering any one of these is enough. Vessel name, type, and MMSI are read from the server's TXT record and shown in the connection list.</p>
+<p>Bonjour requires the phone/tablet to be on the same local network (same Wi-Fi or same VLAN) as the server. It does not work across VPN or different subnets without mDNS forwarding.</p>
+<h4 id="manual-connection">Manual connection<a class="headerlink" href="#manual-connection" title="Permanent link">&para;</a></h4>
+<p>If Bonjour discovery isn't available — for example, when connecting over a VPN or to a server on a different subnet — tap <strong>Add Connection → SignalK</strong> and enter the server's host and port manually.</p>
+<p>Fields to fill in:</p>
+<ul>
+<li><strong>Host</strong> — IP address or hostname of the server (e.g., <code>192.168.1.100</code> or <code>raspberrypi.local</code>)</li>
+<li><strong>REST port</strong> — typically <code>3000</code> for HTTP or <code>443</code> for HTTPS</li>
+<li><strong>WebSocket port</strong> — typically the same as the REST port</li>
+<li><strong>SSL</strong> — toggle on if your server uses HTTPS/WSS</li>
+</ul>
+<p>The app fetches the server's <code>/signalk</code> endpoint on first connect and auto-fills the REST and WebSocket endpoint paths. You rarely need to edit those fields.</p>
+<h4 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h4>
+<p>WilhelmSK supports three authentication modes for SignalK:</p>
+<p><strong>None</strong> — the default. Works if your server doesn't require authentication (common on private boat networks).</p>
+<p><strong>HTTP Basic</strong> — enter a username and password. Credentials are sent with each request using standard HTTP Basic authentication. The app also handles server certificate trust challenges, so self-signed certs work if you accept the prompt.</p>
+<p><strong>JWT token</strong> — if your server requires login (via <code>/signalk/v1/auth/login</code>), enter a username and password and the app will log in automatically on each connection, storing and reusing the JWT token. The token is sent as <code>Authorization: JWT &lt;token&gt;</code> on all subsequent requests.</p>
+<h4 id="icloud-sync-and-favorites">iCloud sync and favorites<a class="headerlink" href="#icloud-sync-and-favorites" title="Permanent link">&para;</a></h4>
+<p>Manual connections (ones you added by hand rather than discovered via Bonjour) are synced to iCloud. If you add a connection on your iPhone, it appears on your iPad automatically without re-entering the details.</p>
+<p>Each connection can be marked as a <strong>favorite</strong>. Favorites appear at the top of the connections list, making it easy to jump to your most-used server when you have multiple connections configured.</p>
+<hr />
+<h3 id="ikommunicate">iKommunicate<a class="headerlink" href="#ikommunicate" title="Permanent link">&para;</a></h3>
+<h4 id="what-it-is_1">What it is<a class="headerlink" href="#what-it-is_1" title="Permanent link">&para;</a></h4>
+<p>iKommunicate is a hardware gateway from B&amp;G/Simrad that bridges NMEA 0183 and NMEA 2000 instrument networks to SignalK over Wi-Fi. It acts as a SignalK server, but with a cloud-hosted endpoint rather than a local one.</p>
+<h4 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h4>
+<p>Choose iKommunicate if you have a B&amp;G or Simrad chartplotter/instrument system and purchased the iKommunicate gateway. It is plug-and-play: the gateway handles all the protocol translation, and WilhelmSK connects to it as if it were a local SignalK server.</p>
+<h4 id="how-to-configure">How to configure<a class="headerlink" href="#how-to-configure" title="Permanent link">&para;</a></h4>
+<p>Add a SignalK connection and enter <code>ikommunicate.cloud</code> as the host along with the port and credentials provided with your iKommunicate device. WilhelmSK detects this hostname and skips the normal server-endpoint discovery step, since iKommunicate's endpoint structure differs from a standard signalk-server-node installation.</p>
+<p>Authentication is username/password (HTTP Basic or JWT depending on your iKommunicate firmware version). Check the documentation that came with your device for the exact credentials format.</p>
+<hr />
+<h3 id="victronvenus-mqtt">Victron/Venus MQTT<a class="headerlink" href="#victronvenus-mqtt" title="Permanent link">&para;</a></h3>
+<p>Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks — via MQTT. WilhelmSK can connect directly to the local MQTT broker or through Victron's VRM cloud portal.</p>
+<h4 id="local-mqtt">Local MQTT<a class="headerlink" href="#local-mqtt" title="Permanent link">&para;</a></h4>
+<p><strong>What it is:</strong> A direct connection to the MQTT broker running on your Venus device on your local network.</p>
+<p><strong>When to use it:</strong> You're on the boat, connected to the same Wi-Fi as your Venus device. This gives the lowest latency and works without internet access.</p>
+<p><strong>How to configure:</strong> Tap <strong>Add Connection → Venus MQTT (Local)</strong>. Enter:
+- <strong>Host</strong> — IP address or hostname of your Venus device (e.g., <code>192.168.1.50</code> or <code>cerbo.local</code>)
+- <strong>Port</strong> — MQTT port, typically <code>1883</code>
+- <strong>Username / Password</strong> — leave blank if your Venus device doesn't require authentication; otherwise use the credentials set in Venus OS</p>
+<h4 id="vrm-cloud-victron-remote-monitoring">VRM Cloud (Victron Remote Monitoring)<a class="headerlink" href="#vrm-cloud-victron-remote-monitoring" title="Permanent link">&para;</a></h4>
+<p><strong>What it is:</strong> A connection through Victron's hosted VRM portal (<code>mqtt.victronenergy.com</code>) to your Venus device, tunneled over the internet. Data is routed through Victron's MQTT brokers.</p>
+<p><strong>When to use it:</strong> You're away from the boat and want to check on your system remotely, or you want to monitor multiple vessels registered in your VRM account.</p>
+<p><strong>How to configure:</strong> Tap <strong>Add Connection → Venus VRM</strong>. Log in with your Victron VRM account credentials. The app fetches the list of portals (sites) registered to your account and lets you choose which one to connect to.</p>
+<p>Under the hood the app connects to <code>mqtt&lt;N&gt;.victronenergy.com:8883</code> using TLS. It keeps the connection alive by publishing a keepalive message every 62 seconds. You don't configure any of that manually.</p>
+<p><strong>Note:</strong> VRM cloud connections require internet access on both the phone and the Venus device. If the Venus device loses its cellular or marina Wi-Fi connection, the VRM connection drops.</p>
+<h4 id="data-format-note">Data format note<a class="headerlink" href="#data-format-note" title="Permanent link">&para;</a></h4>
+<p>Venus/MQTT data is converted to SignalK deltas internally using a JavaScript bridge (<code>venus.js</code>). The gauges you configure work the same way regardless of whether the source is SignalK or Venus — the connection type is transparent once you're past setup.</p>
+<hr />
+<h3 id="raymarine-mfd-bonjour-discovered">Raymarine MFD (Bonjour-Discovered)<a class="headerlink" href="#raymarine-mfd-bonjour-discovered" title="Permanent link">&para;</a></h3>
+<h4 id="what-it-is_2">What it is<a class="headerlink" href="#what-it-is_2" title="Permanent link">&para;</a></h4>
+<p>WilhelmSK can connect to a Raymarine chart plotter (MFD) on the same network and use it as a data source. The MFD streams instrument data over a local TCP connection.</p>
+<h4 id="when-to-use-it_1">When to use it<a class="headerlink" href="#when-to-use-it_1" title="Permanent link">&para;</a></h4>
+<p>Choose this if you have a Raymarine chart plotter and want to display its instrument data on your iPhone or iPad without running a separate SignalK server.</p>
+<h4 id="how-to-configure_1">How to configure<a class="headerlink" href="#how-to-configure_1" title="Permanent link">&para;</a></h4>
+<p>No manual entry is needed. If your Raymarine MFD is on the same Wi-Fi or Ethernet network as your iOS device, it advertises itself via Bonjour (<code>_rym_rrc._tcp</code>). Open <strong>Settings → Connections</strong> and the MFD appears in the list. Tap to connect.</p>
+<p>If the MFD doesn't appear, confirm that:
+- The MFD's Wi-Fi or Ethernet is connected to the same network as your iOS device.
+- The MFD's "SeaTalkNG" or network data sharing option is enabled in its settings (exact menu path varies by MFD model — consult your Raymarine documentation).</p>
+<h4 id="capabilities">Capabilities<a class="headerlink" href="#capabilities" title="Permanent link">&para;</a></h4>
+<p>In addition to receiving instrument data, WilhelmSK can send remote-control inputs to the MFD (key presses, dial rotations, touch events) when the Raymarine connection type is configured. This is an advanced feature — most users only need data display.</p>
+<hr />
+<h3 id="connecting-remotely-outside-the-boats-network">Connecting Remotely (Outside the Boat's Network)<a class="headerlink" href="#connecting-remotely-outside-the-boats-network" title="Permanent link">&para;</a></h3>
+<p>By default WilhelmSK connects over the local Wi-Fi on the boat. If you want to monitor your vessel from shore, a marina Wi-Fi, or a cellular connection, you need to make the SignalK server reachable from the internet. Two approaches are common.</p>
+<h4 id="port-forwarding-simple">Port Forwarding (Simple)<a class="headerlink" href="#port-forwarding-simple" title="Permanent link">&para;</a></h4>
+<p>Forward a port on your boat's router to the SignalK server's local IP and port (typically 3000). On your router's admin page, add a TCP port-forward rule:</p>
+<ul>
+<li><strong>External port:</strong> any unused port (e.g. 3001, or 443 for HTTPS)</li>
+<li><strong>Internal IP:</strong> the SignalK server's local IP (e.g. 192.168.1.100)</li>
+<li><strong>Internal port:</strong> 3000</li>
+</ul>
+<p>In WilhelmSK, add a manual SignalK connection using your router's public IP address (or a dynamic-DNS hostname if your ISP gives you a changing IP) and the external port you chose. Enable SSL only if your server is configured for HTTPS.</p>
+<p>Port forwarding is quick to set up but exposes your SignalK server directly to the internet on that port. At minimum, enable authentication on the server (Settings → Security in the SignalK admin panel) and use JWT or HTTP Basic auth in WilhelmSK.</p>
+<h4 id="reverse-proxy-with-nginx-recommended">Reverse Proxy with nginx (Recommended)<a class="headerlink" href="#reverse-proxy-with-nginx-recommended" title="Permanent link">&para;</a></h4>
+<p>A reverse proxy sits in front of SignalK, handles HTTPS termination, and can add authentication before requests reach the server. This is more work to set up but gives you a clean <code>https://</code> URL, a valid TLS certificate (via Let's Encrypt), and optional Basic Auth as an additional layer.</p>
+<p>A typical setup (as used with the pivac HVAC monitoring project):</p>
+<ol>
+<li>Install nginx on the machine running SignalK (or a Pi on the same network).</li>
+<li>Obtain a TLS certificate — Let's Encrypt via <code>certbot</code> is the standard free option.</li>
+<li>Forward TCP ports 80 and 443 from your router to the nginx machine.</li>
+<li>Configure an nginx <code>location</code> block for SignalK. The critical part is the proxy headers — without these, SignalK constructs its WebSocket URL using its local address instead of your external hostname, which breaks the WilhelmSK connection:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">location</span><span class="w"> </span><span class="s">/signalk/</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:3000/signalk/</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Proto</span><span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>
+<p>In the SignalK admin panel, go to <strong>Server → Settings</strong> and enable <strong>"Trust Proxy"</strong>. Without this, SignalK ignores the <code>X-Forwarded-Proto</code> header and still generates <code>ws://</code> WebSocket URLs, causing WilhelmSK to attempt an unencrypted connection on port 80 — which nginx immediately redirects (301), breaking the handshake.</p>
+</li>
+<li>
+<p>In WilhelmSK, add a manual connection using your external hostname (<code>https://yourhostname.example.com</code>), port 443, with SSL enabled. The app will discover the server endpoints through the standard <code>/signalk</code> path and connect via WSS.</p>
+</li>
+</ol>
+<hr />
+<h3 id="general-tips">General Tips<a class="headerlink" href="#general-tips" title="Permanent link">&para;</a></h3>
+<p><strong>Multiple connections:</strong> WilhelmSK supports configuring multiple connections. You can have a SignalK connection for use at the dock, a VRM cloud connection for remote monitoring, and a local Venus connection all saved in the list. Switch between them from the connections screen.</p>
+<p><strong>Connection log:</strong> If a connection fails, tap it in the list and look for a connection log option. The log shows each authentication and handshake step, which helps diagnose JWT login failures, certificate issues, or wrong-port problems.</p>
+<p><strong>Watch and widget access:</strong> Manual connections synced to iCloud are also available to the Apple Watch app and home screen widgets. The watch uses the same connection settings you configured on the iPhone.</p>
+<p><strong>SSL and self-signed certificates:</strong> If your server uses HTTPS with a self-signed certificate, the app will prompt you to trust it on first connection. Accept the prompt and the certificate is trusted for future sessions. Rejecting it will prevent connection.</p>
+<hr />
+<h2 id="ios-and-ipados">iOS and iPadOS<a class="headerlink" href="#ios-and-ipados" title="Permanent link">&para;</a></h2>
+<p>WilhelmSK on iPhone and iPad is the primary interface for configuring the app, managing layouts, and viewing live instrument data. This guide covers navigation, customization, widgets, and notifications.</p>
+<hr />
+<h3 id="navigation">Navigation<a class="headerlink" href="#navigation" title="Permanent link">&para;</a></h3>
+<h4 id="the-sidebar">The Sidebar<a class="headerlink" href="#the-sidebar" title="Permanent link">&para;</a></h4>
+<p>The sidebar is the app's main navigation panel. Swipe right from the left edge (or tap the hamburger menu) to open it. It contains three sections:</p>
+<ul>
+<li><strong>Gauges</strong> — returns to the live gauge display</li>
+<li><strong>Settings</strong> — connection, appearance, units, notifications, and advanced options</li>
+<li><strong>Log</strong> — raw SignalK message log for debugging</li>
+</ul>
+<p>Swipe left or tap anywhere on the main panel to close the sidebar.</p>
+<h4 id="layouts-and-the-layout-selector">Layouts and the Layout Selector<a class="headerlink" href="#layouts-and-the-layout-selector" title="Permanent link">&para;</a></h4>
+<p>A <em>layout</em> is a named collection of pages. You might have a "Sailing" layout with wind and performance gauges, a "Motoring" layout with engine and fuel gauges, and an "At Anchor" layout with depth and battery. Switch between layouts in the sidebar's layout list.</p>
+<p>Each layout is independent — its pages, gauge arrangement, and gauge configuration are stored separately. You can create as many layouts as you need.</p>
+<hr />
+<h3 id="pages-and-the-gauge-grid">Pages and the Gauge Grid<a class="headerlink" href="#pages-and-the-gauge-grid" title="Permanent link">&para;</a></h3>
+<p>Within a layout, data is organized into <em>pages</em>. Swipe left and right (iPhone/iPad portrait) or up and down (iPad landscape) to move between pages. Each page displays a configurable grid of gauges.</p>
+<p>Pages use named templates that control how space is divided:</p>
+<table>
+<thead>
+<tr>
+<th>Template</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic</td>
+<td>Equal-size grid cells</td>
+</tr>
+<tr>
+<td>LargeBottomView</td>
+<td>One large gauge on top, smaller gauges below</td>
+</tr>
+<tr>
+<td>LargeCenterGauge</td>
+<td>Large gauge in the center with smaller gauges around it</td>
+</tr>
+<tr>
+<td>MFD</td>
+<td>Multi-function display style with many gauges</td>
+</tr>
+<tr>
+<td>FullScreen</td>
+<td>Single gauge fills the page</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="interacting-with-gauges-in-the-live-view">Interacting with Gauges in the Live View<a class="headerlink" href="#interacting-with-gauges-in-the-live-view" title="Permanent link">&para;</a></h3>
+<h4 id="double-tap-fullscreen">Double-Tap: Fullscreen<a class="headerlink" href="#double-tap-fullscreen" title="Permanent link">&para;</a></h4>
+<p>Double-tap any gauge to expand it to fill the entire screen. The status bar hides for a cleaner view. Double-tap again to return to the normal page grid.</p>
+<h4 id="long-press-gauge-settings-and-type">Long-Press: Gauge Settings and Type<a class="headerlink" href="#long-press-gauge-settings-and-type" title="Permanent link">&para;</a></h4>
+<p>Long-press any gauge (hold for about a second) to open a full gauge settings panel. From here you can:
+- Change the <strong>gauge type</strong> (switch from, say, a wind dial to a depth gauge)
+- Set the <strong>SignalK path</strong> the gauge reads
+- Adjust <strong>display options</strong> — digital vs analog, title, units, decimal places
+- Configure <strong>alarm zones</strong> — color thresholds that turn the gauge red/yellow when a value is out of range</p>
+<p>On iPad, the settings panel opens as a split-view overlay. On iPhone, it pushes as a navigation stack.</p>
+<p>Long-press is disabled when <strong>Lock Gauges</strong> is on (Settings → Lock Gauges). Enable the lock when underway to prevent accidental changes.</p>
+<hr />
+<h3 id="layout-manager-and-editor">Layout Manager and Editor<a class="headerlink" href="#layout-manager-and-editor" title="Permanent link">&para;</a></h3>
+<p>The Layout Manager is the screen that controls which pages appear in your layout and how they are structured. It has <strong>three sections</strong>, each with a distinct purpose:</p>
+<p><strong>Your Pages</strong> — the pages currently active in your layout, in the order they appear when you swipe left and right. Drag pages within this section to reorder them. Drag a page down into Custom Page Templates to save it as a reusable template.</p>
+<p><strong>Builtin Page Templates</strong> — read-only factory templates supplied by the app. You cannot edit these directly. Drag one up into Your Pages to add a copy to your layout. Drag one down into Custom Page Templates to create your own editable copy of it.</p>
+<p><strong>Custom Page Templates</strong> — your personal reusable templates. You can edit these freely, and you can drag them up into Your Pages to use them.</p>
+<p>The final item in Your Pages and in Custom Page Templates is an <strong>Add</strong> placeholder. Tap it to create a new blank page or template.</p>
+<hr />
+<h4 id="tapping-a-page-from-your-pages-page-config-mode">Tapping a Page from "Your Pages" → Page Config Mode<a class="headerlink" href="#tapping-a-page-from-your-pages-page-config-mode" title="Permanent link">&para;</a></h4>
+<p>When you tap a page from Your Pages, the editor opens in <strong>page config mode</strong>. This mode shows you the current page layout and lets you make gauge-level changes, but it does not let you restructure the slot layout (positions and sizes).</p>
+<p><strong>What you see:</strong> Save and Cancel buttons. An <strong>Edit Template</strong> or <strong>Convert To Template</strong> button.
+<strong>What you do not see:</strong> Add (+), Delete (−), Width/Height fields, Add Grid, or Snap.</p>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Edit Template</strong></td>
+<td>Opens the underlying layout template in template mode so you can add, remove, or reposition slots. Changes apply to all pages sharing that template.</td>
+</tr>
+<tr>
+<td><strong>Convert To Template</strong></td>
+<td>Shown for built-in templates instead of Edit Template. Creates a personal editable copy of the template and immediately opens it in template mode.</td>
+</tr>
+<tr>
+<td><strong>Save</strong></td>
+<td>Saves gauge-level changes for this page.</td>
+</tr>
+<tr>
+<td><strong>Cancel</strong></td>
+<td>Discards changes.</td>
+</tr>
+</tbody>
+</table>
+<p>Dragging is disabled entirely in page config mode — the editor does not move slots when you pan.</p>
+<hr />
+<h4 id="tapping-a-template-from-custom-page-templates-template-mode">Tapping a Template from "Custom Page Templates" → Template Mode<a class="headerlink" href="#tapping-a-template-from-custom-page-templates-template-mode" title="Permanent link">&para;</a></h4>
+<p>When you tap a template from Custom Page Templates, the editor opens in <strong>template mode</strong> — the full structural editor. This is where you control how many gauge slots a template has, where they are, and how large they are.</p>
+<p><strong>Controls:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>+</strong> (Add)</td>
+<td>Adds a new gauge slot at the top-left, sized to match the selected slot if one is selected, otherwise 200×200. Drag it into position after adding.</td>
+</tr>
+<tr>
+<td><strong>−</strong> (Delete)</td>
+<td>Removes the selected slot. If slots are grouped via multi-select, removes all of them.</td>
+</tr>
+<tr>
+<td><strong>Add Grid</strong></td>
+<td>Opens a grid tool with sliders for columns, rows, and cell size (as % of screen). The resulting grid appears as a movable group.</td>
+</tr>
+<tr>
+<td><strong>Width / Height</strong></td>
+<td>Exact pixel dimensions for the selected slot. Type and press Return. Updates live as you drag or pinch.</td>
+</tr>
+<tr>
+<td><strong>Snap</strong></td>
+<td>When on (default), slots snap within 10 pixels of adjacent slots and screen edges while dragging.</td>
+</tr>
+<tr>
+<td><strong>Multi</strong></td>
+<td>Multi-select mode. When on, tap additional slots to add them to a movable group; tap a grouped slot to remove it. Toggle off to commit positions.</td>
+</tr>
+<tr>
+<td><strong>Share</strong></td>
+<td>Saves the template, then offers: <strong>Share...</strong> (sends as <code>.wlyt</code> via AirDrop, Mail, Messages, or Files) or <strong>Send to device...</strong> (pushes to another WilhelmSK device on the same network via Bonjour).</td>
+</tr>
+<tr>
+<td><strong>Save</strong></td>
+<td>Saves all structural changes.</td>
+</tr>
+<tr>
+<td><strong>Cancel</strong></td>
+<td>Discards all changes.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Gestures in template mode:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Gesture</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tap</td>
+<td>Selects a slot (red border). Tapping an already-selected slot cycles to the one underneath if slots overlap.</td>
+</tr>
+<tr>
+<td>Drag from slot interior</td>
+<td>Moves the slot.</td>
+</tr>
+<tr>
+<td>Drag from bottom-right corner</td>
+<td>Resizes the slot — the bottom-right corner is the resize handle.</td>
+</tr>
+<tr>
+<td>Pinch</td>
+<td>Resizes the slot from its center.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="changing-which-gauge-a-slot-displays">Changing Which Gauge a Slot Displays<a class="headerlink" href="#changing-which-gauge-a-slot-displays" title="Permanent link">&para;</a></h4>
+<p>The layout editor controls positions and sizes only. To change which gauge type fills a slot — or to configure its SignalK path, display options, or alarm zones — long-press the gauge in the normal live view. See <a href="#long-press-gauge-settings-and-type">Long-Press: Gauge Settings and Type</a>.</p>
+<h3 id="editing-layout-files-on-your-computer">Editing Layout Files on Your Computer<a class="headerlink" href="#editing-layout-files-on-your-computer" title="Permanent link">&para;</a></h3>
+<p>WilhelmSK stores layouts as <code>.wlyt</code> files — plain JSON. For complex layouts, editing the JSON directly on a Mac is often faster than dragging gauges on a small screen.</p>
+<p><strong>Getting the file off your device:</strong>
+1. Open the <strong>Files</strong> app on your iPhone or iPad.
+2. Tap <strong>On My iPhone</strong> (or On My iPad) → <strong>WilhelmSK</strong>. Saved layout files appear here.
+3. Long-press a <code>.wlyt</code> file and choose <strong>Share → AirDrop</strong> to send it to your Mac, or copy it to iCloud Drive for Finder access.</p>
+<p>Alternatively, connect your device via USB, open Finder on the Mac, select your device, click <strong>Files</strong>, and drag the <code>.wlyt</code> file out.</p>
+<p><strong>Editing:</strong>
+The format is JSON. Open it in any text editor. The top-level <code>layout</code> key contains a <code>pages</code> array; each page has a <code>pageLayout</code> (template name) and a <code>config</code> dictionary keyed by gauge slot index. The two fields you'll most often edit are the SignalK <code>path</code> and the <code>className</code> (gauge type). See <a href="#custom-signalk-paths">Custom SignalK Paths</a> for path conventions.</p>
+<p><strong>Putting it back:</strong>
+1. AirDrop the edited <code>.wlyt</code> back to your iPhone or iPad, or place it in a Files location you can access from the device.
+2. Tap the file. iOS prompts you to open it with WilhelmSK.
+3. WilhelmSK imports it and adds it to your layout list.</p>
+<p>You can also share a layout directly from within the app — tap <strong>Share</strong> in the layout editor toolbar to send the current layout via AirDrop, Mail, Messages, or any available share target.</p>
+<hr />
+<h3 id="settings-reference">Settings Reference<a class="headerlink" href="#settings-reference" title="Permanent link">&para;</a></h3>
+<p>The Settings menu is reached from the sidebar. The following sections describe every option.</p>
+<hr />
+<h4 id="connections">Connections<a class="headerlink" href="#connections" title="Permanent link">&para;</a></h4>
+<p>Covered in detail in <a href="#connecting-to-a-data-source">Connecting to a Data Source</a>.</p>
+<hr />
+<h4 id="appearance">Appearance<a class="headerlink" href="#appearance" title="Permanent link">&para;</a></h4>
+<p><strong>Theme:</strong>
+- <strong>Theme</strong> — the active color palette. Tap to choose from built-in and custom themes.
+- <strong>Day</strong> — the theme used for the light/day mode when Auto is selected.
+- <strong>Night</strong> — the theme used for the dark/night mode when Auto is selected.
+- <strong>Force Dark Appearance</strong> — forces the dark theme regardless of system appearance setting.
+- <strong>Apple</strong> — segmented control: Light | Dark | Auto. Sets whether the app follows the iOS system appearance toggle.</p>
+<p><strong>Display:</strong>
+- <strong>Text Shadow</strong> — adds a subtle drop shadow to gauge labels for readability over busy backgrounds.
+- <strong>Segmented Digital Font</strong> — uses the app's built-in digital/7-segment font for digital readouts.
+- <strong>Digital Font</strong> — shows the current digital font name; tap to open the font picker.
+- <strong>Title Display</strong> — opens font settings for gauge titles (font face, size, color, position).
+- <strong>Units Display</strong> — opens font settings for gauge unit labels.
+- <strong>Freshness</strong> — where to show the data freshness indicator on each gauge: None, Top-Left, Top-Right, Bottom-Left, Bottom-Right, Top, or Bottom.
+- <strong>Analog Gauge Padding</strong> — spacing (in points) between the gauge edge and the dial face for analog gauges.
+- <strong>Digital Gauge Padding</strong> — spacing for digital readout gauges.
+- <strong>Border Width</strong> — width of the border drawn around each gauge.
+- <strong>Border Rounding</strong> — corner radius for gauge borders.
+- <strong>Border Color</strong> — color picker for the gauge border color.</p>
+<p><strong>Behavior:</strong>
+- <strong>Keep Screen From Locking</strong> — prevents the screen from dimming and locking while the app is in the foreground. Useful at the helm.
+- <strong>Lock Gauges</strong> — disables long-press gauge editing so you can't accidentally reconfigure a gauge while underway.
+- <strong>Different Layouts for Portrait and Landscape</strong> (iPad only) — when on, the app maintains separate page layouts for portrait and landscape orientations.
+- <strong>Don't Throttle Display</strong> — disables the frame rate throttling that the app applies when running on battery. May increase battery drain.
+- <strong>Only When Plugged In</strong> — available when Don't Throttle is on; only disables throttling when the device is charging.</p>
+<p><strong>Map and Track:</strong>
+- <strong>Use Device Location/Heading</strong> — segmented: Never | Always | Not In Signal K | Not At Boat. Controls whether the iOS device's GPS/compass is used for your vessel position and heading, or whether the app uses Signal K data only.
+- <strong>Use Device Attitude</strong> (pitch/roll) — segmented: Never | Always | If Not In Signal K. Whether to use the device's accelerometer for pitch and roll gauges.
+- <strong>Show Track</strong> — displays a track line of past positions on map gauges (requires the <code>signalk-to-influxdb</code> plugin and a compatible server). When enabled: <strong>Timespan</strong> (how far back to show, e.g. <code>1h</code>) and <strong>Resolution</strong> (sampling interval, e.g. <code>1m</code>).
+- <strong>Track Color</strong> — color picker for the position track line.
+- <strong>Show Course Vector</strong> — draws a line ahead of your vessel showing current course over ground. Color is configurable.
+- <strong>Show AWA Vector</strong> — draws the apparent wind angle vector. Color is configurable.
+- <strong>Show TWA Vector</strong> — draws the true wind angle vector. Color is configurable.
+- <strong>Show Route</strong> — displays the active navigation route on map gauges. Color is configurable.
+- <strong>Show Notes</strong> — shows ActiveCaptain community notes on map gauges.</p>
+<p><strong>Map Objects:</strong>
+- <strong>My Ship Size</strong> — slider controlling the size of your vessel icon on map gauges.
+- <strong>My Ship Transparency</strong> — slider (0–100%) for vessel icon transparency.
+- <strong>AIS Target Size</strong> — slider for AIS target icons.
+- <strong>AIS Transparency</strong> — slider for AIS icon transparency.
+- <strong>POI Size</strong> — slider for point-of-interest markers (ActiveCaptain, Navionics).
+- <strong>POI Transparency</strong> — slider for POI marker transparency.</p>
+<p><strong>Navionics (if Navionics SDK is active):</strong>
+- <strong>Mode</strong> — chart rendering mode (standard, fishing, satellite overlay, etc.).
+- <strong>Contour Density</strong> — density of depth contour lines.
+- <strong>Easy View</strong> — high-contrast chart rendering for bright sunlight.
+- <strong>Shallow Area</strong> — slider setting the depth threshold below which areas are highlighted as shallow.
+- <strong>Depth Shading</strong> — slider controlling depth shading intensity.
+- <strong>Depth Contours</strong> — slider controlling contour line density (or "ALL" for all contours).</p>
+<p><strong>ActiveCaptain:</strong>
+- <strong>Show On Maps</strong> — shows ActiveCaptain marina, anchorage, and hazard markers on map gauges.
+- <strong>Download Over Wi-Fi Only</strong> — prevents downloading ActiveCaptain data over cellular.
+- <strong>Disable Updates</strong> — stops the app from downloading updated ActiveCaptain data.
+- <strong>Login / Logout</strong> — authenticate with your Garmin/ActiveCaptain account for full access.
+- <strong>Force Update</strong> — manually triggers a data download.
+- <strong>Delete Data</strong> — removes cached ActiveCaptain data from the device.
+- Status fields show the last update date and your ActiveCaptain captain name and points.</p>
+<hr />
+<h4 id="themes">Themes<a class="headerlink" href="#themes" title="Permanent link">&para;</a></h4>
+<p>Opens the theme list. The app ships with built-in themes (Dark, Light, and variants). Tap a theme to apply it. A theme editor lets you create custom themes by adjusting background, text, and accent colors and saving them under a name.</p>
+<hr />
+<h4 id="layouts">Layouts<a class="headerlink" href="#layouts" title="Permanent link">&para;</a></h4>
+<p>Opens the Layout Manager where you manage your layouts and pages. See <a href="#layout-manager-and-editor">Layout Manager and Editor</a> for full detail.</p>
+<hr />
+<h4 id="old-layouts">Old Layouts<a class="headerlink" href="#old-layouts" title="Permanent link">&para;</a></h4>
+<p>Provides access to layouts created in an older format. If you have layouts from a previous version of the app, they appear here and can be migrated to the current format.</p>
+<hr />
+<h4 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Enable Signal K Alarms</strong> — shows in-app alert banners for <code>vessels.self.notifications.*</code> paths received over the active connection. No server plugin required. This is the primary alarm display mechanism.</li>
+<li><strong>Enable Local Push</strong> — enables push notifications delivered via the WilhelmSK local push provider (requires the push provider server plugin). Notifications arrive even when the app is in the background.</li>
+<li><strong>Enable Remote Push</strong> — enables APNs remote push notifications (for cloud-relay scenarios; requires additional server-side configuration).</li>
+<li><strong>Use V2 Notifications API</strong> — uses the Signal K v2 notifications API if the server supports it, instead of the v1 <code>notifications.*</code> delta path.</li>
+<li><strong>Device Token</strong> — read-only indicator showing whether the app has successfully registered an APNs device token (displays "Has Device Token" or "No Device Token").</li>
+</ul>
+<hr />
+<h4 id="anchor">Anchor<a class="headerlink" href="#anchor" title="Permanent link">&para;</a></h4>
+<p>Opens the anchor alarm control screen. See <a href="#anchor-alarm">Anchor Alarm</a> in the Alarms section for full detail.</p>
+<p>The settings screen also provides:
+- <strong>Mode</strong> — Automatic (the app calculates the anchor position from current GPS position when you tap Drop) or Manual (you enter latitude/longitude directly).
+- <strong>Drop Anchor</strong> — records the current position as the anchor location and activates monitoring.
+- <strong>Set Radius</strong> — sets the alarm radius (in your configured distance unit).
+- <strong>Raise Anchor</strong> — clears the anchor position and deactivates monitoring.
+- <strong>Rode Length</strong> — the amount of anchor chain/rope deployed (used by the server plugin to refine the alarm radius).
+- <strong>Anchor Depth</strong> — the water depth at the anchor location.
+- An embedded map shows the anchor position and current vessel position relative to the alarm radius.</p>
+<hr />
+<h4 id="units">Units<a class="headerlink" href="#units" title="Permanent link">&para;</a></h4>
+<p>Sets the display unit for each measurement category. Changes apply globally to all gauges.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Long Distance</td>
+<td>Nautical miles, Statute miles, Kilometers</td>
+</tr>
+<tr>
+<td>Short Distance</td>
+<td>Feet, Meters</td>
+</tr>
+<tr>
+<td>Wind Speed</td>
+<td>Knots, mph, km/h, m/s</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Knots, mph, km/h</td>
+</tr>
+<tr>
+<td>Depth</td>
+<td>Feet, Meters, Fathoms</td>
+</tr>
+<tr>
+<td>Fuel / Volume</td>
+<td>Gallons, Liters</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>Fahrenheit, Celsius</td>
+</tr>
+<tr>
+<td>Engine Pressure</td>
+<td>PSI, Bar, kPa</td>
+</tr>
+<tr>
+<td>Atmospheric Pressure</td>
+<td>inHg, hPa, mbar</td>
+</tr>
+<tr>
+<td>Position</td>
+<td>Degrees/Minutes/Seconds, Decimal Degrees</td>
+</tr>
+<tr>
+<td>Rate of Turn</td>
+<td>Degrees/min, Degrees/sec</td>
+</tr>
+<tr>
+<td>Flow Rate</td>
+<td>Gallons/hour, Liters/hour</td>
+</tr>
+<tr>
+<td>Fuel Economy</td>
+<td>mpg, L/100km</td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>kWh, Joules</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="today-widget-editor">Today / Widget Editor<a class="headerlink" href="#today-widget-editor" title="Permanent link">&para;</a></h4>
+<p>Opens the widget editor for the iOS Today widget (legacy) and for configuring which gauges appear in WidgetKit home screen widgets. Drag gauges to reorder them, or tap a gauge entry to choose a different gauge type or SignalK path.</p>
+<hr />
+<h4 id="share-settings">Share Settings<a class="headerlink" href="#share-settings" title="Permanent link">&para;</a></h4>
+<p>Exports your current app settings — connections, layout names, unit preferences, and appearance settings — as a <code>.wsettings</code> file shared via the system share sheet (AirDrop, Mail, Files, etc.). Recipients can import the file by opening it with WilhelmSK. Useful for transferring your configuration to a new device or sharing with a crew member.</p>
+<hr />
+<h4 id="watch-layout-shown-when-apple-watch-is-paired">Watch Layout <em>(shown when Apple Watch is paired)</em><a class="headerlink" href="#watch-layout-shown-when-apple-watch-is-paired" title="Permanent link">&para;</a></h4>
+<p>Opens the watch gauge editor. The screen shows a list of gauges configured for the Apple Watch. Drag to reorder. Tap a gauge to change its type or SignalK path. Changes sync to the watch the next time a WCSession connection is established.</p>
+<hr />
+<h4 id="server-plugins-shown-when-server-supports-plugins">Server Plugins <em>(shown when server supports plugins)</em><a class="headerlink" href="#server-plugins-shown-when-server-supports-plugins" title="Permanent link">&para;</a></h4>
+<p>Displays a list of SignalK server plugins installed on the connected server. Tap a plugin to view and edit its configuration — boolean toggles, text fields, number fields, and enum selectors, depending on the plugin's settings schema. Changes are sent to the server immediately.</p>
+<hr />
+<h4 id="cloud-vessel-selector-shown-when-multiple-vessels-are-detected">Cloud / Vessel Selector <em>(shown when multiple vessels are detected)</em><a class="headerlink" href="#cloud-vessel-selector-shown-when-multiple-vessels-are-detected" title="Permanent link">&para;</a></h4>
+<p>Displays a list of vessels currently visible on the Signal K network (other vessels broadcasting AIS or connected to the same server). Tap a vessel to switch the app's viewing context to that vessel — all gauges will then display that vessel's data instead of your own. The selected vessel is highlighted. Tap your own vessel to return to the default <code>vessels.self</code> context.</p>
+<hr />
+<h4 id="shutdown-server-shown-when-signalk-server-shutdown-plugin-is-installed">Shutdown Server <em>(shown when <code>signalk-server-shutdown</code> plugin is installed)</em><a class="headerlink" href="#shutdown-server-shown-when-signalk-server-shutdown-plugin-is-installed" title="Permanent link">&para;</a></h4>
+<p>Sends a shutdown command to the Signal K server after a confirmation alert. Use with caution — the server will stop running and you will lose all data until it restarts.</p>
+<hr />
+<h3 id="sidebar-additional-items">Sidebar: Additional Items<a class="headerlink" href="#sidebar-additional-items" title="Permanent link">&para;</a></h3>
+<p>Beyond the Settings menu, the sidebar contains:</p>
+<p><strong>Playback</strong> <em>(shown when <code>signalk-to-influxdb</code> plugin is detected)</em> — switches the app into playback mode, replaying historical instrument data from the InfluxDB database. A playback control bar appears at the top of the screen. Tap Gauges or any other sidebar item to exit playback mode.</p>
+<p><strong>AR View</strong> <em>(shown on supported devices)</em> — opens an augmented reality overlay that displays instrument data overlaid on the device camera view.</p>
+<hr />
+<h3 id="ipad-specific-features">iPad-Specific Features<a class="headerlink" href="#ipad-specific-features" title="Permanent link">&para;</a></h3>
+<h4 id="split-view-and-slide-over">Split View and Slide Over<a class="headerlink" href="#split-view-and-slide-over" title="Permanent link">&para;</a></h4>
+<p>WilhelmSK runs in Split View and Slide Over alongside other apps. When the app is in a compact window (Slide Over or a narrow Split View column), it automatically switches to a single-column layout optimized for the reduced space. Full-size layouts are restored when the window expands.</p>
+<h4 id="external-display">External Display<a class="headerlink" href="#external-display" title="Permanent link">&para;</a></h4>
+<p>On iPads with Stage Manager enabled, you can move the WilhelmSK window to an external monitor or connected display. The app resizes to fill the available window.</p>
+<h4 id="orientation">Orientation<a class="headerlink" href="#orientation" title="Permanent link">&para;</a></h4>
+<p>The iPad layout adapts to both portrait and landscape. Gauge grids reflow when orientation changes so content remains visible without manual adjustment.</p>
+<hr />
+<h3 id="widgetkit-widgets">WidgetKit Widgets<a class="headerlink" href="#widgetkit-widgets" title="Permanent link">&para;</a></h3>
+<p>WilhelmSK provides home screen and lock screen widgets so you can glance at instrument data without opening the app. Widgets read from the app's shared data store, which the app updates while it's running.</p>
+<h4 id="available-widgets">Available Widgets<a class="headerlink" href="#available-widgets" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gauge</td>
+<td>A single analog or digital gauge (speed, depth, heading, etc.)</td>
+</tr>
+<tr>
+<td>Battery</td>
+<td>Battery voltage and charge state</td>
+</tr>
+<tr>
+<td>Generic Gauge</td>
+<td>Any SignalK path you configure</td>
+</tr>
+<tr>
+<td>Switch</td>
+<td>State of a switch or relay</td>
+</tr>
+<tr>
+<td>Multi-Switch</td>
+<td>State of multiple switches</td>
+</tr>
+</tbody>
+</table>
+<p>On iOS 18 and later, WilhelmSK also provides <strong>Controls</strong> that appear in Control Center:</p>
+<ul>
+<li>Anchor drop / raise / lock radius</li>
+<li>Autopilot tack and heading</li>
+<li>Switch and multi-switch toggles</li>
+<li>Stereo control</li>
+</ul>
+<h4 id="adding-widgets">Adding Widgets<a class="headerlink" href="#adding-widgets" title="Permanent link">&para;</a></h4>
+<p>Long-press the home screen to enter jiggle mode, then tap <strong>+</strong> and search for "Wilhelm". Choose a widget and size, then tap <strong>Add Widget</strong>. Tap the widget to configure which gauge or path it displays.</p>
+<h4 id="update-frequency">Update Frequency<a class="headerlink" href="#update-frequency" title="Permanent link">&para;</a></h4>
+<p>Widgets update on a schedule (approximately every minute while the app is in the foreground and has fresh data). iOS may throttle updates based on battery level and usage patterns, so a widget reading may be up to a few minutes behind the live app display. Widgets are not a substitute for the live gauge view during active navigation — open the app for real-time data.</p>
+<p>Controls (iOS 18+) respond immediately when tapped because they send a command directly to the app's shared data, not through a widget timeline.</p>
+<hr />
+<h3 id="push-notifications">Push Notifications<a class="headerlink" href="#push-notifications" title="Permanent link">&para;</a></h3>
+<p>WilhelmSK can receive push notifications for SignalK alarm conditions — anchor drag, depth threshold, battery low, custom path alarms, and any <code>vessels.self.notifications.*</code> path published by your server.</p>
+<h4 id="how-it-works">How It Works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h4>
+<p>The app connects to a <em>UPN (Universal Push Notifications)</em> provider — a lightweight server process running alongside your SignalK server. When the server raises an alarm notification, the UPN provider forwards it to your device via Apple Push Notification service (APNs), so you receive the alert even when the app is in the background or your device is asleep.</p>
+<h4 id="server-plugin-required">Server Plugin Required<a class="headerlink" href="#server-plugin-required" title="Permanent link">&para;</a></h4>
+<p>Push notifications require the <strong>WilhelmSK UPN server</strong> plugin installed on your SignalK server. See <a href="#server-plugins">Server Plugins</a> for the full dependency table and setup link.</p>
+<h4 id="setup-steps">Setup Steps<a class="headerlink" href="#setup-steps" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Install the UPN server plugin on your SignalK server.</li>
+<li>In WilhelmSK, go to <strong>Settings → Notifications</strong>.</li>
+<li>Enable <strong>Local Push Notifications</strong> and enter the UPN server's host address and port.</li>
+<li>Grant notification permission when iOS prompts you.</li>
+</ol>
+<p>The app registers your device token with the UPN server automatically. If the connection drops, the app retries with exponential backoff (10 seconds, then 5 minutes, then 25 minutes).</p>
+<h4 id="notification-settings">Notification Settings<a class="headerlink" href="#notification-settings" title="Permanent link">&para;</a></h4>
+<p>In <strong>Settings → Notifications</strong> you can independently enable or disable:</p>
+<ul>
+<li><strong>SignalK Alarms</strong> — in-app alert banners for <code>notifications.*</code> paths (no server plugin required)</li>
+<li><strong>Local Push</strong> — UPN server push (requires plugin, works when app is backgrounded)</li>
+<li><strong>Remote Push</strong> — APNs remote notifications (for future cloud-relay support)</li>
+</ul>
+<h4 id="what-triggers-a-notification">What Triggers a Notification<a class="headerlink" href="#what-triggers-a-notification" title="Permanent link">&para;</a></h4>
+<p>Any SignalK <code>vessels.self.notifications.*</code> path can produce an alert. Common triggers:</p>
+<ul>
+<li>Anchor alarm (<code>notifications.navigation.anchor</code>)</li>
+<li>Depth alarm (<code>notifications.environment.depth.*</code>)</li>
+<li>Server-configured threshold alarms on any path</li>
+<li>Custom alarms from server-side plugins</li>
+</ul>
+<p>The alarm indicator in the app's top bar lights up for any active unacknowledged alarm. Open the alarm panel to acknowledge or silence individual alarms.</p>
+<hr />
+<h2 id="watchos">watchOS<a class="headerlink" href="#watchos" title="Permanent link">&para;</a></h2>
+<p>WilhelmSK includes a native Apple Watch app for glancing at instrument data from your wrist. It shows the same gauge types as the iPhone — wind, speed, depth, battery, switches, autopilot — but on a compact watch face.</p>
+<hr />
+<h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Apple Watch paired to an iPhone running WilhelmSK</li>
+<li>watchOS 9 or later (the SwiftUI watch app)</li>
+<li>The iPhone must be awake and within Bluetooth or Wi-Fi range when the watch app starts or needs to refresh data</li>
+</ul>
+<p>The watch app communicates with the iPhone via Watch Connectivity (WCSession). It does not have its own independent network connection to the SignalK server — all data flows through the phone.</p>
+<hr />
+<h3 id="initial-setup">Initial Setup<a class="headerlink" href="#initial-setup" title="Permanent link">&para;</a></h3>
+<p>Install the watch app from the Watch app on iPhone (look for WilhelmSK in the Available Apps section). Once installed, the watch app opens and sends a request to the phone for the current connection and gauge configuration.</p>
+<p><strong>The phone must be awake and reachable when the watch app first launches.</strong> If the phone is asleep or out of range, the watch displays a spinner and waits. Once the phone responds, the gauge layout is pushed to the watch and data starts flowing.</p>
+<p>If you see the message "Please configure gauges in WilhelmSK Settings → Watch Layout", the phone has not sent a gauge configuration yet. Open WilhelmSK on the iPhone and set up the Watch Layout (see below).</p>
+<hr />
+<h3 id="configuring-watch-gauges">Configuring Watch Gauges<a class="headerlink" href="#configuring-watch-gauges" title="Permanent link">&para;</a></h3>
+<p>Watch gauges are configured from the <strong>iPhone</strong>, not from the watch itself.</p>
+<p>In WilhelmSK on iPhone, go to <strong>Settings → Watch Layout</strong>. The Watch Layout screen has three sections:</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Normal</td>
+<td>The default set of gauges shown when you open the watch app</td>
+</tr>
+<tr>
+<td>Swipe Up</td>
+<td>The gauge set shown when you swipe up on the watch face</td>
+</tr>
+<tr>
+<td>Swipe Down</td>
+<td>The gauge set shown when you swipe down on the watch face</td>
+</tr>
+</tbody>
+</table>
+<p>Tap any section to add or remove gauges. Once you save, the phone pushes the new configuration to the watch automatically.</p>
+<hr />
+<h3 id="available-gauge-types">Available Gauge Types<a class="headerlink" href="#available-gauge-types" title="Permanent link">&para;</a></h3>
+<p>The watch supports a subset of gauge types — those that fit on a small display and update meaningfully at the watch's refresh rate:</p>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Graphic Gauge</td>
+<td>A single value with digital, circle, or analog display style</td>
+</tr>
+<tr>
+<td>Watch Grid</td>
+<td>Up to 6 small readings on one screen (good for a combined overview)</td>
+</tr>
+<tr>
+<td>Switch Gauge</td>
+<td>On/off state of a single switch or relay</td>
+</tr>
+<tr>
+<td>Switch Bank</td>
+<td>State of a group of switches</td>
+</tr>
+<tr>
+<td>Multi-Switch</td>
+<td>Multiple switches with toggle controls</td>
+</tr>
+<tr>
+<td>Anchor Gauge</td>
+<td>Current anchor position and radius</td>
+</tr>
+<tr>
+<td>Anchor Alarm Control</td>
+<td>Drop, raise, and lock-radius controls</td>
+</tr>
+<tr>
+<td>Electrical Overview</td>
+<td>Battery bank summary</td>
+</tr>
+<tr>
+<td>Autopilot Control</td>
+<td>Engage/disengage and heading adjust</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="update-rate">Update Rate<a class="headerlink" href="#update-rate" title="Permanent link">&para;</a></h3>
+<p>The watch polls for new data on a <strong>~2-second interval</strong> (configurable from iPhone settings). Each tick the watch app requests fresh values from the phone, which in turn pulls from the active connection.</p>
+<p>The watch face includes a <strong>freshness indicator</strong> — a small animated circle that changes color as data ages. If the indicator stops animating, the phone is no longer sending updates (it may be asleep, out of range, or the connection dropped).</p>
+<p>When you background the watch app or lower your wrist, the polling timer pauses. It resumes when you raise your wrist and the app returns to the foreground.</p>
+<hr />
+<h3 id="complications-and-widgets">Complications and Widgets<a class="headerlink" href="#complications-and-widgets" title="Permanent link">&para;</a></h3>
+<p>The watch app supports WidgetKit-based watch complications for the watch face. These display a single gauge reading in a corner, inline, or modular complication slot.</p>
+<p>Complications update on the <strong>WidgetKit schedule</strong> (~15 minutes), not at the 2-second live rate. They are useful for a persistent glance at a slowly-changing value (battery charge, tank level) rather than live navigation data.</p>
+<p>To add a complication: long-press your watch face → Edit → tap a complication slot → scroll to WilhelmSK → choose which gauge to show.</p>
+<hr />
+<h3 id="known-quirks">Known Quirks<a class="headerlink" href="#known-quirks" title="Permanent link">&para;</a></h3>
+<p><strong>Watch goes blank if phone is out of range.</strong> If you move beyond Bluetooth range and the phone is not on the same Wi-Fi network, the watch stops receiving updates. The freshness indicator will change color. Data from before the connection dropped remains visible but frozen.</p>
+<p><strong>Phone must be awake for the first sync.</strong> The WCSession-based configuration push requires the phone to be active. If you open the watch app and the phone is asleep, the gauge layout may not load until the phone wakes.</p>
+<p><strong>Victron and Raymarine connections always require the phone.</strong> The watch app routes all non-SignalK data through the phone — it cannot speak Venus MQTT or Raymarine protocols directly. The phone must be reachable for these connections to work on the watch.</p>
+<p><strong>SignalK connections also route through the phone.</strong> The watch uses the auth token and connection details obtained from the phone. If the phone is unreachable, the watch cannot fetch data from the server even if both are on the same Wi-Fi network.</p>
+<hr />
+<h2 id="tvos">tvOS<a class="headerlink" href="#tvos" title="Permanent link">&para;</a></h2>
+<p>The tvOS app turns an Apple TV into a dedicated full-screen instrument display — a live gauge panel you can mount at a nav station, chartroom, or anywhere else on the boat with a screen. It shows the same gauge types as the iOS app, arranged across pages that can rotate automatically.</p>
+<h3 id="what-the-app-does">What the App Does<a class="headerlink" href="#what-the-app-does" title="Permanent link">&para;</a></h3>
+<p>WilhelmTV connects to your SignalK server and renders gauge pages at full 1920×1080 resolution. The display is read-only: you watch the data, but you configure the layout from your iPhone or iPad. There is no editing UI on the Apple TV itself.</p>
+<p>Typical uses:
+- A nav station or chartroom screen showing heading, speed, depth, wind, and tide at a glance.
+- A helm-area display connected via HDMI where a tablet isn't practical.
+- A shared display for crew in a saloon.</p>
+<h3 id="limitations-vs-ios">Limitations vs iOS<a class="headerlink" href="#limitations-vs-ios" title="Permanent link">&para;</a></h3>
+<p>The tvOS app intentionally strips away features that don't make sense on a TV:
+- <strong>No touch input.</strong> All interaction is via the Apple TV remote and the tvOS focus engine.
+- <strong>No layout editing on the TV.</strong> Layouts are pushed from the iPhone app; you cannot create or modify them locally on the Apple TV.
+- <strong>No Bonjour discovery for SignalK.</strong> You must enter the server address and port manually.
+- <strong>No split view, widgets, or push notifications.</strong> tvOS doesn't support those features.
+- <strong>Settings are minimal.</strong> Only theme and auto-pagination are configurable on the device.</p>
+<h3 id="navigating-the-app">Navigating the App<a class="headerlink" href="#navigating-the-app" title="Permanent link">&para;</a></h3>
+<p>The app has three tabs, selected with the Apple TV remote:</p>
+<ul>
+<li><strong>Gauges</strong> — the main display. Shows the current layout page.</li>
+<li><strong>Boats</strong> — connection management. Add or switch SignalK servers here.</li>
+<li><strong>Settings</strong> — theme and auto-page options.</li>
+</ul>
+<p>Use the remote's touch surface or directional buttons to move between pages on the Gauges tab.</p>
+<h3 id="connecting-to-signalk">Connecting to SignalK<a class="headerlink" href="#connecting-to-signalk" title="Permanent link">&para;</a></h3>
+<p>Unlike the iPhone app, the Apple TV does not discover SignalK servers automatically via Bonjour. You must add the connection manually:</p>
+<ol>
+<li>Navigate to the <strong>Boats</strong> tab.</li>
+<li>Press the Select button to add a new connection.</li>
+<li>Enter the SignalK server's hostname or IP address and port (typically <code>3000</code> for WebSocket).</li>
+<li>Enter credentials if your server requires authentication.</li>
+<li>Select the connection and press <strong>Connect</strong>.</li>
+</ol>
+<p>The app connects using the same SignalK streaming WebSocket protocol as iOS. REST polling is used where WebSocket is unavailable.</p>
+<h3 id="auto-pagination">Auto-Pagination<a class="headerlink" href="#auto-pagination" title="Permanent link">&para;</a></h3>
+<p>The tvOS app can cycle through gauge pages automatically — useful when you want a rotating overview without touching the remote.</p>
+<p>In <strong>Settings</strong>:
+- Enable <strong>Auto Page</strong> to turn on automatic cycling.
+- Set <strong>Auto Page Interval</strong> (in seconds) to control how long each page stays on screen. The default is 10 seconds.</p>
+<p>When auto-page is active, manually swiping between pages pauses the timer briefly before it resumes.</p>
+<h3 id="configuring-layouts-from-iphone-or-ipad">Configuring Layouts from iPhone or iPad<a class="headerlink" href="#configuring-layouts-from-iphone-or-ipad" title="Permanent link">&para;</a></h3>
+<p>All layout editing for the Apple TV happens remotely from the iPhone or iPad app. The Apple TV advertises itself on the local network, and the iPhone app discovers it via Bonjour.</p>
+<p><strong>Requirements:</strong> Both devices must be on the same Wi-Fi network.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Open WilhelmSK on your iPhone or iPad.</li>
+<li>Go to <strong>Layouts</strong> (the page management screen).</li>
+<li>Tap <strong>Edit AppleTV</strong>.</li>
+<li>The app scans the local network and lists any Apple TVs running WilhelmSK. Tap the one you want to edit.</li>
+<li>A permission prompt appears <strong>on the Apple TV</strong> — confirm it there.</li>
+<li>The iPhone app downloads the Apple TV's current layout and opens the layout editor in TV mode (scaled to 1920×1080).</li>
+<li>Add, remove, or rearrange gauges using the same layout editor as iOS. See <a href="#ios-and-ipados">iOS and iPadOS</a> for layout editor details.</li>
+<li>When you're done, tap <strong>Save</strong> — the new layout is pushed to the Apple TV over the local network and takes effect immediately.</li>
+</ol>
+<p>You can push any saved layout from your phone to the Apple TV. You cannot pull a TV-specific layout back to your phone's local layouts.</p>
+<h3 id="theme">Theme<a class="headerlink" href="#theme" title="Permanent link">&para;</a></h3>
+<p>The same dark/light/auto themes available on iOS are available on tvOS. Change them in <strong>Settings</strong>. The auto theme (day/night switching) follows the same logic as the iOS app — see your iPhone settings for the threshold.</p>
+<h3 id="gauge-types">Gauge Types<a class="headerlink" href="#gauge-types" title="Permanent link">&para;</a></h3>
+<p>WilhelmTV uses the same gauge rendering engine as iOS. All standard gauge types display on the Apple TV: analog dials, digital readouts, bar gauges, tank levels, rudder angle, autopilot status, tide, electrical overview, and navigation progress. Map views (Google Maps, Apple Maps) and Navionics charts are also available as layout pages.</p>
+<p>Gauges that require server-side plugins on iOS (autopilot control, Fusion stereo, anchor alarm) are display-only on tvOS — you can see the data but cannot send commands from the TV.</p>
+<hr />
+<h2 id="gauges">Gauges<a class="headerlink" href="#gauges" title="Permanent link">&para;</a></h2>
+<p>WilhelmSK organizes its display into layouts, pages, and gauges — each layer letting you customize what data you see and how.</p>
+<h3 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h3>
+<p><strong>Gauge</strong> — a single instrument panel: a wind dial, a depth readout, a tank indicator, a map. Each gauge subscribes to one or more SignalK paths and updates in real time.</p>
+<p><strong>Page</strong> — a screen that holds a grid of gauges. You swipe between pages. Each page has a layout that controls how many gauges fit (1 large, 2 side-by-side, a 2×2 grid, etc.).</p>
+<p><strong>Layout</strong> — a named collection of pages. You might have a "Sailing" layout with wind-heavy pages and a "Motoring" layout showing engine gauges. Switch layouts from the sidebar.</p>
+<h3 id="adding-and-removing-gauges">Adding and Removing Gauges<a class="headerlink" href="#adding-and-removing-gauges" title="Permanent link">&para;</a></h3>
+<p>To change the structure of a page (add or remove slots, resize, reposition):</p>
+<ol>
+<li>Open the Page Manager and navigate to your layout templates.</li>
+<li>Tap a custom template to open it in template mode. If you only have pages (not templates), open a page and tap <strong>Convert To Template</strong> to create an editable copy.</li>
+<li>Use the <strong>+</strong> button to add a slot, <strong>−</strong> to remove the selected slot, or <strong>Add Grid</strong> to insert a grid of slots at once.</li>
+<li>Drag slots into position; drag from the bottom-right corner or pinch to resize.</li>
+<li>Tap <strong>Save</strong>.</li>
+</ol>
+<p>See the <a href="#layout-manager-and-editor">Layout Manager and Editor</a> section for a full control reference.</p>
+<h3 id="changing-a-gauge-type">Changing a Gauge Type<a class="headerlink" href="#changing-a-gauge-type" title="Permanent link">&para;</a></h3>
+<p>Long-press any gauge in the normal live view (not the editor) to open its full settings panel. From there you can change the gauge type, the SignalK path, display options, and alarm zones. This is the primary way to configure what any given slot displays — the layout editor controls position and size only.</p>
+<h3 id="full-screen-mode">Full-Screen Mode<a class="headerlink" href="#full-screen-mode" title="Permanent link">&para;</a></h3>
+<p>Double-tap any gauge to expand it to fill the page. Double-tap again (or tap Back) to return to the normal grid. Full-screen is useful for analog wind dials or charts where detail matters.</p>
+<h3 id="display-modes">Display Modes<a class="headerlink" href="#display-modes" title="Permanent link">&para;</a></h3>
+<p>Many gauges offer both analog and digital display modes. Open a gauge's options (tap the gear icon in edit mode) to switch. Some gauges — particularly wind — also let you choose what reference (apparent vs. true vs. ground) to display.</p>
+<h3 id="the-generic-gauge-any-signalk-path">The Generic Gauge (Any SignalK Path)<a class="headerlink" href="#the-generic-gauge-any-signalk-path" title="Permanent link">&para;</a></h3>
+<p>The <strong>Text</strong> gauge (also listed as <code>TextGaugeConfig</code>) displays any numeric or string value from any SignalK path. Use it for custom sensor data, non-standard NMEA paths, or any value the app doesn't have a dedicated gauge for.</p>
+<p>To configure it:
+1. Add a Text gauge to a page.
+2. Tap its settings (gear icon in edit mode).
+3. Enter the full SignalK path (e.g., <code>environment.inside.thermostat.KIDS_ROOM.temperature</code>).
+4. Set the number format (e.g., <code>%0.1f</code> for one decimal place) and a label.</p>
+<p>See <a href="#custom-signalk-paths">Custom SignalK Paths</a> for a worked example using non-marine data.</p>
+<hr />
+<h3 id="gauge-reference">Gauge Reference<a class="headerlink" href="#gauge-reference" title="Permanent link">&para;</a></h3>
+<p>The tables below list all gauge categories and types with their primary SignalK paths. Paths marked with <code>*</code> are instance wildcards — configure the specific instance (e.g., <code>propulsion.0</code> or <code>propulsion.port</code>) in the gauge settings.</p>
+<h4 id="wind">Wind<a class="headerlink" href="#wind" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>SignalK Path(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWA (Apparent Wind Angle)</td>
+<td><code>environment.wind.angleApparent</code></td>
+</tr>
+<tr>
+<td>AWA (Course Over Ground)</td>
+<td><code>environment.wind.angleTrueGround</code></td>
+</tr>
+<tr>
+<td>AWA (True Wind Angle)</td>
+<td><code>environment.wind.angleTrueWater</code></td>
+</tr>
+<tr>
+<td>AWA (Ground Wind Angle)</td>
+<td><code>environment.wind.angleGround</code></td>
+</tr>
+<tr>
+<td>AWS (Apparent Wind Speed)</td>
+<td><code>environment.wind.speedApparent</code></td>
+</tr>
+<tr>
+<td>TWA (True Wind Angle)</td>
+<td><code>environment.wind.angleTrueWater</code></td>
+</tr>
+<tr>
+<td>TWS (True Wind Speed)</td>
+<td><code>environment.wind.speedTrue</code></td>
+</tr>
+<tr>
+<td>TWD (True Wind Direction)</td>
+<td><code>environment.wind.directionTrue</code></td>
+</tr>
+<tr>
+<td>GWA (Ground Wind Angle)</td>
+<td><code>environment.wind.angleGround</code></td>
+</tr>
+<tr>
+<td>GWS (Ground Wind Speed)</td>
+<td><code>environment.wind.speedOverGround</code></td>
+</tr>
+<tr>
+<td>GWD (Ground Wind Direction)</td>
+<td><code>environment.wind.directionGround</code></td>
+</tr>
+<tr>
+<td>TWA or GWA</td>
+<td><code>environment.wind.angleTrueWater</code> / <code>angleGround</code></td>
+</tr>
+<tr>
+<td>Drift</td>
+<td><code>environment.current.drift</code></td>
+</tr>
+<tr>
+<td>Set</td>
+<td><code>environment.current.setTrue</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="navigation_1">Navigation<a class="headerlink" href="#navigation_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>SignalK Path(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOG (Speed Over Ground)</td>
+<td><code>navigation.speedOverGround</code></td>
+</tr>
+<tr>
+<td>COG (Course Over Ground)</td>
+<td><code>navigation.courseOverGroundTrue</code></td>
+</tr>
+<tr>
+<td>Speed (Through Water)</td>
+<td><code>navigation.speedThroughWater</code></td>
+</tr>
+<tr>
+<td>Heading (True)</td>
+<td><code>navigation.headingTrue</code></td>
+</tr>
+<tr>
+<td>Heading (Magnetic)</td>
+<td><code>navigation.headingMagnetic</code></td>
+</tr>
+<tr>
+<td>Head Wind (COG)</td>
+<td><code>navigation.courseOverGroundTrue</code> + wind</td>
+</tr>
+<tr>
+<td>Head Wind (Mag COG)</td>
+<td><code>navigation.headingMagnetic</code> + wind</td>
+</tr>
+<tr>
+<td>Position</td>
+<td><code>navigation.position</code></td>
+</tr>
+<tr>
+<td>XTE (Cross-Track Error)</td>
+<td><code>navigation.courseRhumbline.crossTrackError</code></td>
+</tr>
+<tr>
+<td>DTW (Distance to Waypoint)</td>
+<td><code>navigation.courseRhumbline.nextPoint.distance</code></td>
+</tr>
+<tr>
+<td>TTW (Time to Waypoint)</td>
+<td>derived from DTW + SOG</td>
+</tr>
+<tr>
+<td>ETA</td>
+<td><code>navigation.destination.eta</code></td>
+</tr>
+<tr>
+<td>Rate of Turn</td>
+<td><code>navigation.rateOfTurn</code></td>
+</tr>
+<tr>
+<td>Pitch</td>
+<td><code>navigation.pitch</code></td>
+</tr>
+<tr>
+<td>Roll</td>
+<td><code>navigation.roll</code></td>
+</tr>
+<tr>
+<td>Yaw</td>
+<td><code>navigation.yaw</code></td>
+</tr>
+<tr>
+<td>Date/Time</td>
+<td><code>navigation.datetime</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="depth-environment">Depth &amp; Environment<a class="headerlink" href="#depth-environment" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>SignalK Path(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Depth</td>
+<td><code>environment.depth.belowSurface</code> (falls back to <code>belowTransducer</code> + <code>surfaceToTransducer</code>)</td>
+</tr>
+<tr>
+<td>Water Temperature</td>
+<td><code>environment.water.temperature</code></td>
+</tr>
+<tr>
+<td>Atmospheric Pressure</td>
+<td><code>environment.outside.pressure</code></td>
+</tr>
+<tr>
+<td>Air Temperature</td>
+<td><code>environment.outside.temperature</code></td>
+</tr>
+<tr>
+<td>Tide</td>
+<td>tide/current data</td>
+</tr>
+</tbody>
+</table>
+<h4 id="engine-propulsion">Engine &amp; Propulsion<a class="headerlink" href="#engine-propulsion" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>SignalK Path(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RPM</td>
+<td><code>propulsion.*.revolutions</code></td>
+</tr>
+<tr>
+<td>Coolant Temperature</td>
+<td><code>propulsion.*.temperature</code></td>
+</tr>
+<tr>
+<td>Oil Pressure</td>
+<td><code>propulsion.*.oilPressure</code></td>
+</tr>
+<tr>
+<td>Oil Temperature</td>
+<td><code>propulsion.*.oilTemperature</code></td>
+</tr>
+<tr>
+<td>Alternator Voltage</td>
+<td><code>propulsion.*.alternatorVoltage</code></td>
+</tr>
+<tr>
+<td>Engine Runtime</td>
+<td><code>propulsion.*.runTime</code></td>
+</tr>
+<tr>
+<td>Fuel Rate</td>
+<td><code>propulsion.*.fuelRate</code></td>
+</tr>
+<tr>
+<td>Engine Load</td>
+<td><code>propulsion.*.engineLoad</code></td>
+</tr>
+<tr>
+<td>Engine Torque</td>
+<td><code>propulsion.*.engineTorque</code></td>
+</tr>
+<tr>
+<td>Fuel Economy</td>
+<td>derived from fuel rate + speed</td>
+</tr>
+</tbody>
+</table>
+<p><code>*</code> is a placeholder for the engine instance — configure <code>0</code>, <code>port</code>, <code>starboard</code>, or another instance in gauge settings.</p>
+<h4 id="tanks">Tanks<a class="headerlink" href="#tanks" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>SignalK Path(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fuel</td>
+<td><code>tanks.fuel.*.currentLevel</code></td>
+</tr>
+<tr>
+<td>Fresh Water</td>
+<td><code>tanks.freshWater.*.currentLevel</code></td>
+</tr>
+<tr>
+<td>Black Water</td>
+<td><code>tanks.blackWater.*.currentLevel</code></td>
+</tr>
+<tr>
+<td>Waste Water</td>
+<td><code>tanks.wasteWater.*.currentLevel</code></td>
+</tr>
+</tbody>
+</table>
+<p>Both percentage and volume (liters/gallons) display modes are available. Configure the tank instance number in gauge settings.</p>
+<h4 id="electrical">Electrical<a class="headerlink" href="#electrical" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>SignalK Path(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Battery Voltage (1)</td>
+<td><code>electrical.batteries.1.voltage</code></td>
+</tr>
+<tr>
+<td>Battery Voltage (2)</td>
+<td><code>electrical.batteries.2.voltage</code></td>
+</tr>
+<tr>
+<td>Battery Voltage (24V)</td>
+<td><code>electrical.batteries.*.voltage</code></td>
+</tr>
+<tr>
+<td>Amps</td>
+<td><code>electrical.batteries.*.current</code></td>
+</tr>
+<tr>
+<td>Watts</td>
+<td><code>electrical.batteries.*.power</code></td>
+</tr>
+<tr>
+<td>State of Charge</td>
+<td><code>electrical.batteries.*.capacity.stateOfCharge</code></td>
+</tr>
+<tr>
+<td>Joules</td>
+<td><code>electrical.batteries.*.capacity.stateOfCharge</code> (energy)</td>
+</tr>
+<tr>
+<td>Charge Mode</td>
+<td><code>electrical.batteries.*.chargeState</code></td>
+</tr>
+<tr>
+<td>Battery Overview</td>
+<td>multi-path summary</td>
+</tr>
+<tr>
+<td>Electrical Overview</td>
+<td>multi-path summary</td>
+</tr>
+</tbody>
+</table>
+<h4 id="switches-and-relays">Switches and Relays<a class="headerlink" href="#switches-and-relays" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SwitchBank</td>
+<td>Displays a bank of on/off switches; paths from <code>electrical.switches.*</code></td>
+</tr>
+<tr>
+<td>SwitchGauge</td>
+<td>Single switch/relay indicator</td>
+</tr>
+<tr>
+<td>SwitchLED</td>
+<td>LED-style indicator for a switch state</td>
+</tr>
+<tr>
+<td>LEDGauge</td>
+<td>Single LED indicator</td>
+</tr>
+<tr>
+<td>LEDBank</td>
+<td>Bank of LED indicators</td>
+</tr>
+<tr>
+<td>MultiSwitch</td>
+<td>Grid of toggle switches for relay control</td>
+</tr>
+<tr>
+<td>Slider</td>
+<td>Dimmer/level slider for compatible devices</td>
+</tr>
+</tbody>
+</table>
+<p>Switch paths follow <code>electrical.switches.{bank}.{switch}.state</code>.</p>
+<h4 id="autopilot">Autopilot<a class="headerlink" href="#autopilot" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AutoPilotControl</td>
+<td>Full autopilot control panel — requires the <a href="#server-plugins">Raymarine autopilot server plugin</a></td>
+</tr>
+<tr>
+<td>RudderAngle</td>
+<td><code>steering.rudderAngle</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="ais">AIS<a class="headerlink" href="#ais" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AIS Targets</td>
+<td>Overlay of AIS vessel positions — requires AIS data in SignalK (<code>vessels.*</code>)</td>
+</tr>
+<tr>
+<td>AIS Targets Table</td>
+<td>Tabular list of nearby vessels with CPA/TCPA</td>
+</tr>
+</tbody>
+</table>
+<h4 id="maps-and-charts">Maps and Charts<a class="headerlink" href="#maps-and-charts" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Map (Apple Maps)</td>
+<td>Vessel position on Apple Maps</td>
+</tr>
+<tr>
+<td>Google Map</td>
+<td>Vessel position on Google Maps</td>
+</tr>
+<tr>
+<td>Navionics</td>
+<td>Marine chart overlay — requires Navionics subscription</td>
+</tr>
+<tr>
+<td>Freeboard-SK</td>
+<td>Embedded Freeboard-SK web chart — requires server-side Freeboard-SK</td>
+</tr>
+<tr>
+<td>Raymarine MFD</td>
+<td>Mirrors a Raymarine MFD display</td>
+</tr>
+</tbody>
+</table>
+<h4 id="camera">Camera<a class="headerlink" href="#camera" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP Camera</td>
+<td>RTSP/IP camera stream — enter the camera URL in gauge settings</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fusion-stereo">Fusion Stereo<a class="headerlink" href="#fusion-stereo" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fusion</td>
+<td>Stereo playback controls — requires the <a href="#server-plugins">Fusion server plugin</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="utility">Utility<a class="headerlink" href="#utility" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td>Generic gauge for any SignalK path — numeric or string</td>
+</tr>
+<tr>
+<td>Ratio</td>
+<td>Displays a ratio derived from two paths</td>
+</tr>
+<tr>
+<td>Percent</td>
+<td>Percentage display for any 0–1 value path</td>
+</tr>
+<tr>
+<td>Volume</td>
+<td>Volume display</td>
+</tr>
+<tr>
+<td>Image</td>
+<td>Static image tile</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>Static text label</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>Embedded web view (enter a URL)</td>
+</tr>
+<tr>
+<td>Empty</td>
+<td>Placeholder / blank slot</td>
+</tr>
+<tr>
+<td>GaugeStack</td>
+<td>Stacks two gauges vertically in one slot</td>
+</tr>
+<tr>
+<td>Scrollable</td>
+<td>Scrollable list of values</td>
+</tr>
+<tr>
+<td>Time HHMM</td>
+<td>Clock display</td>
+</tr>
+<tr>
+<td>Thermostat</td>
+<td>Thermostat control (for compatible HVAC systems)</td>
+</tr>
+<tr>
+<td>AnchorAlarmControl</td>
+<td>Anchor alarm drop/raise and radius control</td>
+</tr>
+<tr>
+<td>Anchor</td>
+<td>Anchor position and drag distance</td>
+</tr>
+<tr>
+<td>Tide</td>
+<td>Tide height and prediction</td>
+</tr>
+<tr>
+<td>MultiGauge</td>
+<td>Composite gauge combining multiple readings</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="alarms-and-notifications">Alarms and Notifications<a class="headerlink" href="#alarms-and-notifications" title="Permanent link">&para;</a></h2>
+<p>WilhelmSK surfaces two kinds of alarms: <strong>server-side notifications</strong> raised by the SignalK server (or its plugins) and delivered to the app over the live data stream, and <strong>local zone alarms</strong> configured per gauge on the device. The anchor alarm is a special case that bridges both: the app sends a drop-anchor command to a server plugin, and the plugin raises a SignalK notification when the vessel drifts.</p>
+<hr />
+<h3 id="the-alarm-indicator">The Alarm Indicator<a class="headerlink" href="#the-alarm-indicator" title="Permanent link">&para;</a></h3>
+<p>The alarm button in the top bar gives you a persistent status summary:</p>
+<ul>
+<li><strong>Red</strong> — one or more unacknowledged alarms at <code>alarm</code> or <code>emergency</code> severity are active.</li>
+<li><strong>Yellow</strong> — one or more unacknowledged warnings at <code>warn</code> or <code>alert</code> severity are active.</li>
+<li><strong>Gray / dimmed</strong> — no active alarms, or all notifications have been acknowledged.</li>
+</ul>
+<p>When alarms are active, a scrolling marquee next to the button shows the vessel name and the notification message. If multiple alarms are active, it cycles through them every four seconds. The background color of the marquee matches the severity: yellow for warnings, red for alarms.</p>
+<p>Tapping the alarm button opens the <strong>Alerts list</strong>, which shows every active notification with its path, message, and timestamp. From there you can act on each alarm individually.</p>
+<hr />
+<h3 id="server-side-alarms">Server-Side Alarms<a class="headerlink" href="#server-side-alarms" title="Permanent link">&para;</a></h3>
+<p>SignalK represents alarms and notifications as values under the <code>notifications.*</code> path hierarchy. Any value published there — by the server itself, by an instrument, or by a plugin — appears in WilhelmSK as a notification.</p>
+<h4 id="severity-levels">Severity levels<a class="headerlink" href="#severity-levels" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Meaning</th>
+<th>Indicator color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>normal</code></td>
+<td>Condition resolved</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>alert</code></td>
+<td>Advisory — attention needed</td>
+<td>Yellow</td>
+</tr>
+<tr>
+<td><code>warn</code> / <code>warning</code></td>
+<td>Warning — action may be needed</td>
+<td>Yellow</td>
+</tr>
+<tr>
+<td><code>alarm</code></td>
+<td>Alarm — action required</td>
+<td>Red</td>
+</tr>
+<tr>
+<td><code>emergency</code></td>
+<td>Critical — immediate action required</td>
+<td>Red</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responding-to-a-notification">Responding to a notification<a class="headerlink" href="#responding-to-a-notification" title="Permanent link">&para;</a></h4>
+<p>In the Alerts list, each notification offers up to three actions depending on what the server allows:</p>
+<ul>
+<li><strong>Silence</strong> — suppresses audio for this notification without acknowledging it. On servers that support the SignalK v2 notifications API, the silence is sent back to the server (<code>POST /notifications/{id}/silence</code>). On v1 servers, the method list is cleared locally.</li>
+<li><strong>Acknowledge</strong> — marks the notification as seen. On v2 servers this is confirmed server-side (<code>POST /notifications/{id}/acknowledge</code>). Acknowledged notifications no longer count toward the alarm indicator.</li>
+<li><strong>Clear</strong> — removes the notification entirely. On v2 servers this sends <code>DELETE /notifications/{id}</code>; on v1 servers the state is set to <code>normal</code>.</li>
+</ul>
+<p>Which actions appear depends on the notification's <code>canSilence</code>, <code>canAcknowledge</code>, and <code>canClear</code> flags sent by the server.</p>
+<h4 id="security-access-requests">Security access requests<a class="headerlink" href="#security-access-requests" title="Permanent link">&para;</a></h4>
+<p>If the SignalK server is configured with access control, connection requests from new clients appear in the Alerts list as <code>notifications.security.accessRequest.*</code> notifications. You can approve or deny them directly from the app.</p>
+<hr />
+<h3 id="local-zone-alarms">Local Zone Alarms<a class="headerlink" href="#local-zone-alarms" title="Permanent link">&para;</a></h3>
+<p>Each gauge in WilhelmSK can have <strong>zones</strong> — value ranges that map to a severity state. Zones are stored as SignalK metadata (<code>path.meta.zones</code>) and are applied whenever the gauge value falls within the configured range.</p>
+<h4 id="what-zones-do">What zones do<a class="headerlink" href="#what-zones-do" title="Permanent link">&para;</a></h4>
+<p>When a value enters a zone, the gauge changes color to reflect the severity (green for normal, yellow for warn/alert, red for alarm/emergency). If the zone's <code>method</code> includes <code>sound</code>, the app also plays an alert tone.</p>
+<h4 id="configuring-zones">Configuring zones<a class="headerlink" href="#configuring-zones" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Long-press a gauge to open the gauge editor.</li>
+<li>Navigate to the <strong>Zones</strong> section.</li>
+<li>Tap the <strong>+</strong> button to add a zone, or tap an existing zone to edit it.</li>
+</ol>
+<p>Each zone has:
+- <strong>State</strong> — the severity level (<code>normal</code>, <code>alert</code>, <code>warn</code>, <code>alarm</code>, <code>emergency</code>).
+- <strong>Lower / Upper</strong> — the value range (in the gauge's configured units). The zone matches when <code>lower ≤ value &lt; upper</code>.
+- <strong>Message</strong> — the text shown in the alarm indicator when this zone is active.
+- <strong>Label</strong> — a short label for the zone (e.g., "Low Voltage", "Overheat").
+- <strong>Visual / Sound</strong> — whether the zone triggers a color change, an audio alert, or both.</p>
+<p>Zones you configure in the app are stored locally and applied on top of any metadata the server provides.</p>
+<hr />
+<h3 id="anchor-alarm">Anchor Alarm<a class="headerlink" href="#anchor-alarm" title="Permanent link">&para;</a></h3>
+<p>The anchor alarm lets you drop a virtual anchor and receive an alert if the vessel drifts beyond a set radius.</p>
+<blockquote>
+<p><strong>Requires the server plugin:</strong> The anchor alarm depends on the <code>@signalk/signalk-anchoralarm-plugin</code> running on your SignalK server. Without it, the drop/raise commands have no effect.</p>
+</blockquote>
+<h4 id="setting-the-anchor">Setting the anchor<a class="headerlink" href="#setting-the-anchor" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Open the <strong>Anchor Alarm</strong> panel (available as a gauge type, or from the top bar anchor button if shown).</li>
+<li>Set the <strong>alarm radius</strong> in meters — the maximum distance the vessel is allowed to drift from the drop point.</li>
+<li>Tap <strong>Drop Anchor</strong>. The app sends the current GPS position and radius to the server plugin, which begins monitoring.</li>
+</ol>
+<p>The anchor button in the top bar changes color to confirm:
+- <strong>Green</strong> — anchor is down with a valid radius set.
+- <strong>Yellow</strong> — anchor is down but no radius has been configured.
+- <strong>Text color</strong> — no anchor is currently dropped.</p>
+<h4 id="when-the-alarm-fires">When the alarm fires<a class="headerlink" href="#when-the-alarm-fires" title="Permanent link">&para;</a></h4>
+<p>If the vessel drifts beyond the configured radius, the server plugin raises a <code>notifications.anchoralarm.*</code> notification. This appears in the alarm indicator (red) and the marquee text, and triggers a local alert on the device.</p>
+<h4 id="raising-the-anchor">Raising the anchor<a class="headerlink" href="#raising-the-anchor" title="Permanent link">&para;</a></h4>
+<p>Tap <strong>Raise Anchor</strong> in the anchor panel. This sends a raise command to the plugin, which clears the anchor position and stops monitoring.</p>
+<hr />
+<h3 id="push-notifications_1">Push Notifications<a class="headerlink" href="#push-notifications_1" title="Permanent link">&para;</a></h3>
+<p>Push notifications let the app alert you even when it is in the background or the device screen is off.</p>
+<blockquote>
+<p><strong>Requires a server plugin.</strong> Remote push notifications require the WilhelmSK push plugin running on your SignalK server. See <a href="#server-plugins">Server Plugins</a> for setup instructions and the plugin repository link.</p>
+</blockquote>
+<h4 id="how-it-works_1">How it works<a class="headerlink" href="#how-it-works_1" title="Permanent link">&para;</a></h4>
+<p>WilhelmSK includes a <strong>Local Push Provider</strong> (a Network Extension) that maintains a persistent TCP connection to the SignalK server. When a notification arrives on that connection, the provider delivers it as a local iOS/iPadOS notification — even if the main app is suspended.</p>
+<p>For remote push (when the device is off the same network as the server), the server plugin routes notifications through AWS SNS using the device token registered by the app at launch.</p>
+<h4 id="enabling-push-notifications">Enabling push notifications<a class="headerlink" href="#enabling-push-notifications" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Go to <strong>Settings → Notifications</strong> in the app.</li>
+<li>Enable <strong>SignalK Alarms</strong> (master toggle for all server notifications — on by default).</li>
+<li>Enable <strong>Local Push</strong> to receive notifications when the app is backgrounded on the same network.</li>
+<li>Enable <strong>Remote Push</strong> to receive notifications away from the boat network (requires the server-side push plugin).</li>
+</ol>
+<p>If local push notifications are not being delivered, check that iOS has granted the app notification permission (<strong>Settings → WilhelmSK → Notifications</strong>).</p>
+<h4 id="reconnection-behavior">Reconnection behavior<a class="headerlink" href="#reconnection-behavior" title="Permanent link">&para;</a></h4>
+<p>The local push provider uses exponential backoff if the server connection drops: it retries after 10 seconds, then 60 seconds, then every 5 minutes. Notifications sent while disconnected are not replayed.</p>
+<hr />
+<h2 id="server-plugins">Server Plugins<a class="headerlink" href="#server-plugins" title="Permanent link">&para;</a></h2>
+<p>Several advanced WilhelmSK features require companion plugins running on your SignalK server. This page lists every optional dependency, what it unlocks, and where to find it.</p>
+<blockquote>
+<p><strong>Base requirement:</strong> All plugins listed here run on <a href="https://github.com/SignalK/signalk-server-node">signalk-server-node</a>. See the <a href="https://github.com/sbender9/wilhelmsk-node-server-setup">canonical setup guide</a> for installing signalk-server-node and adding plugins.</p>
+</blockquote>
+<hr />
+<h3 id="plugin-dependency-matrix">Plugin dependency matrix<a class="headerlink" href="#plugin-dependency-matrix" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Plugin name</th>
+<th>Plugin repo</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server-side alarms</td>
+<td><code>signalk-zones</code></td>
+<td><a href="https://github.com/sbender9/signalk-zones">sbender9/signalk-zones</a></td>
+<td>Publishes threshold alerts to <code>notifications.*</code>; WilhelmSK reads and displays them</td>
+</tr>
+<tr>
+<td>Push notifications</td>
+<td><code>signalk-push-notifications</code></td>
+<td><a href="https://github.com/sbender9/signalk-push-notifications">sbender9/signalk-push-notifications</a></td>
+<td>Local push via persistent TCP; remote push via AWS SNS when off-network</td>
+</tr>
+<tr>
+<td>Anchor alarm</td>
+<td><code>signalk-anchoralarm-plugin</code></td>
+<td><a href="https://github.com/sbender9/signalk-anchoralarm-plugin">sbender9/signalk-anchoralarm-plugin</a></td>
+<td>Monitors vessel position and raises <code>notifications.anchoralarm.*</code> on drift</td>
+</tr>
+<tr>
+<td>Raymarine autopilot control</td>
+<td><code>signalk-raymarine-autopilot</code></td>
+<td><a href="https://github.com/sbender9/signalk-raymarine-autopilot">sbender9/signalk-raymarine-autopilot</a></td>
+<td>Enables the autopilot control panel: mode, heading/wind target, tack/gybe</td>
+</tr>
+<tr>
+<td>Fusion stereo control</td>
+<td><em>(none required)</em></td>
+<td>—</td>
+<td>WilhelmSK sends commands directly via NMEA 2000 paths; no plugin needed</td>
+</tr>
+<tr>
+<td>AIS targets</td>
+<td><em>(none required)</em></td>
+<td>—</td>
+<td>AIS data flows through SignalK natively as <code>vessels.*</code>; no plugin needed</td>
+</tr>
+<tr>
+<td>Navionics track overlay</td>
+<td><em>(none required)</em></td>
+<td>—</td>
+<td>WilhelmSK reads the vessel's own track from <code>vessels.self.track</code>; no plugin needed</td>
+</tr>
+<tr>
+<td>Freeboard-SK integration</td>
+<td><em>(none required)</em></td>
+<td>—</td>
+<td>WilhelmSK can link to a Freeboard-SK instance on the same server; no server-side plugin needed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="feature-details">Feature details<a class="headerlink" href="#feature-details" title="Permanent link">&para;</a></h3>
+<h4 id="server-side-alarms-signalk-zones">Server-side alarms (<code>signalk-zones</code>)<a class="headerlink" href="#server-side-alarms-signalk-zones" title="Permanent link">&para;</a></h4>
+<p>SignalK zone alarms let the server watch any data path and emit a notification when a value crosses a threshold. WilhelmSK monitors <code>notifications.*</code> and surfaces active alarms in the alarm indicator at the top of the screen. The zones plugin is what actually generates those notifications — without it, you only see alarms that originate from connected instruments themselves.</p>
+<p>Install <code>signalk-zones</code> from the SignalK app store (server admin panel → App Store), configure one or more zones on a path (e.g. <code>environment.water.temperature</code>), and the next time the value crosses the boundary WilhelmSK will alert.</p>
+<h4 id="push-notifications-signalk-push-notifications">Push notifications (<code>signalk-push-notifications</code>)<a class="headerlink" href="#push-notifications-signalk-push-notifications" title="Permanent link">&para;</a></h4>
+<p>Push notifications deliver alarm alerts to your iPhone even when the WilhelmSK app is backgrounded or the phone is off the boat's Wi-Fi. The plugin handles two delivery paths:</p>
+<ul>
+<li><strong>Local push</strong> — a persistent TCP connection from the app to the server; works on the same network, no internet required.</li>
+<li><strong>Remote push</strong> — routes through AWS SNS; requires a brief one-time setup linking your Apple ID to the plugin's AWS backend.</li>
+</ul>
+<p>See the <a href="https://github.com/sbender9/wilhelmsk-node-server-setup">setup guide</a> for the AWS configuration steps.</p>
+<h4 id="anchor-alarm-signalk-anchoralarm-plugin">Anchor alarm (<code>signalk-anchoralarm-plugin</code>)<a class="headerlink" href="#anchor-alarm-signalk-anchoralarm-plugin" title="Permanent link">&para;</a></h4>
+<p>The anchor alarm gauge in WilhelmSK shows a <strong>Drop Anchor</strong> button that sets a GPS fix and radius. The plugin watches the vessel's position and publishes a <code>notifications.anchoralarm.*</code> notification when the vessel drifts beyond the set radius. WilhelmSK picks that notification up through the standard alarm path, so you see and hear the alert even if the app is backgrounded (combined with the push notifications plugin).</p>
+<h4 id="raymarine-autopilot-control-signalk-raymarine-autopilot">Raymarine autopilot control (<code>signalk-raymarine-autopilot</code>)<a class="headerlink" href="#raymarine-autopilot-control-signalk-raymarine-autopilot" title="Permanent link">&para;</a></h4>
+<p>This plugin bridges WilhelmSK's autopilot control panel to a Raymarine SeaTalk or EVO autopilot. It translates SignalK commands into the Raymarine proprietary protocol and exposes heading, wind mode, track mode, and tack/gybe controls to the app. Without this plugin the autopilot gauge is read-only (it will display current pilot state from NMEA 2000 but cannot send commands).</p>
+<h4 id="fusion-stereo-control">Fusion stereo control<a class="headerlink" href="#fusion-stereo-control" title="Permanent link">&para;</a></h4>
+<p>WilhelmSK communicates with Fusion marine stereos via standard NMEA 2000 paths that SignalK already exposes. No additional plugin is needed — the stereo gauge works as long as your Fusion head unit is connected to the NMEA 2000 network and your SignalK server has a CAN bus interface.</p>
+<h4 id="ais-targets">AIS targets<a class="headerlink" href="#ais-targets" title="Permanent link">&para;</a></h4>
+<p>AIS vessel data arrives through your AIS receiver, is decoded by SignalK, and appears in the <code>vessels.*</code> tree. WilhelmSK reads that data directly. No plugin is required.</p>
+<h4 id="navionics-track-overlay">Navionics track overlay<a class="headerlink" href="#navionics-track-overlay" title="Permanent link">&para;</a></h4>
+<p>Your vessel's GPS track is logged by SignalK as <code>vessels.self.track</code>. WilhelmSK reads that path to draw the track on the Navionics chart. No plugin is needed, but the track is only as long as your server has been running — there is no persistent track storage unless you add a logging plugin such as <code>signalk-to-influxdb</code>.</p>
+<h4 id="freeboard-sk-integration">Freeboard-SK integration<a class="headerlink" href="#freeboard-sk-integration" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/SignalK/freeboard-sk">Freeboard-SK</a> is a browser-based chart plotter that runs alongside signalk-server-node. WilhelmSK can open a Freeboard-SK session in the in-app browser using the server's local address. No additional plugin is needed beyond having Freeboard-SK installed on the server.</p>
+<hr />
+<h3 id="installing-plugins">Installing plugins<a class="headerlink" href="#installing-plugins" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Open the SignalK server admin panel (typically <code>http://&lt;server-ip&gt;:3000</code>).</li>
+<li>Go to <strong>App Store</strong> and search for the plugin by name.</li>
+<li>Install and restart the server.</li>
+<li>Open the plugin's settings page and configure as needed.</li>
+<li>Reconnect WilhelmSK — the new feature should appear automatically.</li>
+</ol>
+<p>For a complete walkthrough of first-time server and plugin setup, see the <a href="https://github.com/sbender9/wilhelmsk-node-server-setup">wilhelmsk-node-server-setup guide</a>.</p>
+<hr />
+<h2 id="custom-signalk-paths">Custom SignalK Paths<a class="headerlink" href="#custom-signalk-paths" title="Permanent link">&para;</a></h2>
+<p>WilhelmSK is not limited to marine data. Any value available on a SignalK server can be displayed using a generic gauge — temperature sensors, relay states, pressure readings, power meters, or anything else a plugin pushes into the SignalK data model.</p>
+<p>This guide covers how to configure gauges for arbitrary SignalK paths and walks through a complete non-marine example: a home HVAC and utility monitoring system.</p>
+<hr />
+<h3 id="signalk-path-naming-conventions">SignalK Path Naming Conventions<a class="headerlink" href="#signalk-path-naming-conventions" title="Permanent link">&para;</a></h3>
+<p>Every value in SignalK is identified by a dot-separated path. The structure follows a defined hierarchy:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;context&gt;.&lt;domain&gt;.&lt;instance&gt;.&lt;property&gt;
+</code></pre></div>
+<p>Examples:
+- <code>environment.inside.thermostat.KIDS_ROOM.temperature</code> — temperature at a named thermostat
+- <code>electrical.batteries.house.voltage</code> — house battery bank voltage
+- <code>propulsion.boiler.gasInput</code> — gas input to a boiler (non-marine)</p>
+<p>The top-level segment is conventionally the vessel context (<code>vessels.self</code> is implied). Paths from the <a href="https://signalspec.signalk.org/">SignalK specification</a> are standardised. Custom paths — created by plugins or third-party integrations — can use any naming, as long as they are unique within the server.</p>
+<h4 id="units-and-metadata">Units and Metadata<a class="headerlink" href="#units-and-metadata" title="Permanent link">&para;</a></h4>
+<p>SignalK paths carry metadata alongside their values. The <code>meta.units</code> field tells clients what unit the value is in (e.g. <code>K</code> for Kelvin, <code>m/s</code> for speed). WilhelmSK uses this metadata to convert and display values in the units you select in preferences.</p>
+<p>If a custom path does not include metadata, the app displays the raw value. For temperature paths, the server is expected to publish in Kelvin; the app converts to °C or °F based on your unit preference.</p>
+<hr />
+<h3 id="gauge-types-for-custom-paths">Gauge Types for Custom Paths<a class="headerlink" href="#gauge-types-for-custom-paths" title="Permanent link">&para;</a></h3>
+<p>Several built-in gauge types accept arbitrary paths:</p>
+<table>
+<thead>
+<tr>
+<th>Gauge type</th>
+<th>Best for</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Generic Number</strong> (<code>TextGaugeConfig</code>)</td>
+<td>Any numeric or string value</td>
+<td>Configurable format string; no unit conversion</td>
+</tr>
+<tr>
+<td><strong>WaterTempGauge</strong></td>
+<td>Temperature values in Kelvin</td>
+<td>Converts to °C/°F per preferences; works for any temperature path</td>
+</tr>
+<tr>
+<td><strong>WattsGauge</strong></td>
+<td>Power in watts</td>
+<td>Works for any <code>*.power</code> or <code>*.watts</code> path</td>
+</tr>
+<tr>
+<td><strong>SwitchBank</strong></td>
+<td>Binary on/off relay states</td>
+<td>Reads a path prefix; each child key becomes a labelled switch</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>Generic Number</strong> gauge is the most flexible: it displays any value at any path, formatted as a number or string. Use the specialised gauges (WaterTempGauge, WattsGauge) when you want unit conversion built in.</p>
+<hr />
+<h3 id="configuring-a-generic-number-gauge">Configuring a Generic Number Gauge<a class="headerlink" href="#configuring-a-generic-number-gauge" title="Permanent link">&para;</a></h3>
+<h4 id="in-the-app-layout-editor">In the app (Layout Editor)<a class="headerlink" href="#in-the-app-layout-editor" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Open the layout editor by long-pressing any gauge slot.</li>
+<li>Tap the slot you want to configure.</li>
+<li>Scroll to <strong>Generic</strong> in the gauge picker and select <strong>Generic Number</strong>.</li>
+<li>Enter the full SignalK path (e.g. <code>electrical.ac.arduinoThermPSI.psi</code>).</li>
+<li>Set the display title and numeric format.</li>
+<li>Tap <strong>Done</strong>.</li>
+</ol>
+<h4 id="in-a-wlyt-layout-file">In a <code>.wlyt</code> layout file<a class="headerlink" href="#in-a-wlyt-layout-file" title="Permanent link">&para;</a></h4>
+<p>Layout files are JSON. A Generic Number gauge entry looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&quot;12&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextGaugeConfig&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;electrical.ac.arduinoThermPSI.psi&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hydronic PSI&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;valueLabelFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%0.0f&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;integerDigits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">&quot;decimalDigits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="nt">&quot;defaultTitle&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generic Number&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>Key fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>className</code></td>
+<td>Always <code>"TextGaugeConfig"</code> for the generic gauge</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Full SignalK path to the value</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>Label shown on the gauge face</td>
+</tr>
+<tr>
+<td><code>valueLabelFormat</code></td>
+<td>Printf-style format: <code>"%0.0f"</code> for integers, <code>"%0.2f"</code> for two decimal places, <code>"%s"</code> for strings</td>
+</tr>
+<tr>
+<td><code>integerDigits</code></td>
+<td>Digits before the decimal point (for layout sizing)</td>
+</tr>
+<tr>
+<td><code>decimalDigits</code></td>
+<td>Digits after the decimal point</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="worked-example-home-hvac-and-utility-monitoring-with-pivac">Worked Example: Home HVAC and Utility Monitoring with pivac<a class="headerlink" href="#worked-example-home-hvac-and-utility-monitoring-with-pivac" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/dpnl87/pivac">pivac</a> is a Raspberry Pi-based data collection system that monitors a residential HVAC system, thermostats, boiler, and electrical circuits and publishes all readings to a local SignalK server. WilhelmSK connects to that server and displays the home data exactly as it would display boat data — no special configuration needed on the app side.</p>
+<h4 id="what-pivac-publishes">What pivac publishes<a class="headerlink" href="#what-pivac-publishes" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>SignalK path</th>
+<th>What it represents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>environment.inside.thermostat.KIDS_ROOM.temperature</code></td>
+<td>Thermostat temperature reading, Kids Room</td>
+</tr>
+<tr>
+<td><code>environment.inside.thermostat.KIDS_ROOM.humidity</code></td>
+<td>Thermostat humidity reading, Kids Room</td>
+</tr>
+<tr>
+<td><code>environment.inside.hvac.IN.temperature.value</code></td>
+<td>Air handler supply air temperature</td>
+</tr>
+<tr>
+<td><code>environment.inside.hvac.OUT.temperature.value</code></td>
+<td>Return air temperature</td>
+</tr>
+<tr>
+<td><code>environment.inside.boiler.waterTemperature</code></td>
+<td>Hydronic boiler water temperature</td>
+</tr>
+<tr>
+<td><code>electrical.ac.arduinoThermPSI.psi</code></td>
+<td>Hydronic system pressure (PSI)</td>
+</tr>
+<tr>
+<td><code>electrical.ac.arduinoPSI.psi</code></td>
+<td>Potable domestic hot water pressure (PSI)</td>
+</tr>
+<tr>
+<td><code>propulsion.boiler.gasInput</code></td>
+<td>Gas input to boiler (BTU or flow rate)</td>
+</tr>
+<tr>
+<td><code>hvac.boiler.sentry.status</code></td>
+<td>Boiler control status (string)</td>
+</tr>
+<tr>
+<td><code>electrical.ac.switch.utility</code></td>
+<td>Relay bank for utility control switches</td>
+</tr>
+</tbody>
+</table>
+<h4 id="layout-configuration">Layout configuration<a class="headerlink" href="#layout-configuration" title="Permanent link">&para;</a></h4>
+<p>The pivac WilhelmSK layout (<code>wilhelmsk/iphone.wlyt</code>) demonstrates mixing gauge types on a single page:</p>
+<p><strong>Thermostat gauges</strong> use a dedicated <code>Thermostat</code> class that reads temperature, humidity, and state from three related paths under a shared prefix:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&quot;10&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thermostat&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kids Room&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;environment.inside.thermostat.KIDS_ROOM.temperature&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;environment.inside.thermostat.KIDS_ROOM.humidity&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;environment.inside.thermostat.KIDS_ROOM.state&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">&quot;setting&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;environment.inside.setting&quot;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Temperature gauges</strong> use <code>WaterTempGauge</code> for any Kelvin temperature path — including non-marine ones like HVAC supply air:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WaterTempGauge&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;environment.inside.hvac.IN.temperature.value&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HVAC In&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Generic numeric gauges</strong> display PSI readings, gas input, and other values without a dedicated gauge class:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">&quot;12&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextGaugeConfig&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;electrical.ac.arduinoThermPSI.psi&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hydronic PSI&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">&quot;valueLabelFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%0.0f&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">&quot;integerDigits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">&quot;decimalDigits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nt">&quot;defaultTitle&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generic Number&quot;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">},</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nt">&quot;16&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextGaugeConfig&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hvac.boiler.sentry.status&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Boiler Status&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">  </span><span class="nt">&quot;valueLabelFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;%s&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">  </span><span class="nt">&quot;integerDigits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">  </span><span class="nt">&quot;decimalDigits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">  </span><span class="nt">&quot;defaultTitle&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generic Number&quot;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Switch banks</strong> map a path prefix to a row of toggle controls:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">&quot;11&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SwitchBank&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;electrical.ac.switch.utility&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Control Relays&quot;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h4>
+<p>A single WilhelmSK layout page shows room temperatures, HVAC duct temperatures, boiler status, system pressures, and relay controls — all pulled from a home automation system with no changes to the app. The SignalK protocol is the only interface.</p>
+<hr />
+<h3 id="tips-for-working-with-custom-paths">Tips for Working with Custom Paths<a class="headerlink" href="#tips-for-working-with-custom-paths" title="Permanent link">&para;</a></h3>
+<p><strong>Browse available paths first.</strong> Open the SignalK server's data browser (usually at <code>http://&lt;server&gt;:3000/signalk/v1/api/vessels/self</code>) to see what paths are available and what format the values take before configuring gauges.</p>
+<p><strong>Match the value type to the format string.</strong> Numeric values need <code>%0.Nf</code> (where N is decimal places); string values need <code>%s</code>. Mixing these causes the gauge to show nothing or display incorrectly.</p>
+<p><strong>Temperature paths expect Kelvin.</strong> If you use <code>WaterTempGauge</code> for a custom temperature path, the server must publish the value in Kelvin (as the SignalK spec requires). If your plugin publishes in Celsius or Fahrenheit, use <code>TextGaugeConfig</code> with a <code>%0.1f</code> format instead and set the title to include the unit.</p>
+<p><strong>Use SwitchBank for grouped binary states.</strong> If your plugin publishes several on/off values under a common path prefix (e.g. <code>electrical.ac.switch.utility.pump</code>, <code>electrical.ac.switch.utility.fan</code>), a single <code>SwitchBank</code> gauge pointing at the prefix (<code>electrical.ac.switch.utility</code>) will display all of them as labelled toggles.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.indexes", "search.highlight", "search.suggest", "toc.follow", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

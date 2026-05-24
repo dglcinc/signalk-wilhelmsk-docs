@@ -4,7 +4,8 @@
   "description": "SignalK plugin that serves the WilhelmSK documentation site and an installation-detection endpoint for the WilhelmSK iOS app.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "echo \"No tests yet\" && exit 0",
+    "build-docs": "cd .. && mkdocs build --strict -d plugin/public/"
   },
   "keywords": [
     "signalk-node-server-plugin",
