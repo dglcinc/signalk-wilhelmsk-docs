@@ -47,6 +47,20 @@
 
     
     
+  
+  <script>
+    (function () {
+      var path = window.location.pathname;
+      if (path.indexOf('//') !== -1) {
+        window.location.replace(
+          window.location.protocol + '//' + window.location.host +
+          path.replace(/\/{2,}/g, '/') +
+          window.location.search + window.location.hash
+        );
+      }
+    })();
+  </script>
+
   </head>
   
   
