@@ -64,17 +64,21 @@ curl -I http://localhost:3000/signalk-wilhelmsk-docs/
 ## Size
 
 The plugin bundles the entire documentation site (so it works without internet
-access on the boat). On a typical Raspberry Pi-class SignalK server, expect:
+access on the boat). Everything ships inside the package — installing it adds
+**nothing** to `node_modules` beyond the plugin's own folder, because it has no
+runtime dependencies. So the installed footprint below is the whole cost:
 
 | What | Size |
 |------|------|
-| npm tarball (download) | ~690 KB |
-| Installed on disk (`public/` + plugin) | ~2.8 MB |
-| File count | 54 |
+| Download (npm tarball, gzipped) | ~670 KB |
+| Installed on disk | ~2.8 MB (54 files) |
+| Extra `node_modules` dependencies | none |
 
-Almost all of that is the Material theme's bundled assets (fonts, icons, JS,
-CSS — about 2.5 MB) plus the rendered HTML pages. The plugin code itself is
-only a few KB. The plugin has no runtime npm dependencies.
+Almost all of the on-disk size is the Material theme's bundled assets (fonts,
+icons, JS, CSS — about 2.5 MB) plus the rendered HTML pages; the plugin code
+itself is only a few KB. On a Raspberry Pi-class SignalK server — where the OS,
+Node, and signalk-server already account for a few GB — under 3 MB of docs is
+negligible and will fit comfortably on any install that runs SignalK at all.
 
 ## Documentation content
 
