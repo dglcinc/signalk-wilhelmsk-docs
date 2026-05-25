@@ -5,7 +5,6 @@ const PLUGIN_ID = 'signalk-wilhelmsk-docs'
 const DOCS_MOUNT = '/signalk-wilhelmsk-docs'
 
 module.exports = function (app) {
-  const pkg = require('./package.json')
   const publicDir = path.join(__dirname, 'public')
 
   const plugin = {
@@ -37,18 +36,12 @@ module.exports = function (app) {
     }
   }
 
-  // Detection endpoint. registerWithRouter mounts these routes under
-  // /plugins/signalk-wilhelmsk-docs/, so this responds at
-  // GET /plugins/signalk-wilhelmsk-docs/info
-  plugin.registerWithRouter = function (router) {
-    router.get('/info', function (req, res) {
-      res.json({
-        id: PLUGIN_ID,
-        version: pkg.version,
-        docsPath: DOCS_MOUNT + '/'
-      })
-    })
-  }
+  // Note: detection is served as a static file at
+  // /signalk-wilhelmsk-docs/info.json (generated into public/ by
+  // scripts/gen-info.js at build time). It deliberately lives on the open
+  // static route rather than a registerWithRouter endpoint under /plugins/*,
+  // which SignalK's security middleware would gate behind authentication —
+  // the WilhelmSK app probes it before any login.
 
   return plugin
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0",
-    "build-docs": "cd .. && mkdocs build --strict -d plugin/public/"
+    "build-docs": "cd .. && mkdocs build --strict -d plugin/public/ && node plugin/scripts/gen-info.js"
   },
   "keywords": [
     "signalk-node-server-plugin",
