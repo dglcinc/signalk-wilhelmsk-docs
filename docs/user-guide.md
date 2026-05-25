@@ -42,7 +42,7 @@ This is where most of your one-time setup happens. WilhelmSK can connect directl
 | Source | Best for |
 |---|---|
 | **SignalK server** | The flexible default — runs on a Raspberry Pi or similar, aggregates all your NMEA data, works with every WilhelmSK feature |
-| **Victron Venus MQTT** | Victron Energy installations — batteries, inverters, solar, shore power. Local or via VRM cloud |
+| **Victron Venus** | Victron Energy installations — batteries, inverters, solar, shore power. Local MQTT, VRM cloud MQTT, or VRM cloud SignalK |
 | **Actisense W2K** | Direct NMEA 2000 over Wi-Fi via an Actisense W2K-1 or W2K-2 gateway |
 | **Yacht Devices YDWG** | Direct NMEA 2000 over Wi-Fi via a Yacht Devices YDWG-02 gateway |
 | **Digital Yacht RAW** | Digital Yacht Wi-Fi NMEA 0183 gateways (WLN10/WLN30/NavLink2/LANLink); also Yacht Devices YDEN-02 |
@@ -115,9 +115,9 @@ Each connection can be marked as a **favorite**. Favorites appear at the top of 
 
 ---
 
-### Victron Venus MQTT
+### Victron Venus
 
-Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks — via MQTT. WilhelmSK can connect directly to the local MQTT broker or through Victron's VRM cloud portal.
+Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks. WilhelmSK supports three connection paths to it: local MQTT, VRM cloud MQTT, and VRM cloud SignalK.
 
 #### Local MQTT
 
@@ -144,9 +144,24 @@ Under the hood the app connects to `mqtt<N>.victronenergy.com:8883` using TLS. I
 
 #### VRM Cloud — SignalK endpoint
 
-If your Venus device runs the SignalK server package, you can reach its SignalK endpoint through the VRM cloud rather than over MQTT. Pick **Venus VRM Signal K** from the connection picker. Log in with VRM credentials the same way as the MQTT variant; the app handles the cloud-to-device routing.
+**What it is:** Reach your Venus device's SignalK server through the VRM cloud, instead of going through Victron's MQTT brokers. Picks up the same data the SignalK path would carry locally — custom paths, server plugins, and anything else SignalK offers — but tunneled over the internet via VRM.
 
-Use this variant when you want the full SignalK feature set (custom paths, server plugins) tunneled through VRM. The plain VRM MQTT path is simpler if you only need standard Victron data.
+**When to use it:** Same scenarios as the plain VRM MQTT variant (you're away from the boat, monitoring remotely), but you want the full SignalK feature set rather than the more limited MQTT view. If you only need standard Victron values (batteries, solar, etc.) the plain VRM MQTT path is simpler.
+
+**Prerequisite — SignalK enabled on the Venus device:**
+
+The Venus OS device must have the **SignalK Server** package installed and connected to your VRM portal. On Cerbo GX / Color Control GX, this is enabled via Venus OS's package manager (or `opkg`). Refer to Victron's documentation: [Signal K Server on Venus OS](https://www.victronenergy.com/live/venus-os:signalk-installation) for the install steps. Once it's running on the Venus device and the device is online in your VRM account, WilhelmSK can reach it.
+
+**How to configure:** Tap **Add Connection → Venus VRM Signal K**. Enter your VRM account credentials. The app:
+
+1. Calls VRM's `/v2/auth/login` to get an auth token.
+2. Fetches the list of installations registered to your account.
+3. Lets you pick which portal/site to connect to (same picker as VRM MQTT).
+4. Opens a SignalK proxy-relay at `/v2/installations/<siteId>/proxy-relay/signalk` using the token.
+
+After that, the connection behaves like a normal SignalK connection — auto-discovers REST and WebSocket endpoints from the relayed server, subscribes to deltas, drives gauges from the stream.
+
+**Note:** VRM Cloud SignalK requires internet access on both the phone and the Venus device, plus the Venus device must be online in VRM (the same constraint as VRM MQTT). It does not require the phone to be on the same network as the boat.
 
 #### Data format note
 
