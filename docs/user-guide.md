@@ -1250,6 +1250,7 @@ Several advanced WilhelmSK features require companion plugins running on your Si
 | AIS targets | *(none required)* | — | AIS data flows through SignalK natively as `vessels.*`; no plugin needed |
 | Navionics track overlay | *(none required)* | — | WilhelmSK reads the vessel's own track from `vessels.self.track`; no plugin needed |
 | Freeboard-SK integration | *(none required)* | — | WilhelmSK can link to a Freeboard-SK instance on the same server; no server-side plugin needed |
+| In-app documentation (offline) | `signalk-wilhelmsk-docs` | [dglcinc/signalk-wilhelmsk-docs](https://github.com/dglcinc/signalk-wilhelmsk-docs) | Serves this documentation site from the server so **Help / Documentation** works without an internet connection |
 
 ---
 
@@ -1293,6 +1294,14 @@ Your vessel's GPS track is logged by SignalK as `vessels.self.track`. WilhelmSK 
 #### Freeboard-SK integration
 
 [Freeboard-SK](https://github.com/SignalK/freeboard-sk) is a browser-based chart plotter that runs alongside signalk-server-node. WilhelmSK can open a Freeboard-SK session in the in-app browser using the server's local address. No additional plugin is needed beyond having Freeboard-SK installed on the server.
+
+#### In-app documentation (`signalk-wilhelmsk-docs`)
+
+WilhelmSK can show this documentation inside the app, served straight from your own SignalK server. The `signalk-wilhelmsk-docs` plugin bundles the entire documentation site and serves it at `/signalk-wilhelmsk-docs/`, so [Help / Documentation](#help-documentation) works even when the boat has no internet connection — the same guide you're reading now, available offline at the helm.
+
+Install **WilhelmSK Documentation** from the SignalK App Store (server admin panel → App Store) and restart the server. There are no configuration options; the docs are available as soon as the plugin is installed. In the app, set **Settings → Documentation Source** to **SignalK Server** to use it. If the plugin isn't installed on the server you're connected to, WilhelmSK falls back to the [public web documentation](https://dglcinc.github.io/signalk-wilhelmsk-docs/) instead.
+
+Unlike the feature plugins above, this one doesn't unlock any in-app capability — it just makes the help content available locally. The web documentation is always there as a fallback, so the plugin is optional but handy for boats that are often offline.
 
 ---
 

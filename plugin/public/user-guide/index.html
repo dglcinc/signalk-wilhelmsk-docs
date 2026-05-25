@@ -3422,6 +3422,12 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <td>—</td>
 <td>WilhelmSK can link to a Freeboard-SK instance on the same server; no server-side plugin needed</td>
 </tr>
+<tr>
+<td>In-app documentation (offline)</td>
+<td><code>signalk-wilhelmsk-docs</code></td>
+<td><a href="https://github.com/dglcinc/signalk-wilhelmsk-docs">dglcinc/signalk-wilhelmsk-docs</a></td>
+<td>Serves this documentation site from the server so <strong>Help / Documentation</strong> works without an internet connection</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -3448,6 +3454,10 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <p>Your vessel's GPS track is logged by SignalK as <code>vessels.self.track</code>. WilhelmSK reads that path to draw the track on the Navionics chart. No plugin is needed, but the track is only as long as your server has been running — there is no persistent track storage unless you add a logging plugin such as <code>signalk-to-influxdb</code>.</p>
 <h4 id="freeboard-sk-integration">Freeboard-SK integration<a class="headerlink" href="#freeboard-sk-integration" title="Permanent link">&para;</a></h4>
 <p><a href="https://github.com/SignalK/freeboard-sk">Freeboard-SK</a> is a browser-based chart plotter that runs alongside signalk-server-node. WilhelmSK can open a Freeboard-SK session in the in-app browser using the server's local address. No additional plugin is needed beyond having Freeboard-SK installed on the server.</p>
+<h4 id="in-app-documentation-signalk-wilhelmsk-docs">In-app documentation (<code>signalk-wilhelmsk-docs</code>)<a class="headerlink" href="#in-app-documentation-signalk-wilhelmsk-docs" title="Permanent link">&para;</a></h4>
+<p>WilhelmSK can show this documentation inside the app, served straight from your own SignalK server. The <code>signalk-wilhelmsk-docs</code> plugin bundles the entire documentation site and serves it at <code>/signalk-wilhelmsk-docs/</code>, so <a href="#help-documentation">Help / Documentation</a> works even when the boat has no internet connection — the same guide you're reading now, available offline at the helm.</p>
+<p>Install <strong>WilhelmSK Documentation</strong> from the SignalK App Store (server admin panel → App Store) and restart the server. There are no configuration options; the docs are available as soon as the plugin is installed. In the app, set <strong>Settings → Documentation Source</strong> to <strong>SignalK Server</strong> to use it. If the plugin isn't installed on the server you're connected to, WilhelmSK falls back to the <a href="https://dglcinc.github.io/signalk-wilhelmsk-docs/">public web documentation</a> instead.</p>
+<p>Unlike the feature plugins above, this one doesn't unlock any in-app capability — it just makes the help content available locally. The web documentation is always there as a fallback, so the plugin is optional but handy for boats that are often offline.</p>
 <hr />
 <h3 id="installing-plugins">Installing plugins<a class="headerlink" href="#installing-plugins" title="Permanent link">&para;</a></h3>
 <ol>
