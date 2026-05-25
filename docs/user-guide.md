@@ -148,9 +148,16 @@ Under the hood the app connects to `mqtt<N>.victronenergy.com:8883` using TLS. I
 
 **When to use it:** Same scenarios as the plain VRM MQTT variant (you're away from the boat, monitoring remotely), but you want the full SignalK feature set rather than the more limited MQTT view. If you only need standard Victron values (batteries, solar, etc.) the plain VRM MQTT path is simpler.
 
-**Prerequisite — SignalK enabled on the Venus device:**
+**Prerequisite — Venus OS Large with Signal K enabled:**
 
-The Venus OS device must have the **SignalK Server** package installed and connected to your VRM portal. On Cerbo GX / Color Control GX, this is enabled via Venus OS's package manager (or `opkg`). Refer to Victron's documentation: [Signal K Server on Venus OS](https://www.victronenergy.com/live/venus-os:signalk-installation) for the install steps. Once it's running on the Venus device and the device is online in your VRM account, WilhelmSK can reach it.
+Signal K Server is only shipped in **Venus OS Large**, the extended firmware variant. Standard Venus OS does not include it. Steps on the Venus device (per [Victron's Venus OS Large docs](https://www.victronenergy.com/live/venus-os:large)):
+
+1. **Settings → General → Firmware → Online updates** — set **Image type** to `Large` and run the update.
+2. After the reboot, **Settings → Signal K** — enable it. This requires **Installer access level** (the default User level can't toggle it; promote yourself via Settings → General → Access Level).
+3. Verify the Signal K admin is reachable from the boat network at `http://venus.local:3000` (or the Venus device's IP at port `3000`).
+4. Confirm the Venus device is online in your VRM portal — `https://vrm.victronenergy.com/`.
+
+Once Signal K is running on the device and the device is online in VRM, WilhelmSK can reach it through the VRM relay.
 
 **How to configure:** Tap **Add Connection → Venus VRM Signal K**. Enter your VRM account credentials. The app:
 
