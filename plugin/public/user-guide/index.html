@@ -1945,7 +1945,14 @@
 <h4 id="vrm-cloud-victron-remote-monitoring">VRM Cloud (Victron Remote Monitoring)<a class="headerlink" href="#vrm-cloud-victron-remote-monitoring" title="Permanent link">&para;</a></h4>
 <p><strong>What it is:</strong> A connection through Victron's hosted VRM portal (<code>mqtt.victronenergy.com</code>) to your Venus device, tunneled over the internet. Data is routed through Victron's MQTT brokers.</p>
 <p><strong>When to use it:</strong> You're away from the boat and want to check on your system remotely, or you want to monitor multiple vessels registered in your VRM account.</p>
-<p><strong>How to configure:</strong> Tap <strong>Add Connection → Venus VRM</strong>. Log in with your Victron VRM account credentials. The app fetches the list of portals (sites) registered to your account and lets you choose which one to connect to.</p>
+<p><strong>How to configure:</strong></p>
+<ol>
+<li>Tap <strong>Add Connection → Venus VRM</strong>.</li>
+<li>Enter your VRM account username and password.</li>
+<li>Tap <strong>Refresh Installations</strong>. The app logs in to VRM and lists every installation registered to your account.</li>
+<li><strong>Check the box next to the installation you want to monitor.</strong> Multiple installations can be checked — the app uses the first checked one for this connection.</li>
+<li>Save.</li>
+</ol>
 <p>Under the hood the app connects to <code>mqtt&lt;N&gt;.victronenergy.com:8883</code> using TLS. It keeps the connection alive by publishing a keepalive message every 62 seconds. You don't configure any of that manually.</p>
 <p><strong>Note:</strong> VRM cloud connections require internet access on both the phone and the Venus device. If the Venus device loses its cellular or marina Wi-Fi connection, the VRM connection drops.</p>
 <h4 id="vrm-cloud-signalk-endpoint">VRM Cloud — SignalK endpoint<a class="headerlink" href="#vrm-cloud-signalk-endpoint" title="Permanent link">&para;</a></h4>
@@ -1960,14 +1967,15 @@
 <li>Confirm the Venus device is online in your VRM portal — <code>https://vrm.victronenergy.com/</code>.</li>
 </ol>
 <p>Once Signal K is running on the device and the device is online in VRM, WilhelmSK can reach it through the VRM relay.</p>
-<p><strong>How to configure:</strong> Tap <strong>Add Connection → Venus VRM Signal K</strong>. Enter your VRM account credentials. The app:</p>
+<p><strong>How to configure:</strong></p>
 <ol>
-<li>Calls VRM's <code>/v2/auth/login</code> to get an auth token.</li>
-<li>Fetches the list of installations registered to your account.</li>
-<li>Lets you pick which portal/site to connect to (same picker as VRM MQTT).</li>
-<li>Opens a SignalK proxy-relay at <code>/v2/installations/&lt;siteId&gt;/proxy-relay/signalk</code> using the token.</li>
+<li>Tap <strong>Add Connection → Venus VRM Signal K</strong>.</li>
+<li>Enter your VRM account username and password.</li>
+<li>Tap <strong>Refresh Installations</strong>. The app logs in to VRM and lists every installation registered to your account.</li>
+<li><strong>Check the box next to the installation whose Signal K server you want to reach.</strong> Checking the box authorizes WilhelmSK to use your VRM credentials to relay through to the Signal K server running on that installation. Multiple installations can be checked.</li>
+<li>Save.</li>
 </ol>
-<p>After that, the connection behaves like a normal SignalK connection — auto-discovers REST and WebSocket endpoints from the relayed server, subscribes to deltas, drives gauges from the stream.</p>
+<p>Under the hood, on first connect the app calls VRM's <code>/v2/auth/login</code> for a token, then opens a Signal K proxy relay at <code>/v2/installations/&lt;siteId&gt;/proxy-relay/signalk</code> for the checked installation. From there it behaves like a normal Signal K connection — auto-discovers REST and WebSocket endpoints from the relayed server, subscribes to deltas, drives gauges from the stream.</p>
 <p><strong>Note:</strong> VRM Cloud SignalK requires internet access on both the phone and the Venus device, plus the Venus device must be online in VRM (the same constraint as VRM MQTT). It does not require the phone to be on the same network as the boat.</p>
 <h4 id="data-format-note">Data format note<a class="headerlink" href="#data-format-note" title="Permanent link">&para;</a></h4>
 <p>Venus/MQTT data is converted to SignalK deltas internally using a JavaScript bridge (<code>venus.js</code>). The gauges you configure work the same way regardless of whether the source is SignalK or Venus — the connection type is transparent once you're past setup.</p>
