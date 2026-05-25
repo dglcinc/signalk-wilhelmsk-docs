@@ -1,29 +1,18 @@
-# signalk-wilhelmsk-docs (SignalK plugin)
+# WilhelmSK Documentation (SignalK plugin)
 
-A [SignalK](https://signalk.org/) node-server plugin that serves the WilhelmSK
-documentation site directly from your SignalK server, and ships a small static
-detection file the WilhelmSK iOS app can use to confirm the plugin is installed.
+A [SignalK](https://signalk.org/) node-server plugin that serves the
+[WilhelmSK](https://wilhelmsk.com/) documentation site directly from your boat's
+SignalK server, and ships a small static detection file the WilhelmSK iOS app
+uses to confirm the plugin is installed.
 
-## Size
-
-The plugin ships the entire documentation site bundled with it (so it works
-without internet access on the boat). On a typical Raspberry Pi-class SignalK
-server, expect:
-
-| What | Size |
-|------|------|
-| npm tarball (download) | ~640 KB |
-| Installed on disk (`public/` + plugin) | ~2.7 MB |
-| File count | 52 |
-
-Almost all of that is the Material theme's bundled assets (fonts, icons, JS,
-CSS — about 2.5 MB) plus the rendered HTML pages. The plugin code itself is
-only a few KB. Numbers above include the documentation; they do not include
-`node_modules` (the plugin has no runtime npm dependencies).
+WilhelmSK is the marine instrument display app for iOS, iPadOS, and watchOS.
+Install this plugin and the app can offer in-app help straight from your own
+SignalK server — no internet connection required once it's on the boat.
 
 ## What it does
 
 - Serves the bundled MkDocs documentation site at `/signalk-wilhelmsk-docs/`.
+- Works fully offline — the entire docs site ships with the plugin.
 - Ships a static detection file at `/signalk-wilhelmsk-docs/info.json`:
 
   ```json
@@ -49,8 +38,9 @@ only a few KB. Numbers above include the documentation; they do not include
 
 ### From the SignalK App Store
 
-Once published, install **WilhelmSK Documentation** from the SignalK server
-admin UI (Appstore → Available).
+Install **WilhelmSK Documentation** from the SignalK server admin UI
+(Appstore → Available), then restart the server when prompted. There are no
+configuration options — the docs start serving immediately.
 
 ### Manually (development)
 
@@ -62,7 +52,7 @@ ln -s /path/to/signalk-wilhelmsk-docs/plugin signalk-wilhelmsk-docs
 ```
 
 Restart the SignalK server, then enable **WilhelmSK Documentation** under
-Server → Plugin Config. There are no configuration options.
+Server → Plugin Config.
 
 ## Verify
 
@@ -71,12 +61,30 @@ curl http://localhost:3000/signalk-wilhelmsk-docs/info.json
 curl -I http://localhost:3000/signalk-wilhelmsk-docs/
 ```
 
+## Size
+
+The plugin bundles the entire documentation site (so it works without internet
+access on the boat). Everything ships inside the package — installing it adds
+**nothing** to `node_modules` beyond the plugin's own folder, because it has no
+runtime dependencies. So the installed footprint below is the whole cost:
+
+| What | Size |
+|------|------|
+| Download (npm tarball, gzipped) | ~670 KB |
+| Installed on disk | ~2.8 MB (54 files) |
+| Extra `node_modules` dependencies | none |
+
+Almost all of the on-disk size is the Material theme's bundled assets (fonts,
+icons, JS, CSS — about 2.5 MB) plus the rendered HTML pages; the plugin code
+itself is only a few KB. On a Raspberry Pi-class SignalK server — where the OS,
+Node, and signalk-server already account for a few GB — under 3 MB of docs is
+negligible and will fit comfortably on any install that runs SignalK at all.
+
 ## Documentation content
 
 The `public/` directory holds the built MkDocs site. It is generated from the
 `docs/` sources at the repository root via `mkdocs build -d plugin/public/`
-(see the repo root `README.md` / `npm run build-docs`). The placeholder
-`.gitkeep` is replaced by real content in the docs-bundling step.
+(see the repo root `README.md` / `npm run build-docs`).
 
 ## License
 
