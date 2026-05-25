@@ -16,7 +16,7 @@ Search **WilhelmSK** on the App Store. One purchase covers iPhone, iPad, and App
 
 The complete [User Guide](user-guide.md) covers setup and use across all platforms:
 
-- [Prerequisites](user-guide.md#prerequisites) — what you need before launching the app
+- [Before You Start](user-guide.md#before-you-start) — device requirements, install, network basics
 - [Connecting to a Data Source](user-guide.md#connecting-to-a-data-source) — SignalK, Victron Venus, Raymarine MFD, iKommunicate, and remote access
 - [iOS and iPadOS](user-guide.md#ios-and-ipados) — navigation, layouts, settings, widgets, push notifications
 - [watchOS](user-guide.md#watchos) — setup, gauge types, complications, update rate
@@ -25,6 +25,7 @@ The complete [User Guide](user-guide.md) covers setup and use across all platfor
 - [Alarms and Notifications](user-guide.md#alarms-and-notifications) — server-side, local zone, anchor alarm, push
 - [Server Plugins](user-guide.md#server-plugins) — dependency matrix and feature details
 - [Custom SignalK Paths](user-guide.md#custom-signalk-paths) — naming conventions and worked examples
+- [Not Just for Boats](user-guide.md#not-just-for-boats) — using WilhelmSK with non-marine SignalK sources
 
 ---
 

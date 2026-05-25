@@ -4,47 +4,9 @@ Everything you need to set up and use WilhelmSK across all supported platforms. 
 
 ---
 
-## Prerequisites
+## Before You Start
 
-WilhelmSK is a display client. Before you launch the app for the first time, you need a data source it can connect to. This guide covers everything you need to have in place.
-
----
-
-### What Is SignalK?
-
-[SignalK](https://signalk.org) is an open-source data server that aggregates readings from your boat's instruments — GPS, wind sensors, depth sounder, engine gauges, tank monitors, AIS, and more — and makes them available over your local network using a standard JSON protocol.
-
-WilhelmSK speaks SignalK. It connects to a running SignalK server, subscribes to the data streams you care about, and renders them as live gauges on your iPhone, iPad, Apple Watch, or Apple TV. Without a SignalK server (or compatible data source), the app has nothing to display.
-
-If you already have a SignalK server running on your boat and know its IP address or hostname, you can skip straight to the [Connecting to a Data Source](#connecting-to-a-data-source) section.
-
----
-
-### Running a SignalK Server
-
-SignalK runs on any machine that supports Node.js. Common options on boats:
-
-**Raspberry Pi (most common)**
-A dedicated Pi is the most popular choice. It draws very little power, handles the 24/7 server load easily, and can be wired directly to the boat's NMEA backbone. A Pi 3B+ or newer running Raspberry Pi OS is sufficient. The official installation instructions are at [https://github.com/SignalK/signalk-server](https://github.com/SignalK/signalk-server).
-
-**NAS or existing boat computer**
-If you already have a network-attached storage device or a Linux/Windows machine running continuously, SignalK can run there. Anything that can run Node.js works.
-
-**Mac or PC on the same network**
-A laptop or desktop on the boat's Wi-Fi is a valid option for testing or temporary use. You would not normally leave a laptop running 24/7 at the nav station, but it is a convenient way to try the setup before committing to a Pi.
-
-**iKommunicate gateway**
-An iKommunicate device from Digital Yacht is a self-contained NMEA-to-SignalK bridge with its own built-in SignalK server. WilhelmSK supports its REST and streaming APIs directly with auto-discovery via Bonjour.
-
----
-
-### Network Requirements
-
-WilhelmSK discovers and connects to your SignalK server over Wi-Fi. Two things must be true:
-
-- **Same local network.** Your iPhone or iPad and the SignalK server must be on the same LAN or Wi-Fi network. Connections across the internet or through a VPN are technically possible with the right port forwarding, but the typical case is a boat router or access point with everything on the same subnet.
-
-- **mDNS/Bonjour works on your network.** WilhelmSK can find your server automatically using Bonjour (mDNS). SignalK advertises itself on the local network, and the app picks it up without any manual configuration. Most routers support this; some enterprise or managed switches block mDNS between clients. If auto-discovery does not work, you can always enter the server's IP address and port manually — see [Connecting to a Data Source](#connecting-to-a-data-source).
+WilhelmSK is a display client — you'll connect it to a data source on your boat (or wherever the data lives). The full setup flow is in **Connecting to a Data Source** below. First, a few basics that apply regardless of which source you choose.
 
 ---
 
@@ -64,43 +26,53 @@ Search "WilhelmSK" on the App Store. The app is a universal binary — one purch
 
 ---
 
-### Not Just for Boats
+### Network Requirements
 
-WilhelmSK works with any SignalK data source, not only marine instruments. SignalK is a generic key-value protocol with a defined path namespace; anything that can push data to a SignalK server can be displayed in the app.
+Whichever data source you use, your iOS device and the data source need to reach each other on the network. For most setups that means the same boat Wi-Fi or LAN.
 
-A concrete example is [pivac](https://github.com/dglc/pivac), a Raspberry Pi sensor collector for HVAC and home automation. pivac reads temperature sensors, relay states, thermostat data (via a Honeywell RedLink cloud API), hydronic pressure gauges, and power monitors, then pushes delta messages to a local SignalK server over WebSocket. WilhelmSK connects to the same server and displays all of that data using the same gauge system as a marine installation — water temperature gauges showing HVAC supply/return/outdoor temperatures, a switch bank showing relay states, and custom text gauges for thermostat setpoints.
+WilhelmSK uses **Bonjour (mDNS)** to discover compatible servers and devices automatically. Most home and boat routers pass mDNS without configuration; some enterprise or managed switches block it. If auto-discovery doesn't find your server, you can always enter the address manually — covered in each Connecting section below.
 
-If you have sensors or automation equipment that can push data to SignalK, WilhelmSK can display it. See [Custom SignalK Paths](#custom-signalk-paths) for how to configure gauges for non-marine SignalK paths.
+For monitoring from outside the boat's network (cellular, marina Wi-Fi, shore), see [Remote Access](#remote-access) further down.
 
 ---
 
 ## Connecting to a Data Source
 
-WilhelmSK can connect to several types of data sources. The most common is a SignalK server, but the app also supports Victron/Venus devices, Raymarine MFDs, and others. This guide covers the four primary connection types in detail.
+This is where most of your one-time setup happens. WilhelmSK supports four kinds of data sources, used in different installations:
 
----
-
-### Connection Types at a Glance
-
-| Type | Best For |
+| Source | Best for |
 |---|---|
-| SignalK | Most boat setups; connects to any SignalK server over your local network |
-| iKommunicate | B&G/Simrad users with an iKommunicate NMEA gateway |
-| Victron/Venus MQTT | Victron Energy installations — monitoring batteries, inverters, solar |
-| Raymarine MFD | Raymarine chart plotter owners who want phone/tablet as a secondary display |
+| **SignalK server** | The flexible default — runs on a Raspberry Pi or similar, aggregates all your NMEA data, works with every WilhelmSK feature |
+| **Victron Venus MQTT** | Victron Energy installations — batteries, inverters, solar, shore power |
+| **Raymarine MFD** | Raymarine chart-plotter owners; no separate server needed |
+| **iKommunicate** | B&G/Simrad users who bought the iKommunicate NMEA-to-SignalK gateway |
+
+You can have several connections configured at once (e.g., local SignalK at the dock and Victron VRM cloud when away). Pick the section below that matches your installation.
 
 ---
 
-### SignalK (REST + WebSocket Streaming)
+### SignalK
 
 #### What it is
 
-SignalK is an open marine data standard. A SignalK server (typically running on a Raspberry Pi, NAS, or boat computer) collects NMEA data from your instruments and makes it available over your local network. WilhelmSK connects to that server, subscribes to live data, and drives its gauges from the stream.
+[SignalK](https://signalk.org) is an open marine-data standard. A SignalK server typically runs on a Raspberry Pi, NAS, or boat computer; it collects NMEA data from your instruments and makes it available over your local network. WilhelmSK connects to that server, subscribes to live data, and drives its gauges from the stream.
 
 Two protocols are used together:
 
 - **REST** — used at startup to discover the server's endpoints and fetch initial values.
 - **WebSocket** — used for live streaming of instrument data (deltas). This is how gauges update in real time.
+
+If you already have a SignalK server running on your boat and know its IP address or hostname, skip ahead to **Auto-discovery** or **Manual connection** below.
+
+#### Running a SignalK server
+
+If you don't have a SignalK server yet, common options on boats are:
+
+**Raspberry Pi (most common)** — A dedicated Pi is the most popular choice. It draws very little power, handles the 24/7 server load easily, and can be wired directly to the boat's NMEA backbone. A Pi 3B+ or newer running Raspberry Pi OS is sufficient. The official installation instructions are at [https://github.com/SignalK/signalk-server](https://github.com/SignalK/signalk-server).
+
+**NAS or existing boat computer** — If you already have a network-attached storage device or a Linux/Windows machine running continuously, SignalK can run there. Anything that can run Node.js works.
+
+**Mac or PC on the same network** — A laptop or desktop on the boat's Wi-Fi is a valid option for testing or temporary use. You wouldn't normally leave a laptop running 24/7 at the nav station, but it's a convenient way to try the setup before committing to a Pi.
 
 #### Auto-discovery (Bonjour)
 
@@ -159,7 +131,7 @@ Authentication is username/password (HTTP Basic or JWT depending on your iKommun
 
 ---
 
-### Victron/Venus MQTT
+### Victron Venus MQTT
 
 Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks — via MQTT. WilhelmSK can connect directly to the local MQTT broker or through Victron's VRM cloud portal.
 
@@ -192,15 +164,9 @@ Venus/MQTT data is converted to SignalK deltas internally using a JavaScript bri
 
 ---
 
-### Raymarine MFD (Bonjour-Discovered)
+### Raymarine MFD
 
-#### What it is
-
-WilhelmSK can connect to a Raymarine chart plotter (MFD) on the same network and use it as a data source. The MFD streams instrument data over a local TCP connection.
-
-#### When to use it
-
-Choose this if you have a Raymarine chart plotter and want to display its instrument data on your iPhone or iPad without running a separate SignalK server.
+WilhelmSK can use a Raymarine chart plotter (MFD) on the same network as a data source. The MFD streams instrument data over a local TCP connection — no separate SignalK server needed.
 
 #### How to configure
 
@@ -216,7 +182,7 @@ In addition to receiving instrument data, WilhelmSK can send remote-control inpu
 
 ---
 
-### Connecting Remotely (Outside the Boat's Network)
+### Remote Access
 
 By default WilhelmSK connects over the local Wi-Fi on the boat. If you want to monitor your vessel from shore, a marina Wi-Fi, or a cellular connection, you need to make the SignalK server reachable from the internet. Two approaches are common.
 
@@ -261,7 +227,7 @@ location /signalk/ {
 
 ---
 
-### General Tips
+### Tips
 
 **Multiple connections:** WilhelmSK supports configuring multiple connections. You can have a SignalK connection for use at the dock, a VRM cloud connection for remote monitoring, and a local Venus connection all saved in the list. Switch between them from the connections screen.
 
@@ -270,6 +236,16 @@ location /signalk/ {
 **Watch and widget access:** Manual connections synced to iCloud are also available to the Apple Watch app and home screen widgets. The watch uses the same connection settings you configured on the iPhone.
 
 **SSL and self-signed certificates:** If your server uses HTTPS with a self-signed certificate, the app will prompt you to trust it on first connection. Accept the prompt and the certificate is trusted for future sessions. Rejecting it will prevent connection.
+
+---
+
+## Not Just for Boats
+
+WilhelmSK works with any SignalK data source, not only marine instruments. SignalK is a generic key-value protocol with a defined path namespace; anything that can push data to a SignalK server can be displayed in the app.
+
+A concrete example is [pivac](https://github.com/dglc/pivac), a Raspberry Pi sensor collector for HVAC and home automation. pivac reads temperature sensors, relay states, thermostat data (via a Honeywell RedLink cloud API), hydronic pressure gauges, and power monitors, then pushes delta messages to a local SignalK server over WebSocket. WilhelmSK connects to the same server and displays all of that data using the same gauge system as a marine installation — water temperature gauges showing HVAC supply/return/outdoor temperatures, a switch bank showing relay states, and custom text gauges for thermostat setpoints.
+
+If you have sensors or automation equipment that can push data to SignalK, WilhelmSK can display it. See [Custom SignalK Paths](#custom-signalk-paths) for how to configure gauges for non-marine SignalK paths.
 
 ---
 
