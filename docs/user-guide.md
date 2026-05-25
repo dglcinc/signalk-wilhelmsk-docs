@@ -827,7 +827,7 @@ To add a complication: long-press your watch face → Edit → tap a complicatio
 
 **Phone must be awake for the first sync.** The WCSession-based configuration push requires the phone to be active. If you open the watch app and the phone is asleep, the gauge layout may not load until the phone wakes.
 
-**Victron and Raymarine connections always require the phone.** The watch app routes all non-SignalK data through the phone — it cannot speak Venus MQTT or Raymarine protocols directly. The phone must be reachable for these connections to work on the watch.
+**Non-SignalK connections always require the phone.** The watch app routes all non-SignalK data (Victron MQTT, Actisense W2K, Yacht Devices YDWG, Digital Yacht RAW, generic NMEA 0183) through the phone — it cannot speak those protocols directly. The phone must be reachable for these connections to work on the watch.
 
 **SignalK connections also route through the phone.** The watch uses the auth token and connection details obtained from the phone. If the phone is unreachable, the watch cannot fetch data from the server even if both are on the same Wi-Fi network.
 
@@ -1017,7 +1017,6 @@ Switch paths follow `electrical.switches.{bank}.{switch}.state`.
 | Google Map | Vessel position on Google Maps |
 | Navionics | Marine chart overlay — requires Navionics subscription |
 | Freeboard-SK | Embedded Freeboard-SK web chart — requires server-side Freeboard-SK |
-| Raymarine MFD | Mirrors a Raymarine MFD display |
 
 #### Camera
 

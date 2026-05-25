@@ -1,6 +1,6 @@
 # WilhelmSK
 
-WilhelmSK is a marine instrument display app for **iOS, iPadOS, and watchOS**. It connects to your boat's data — from a [SignalK](https://signalk.org) server, a Victron Venus device over MQTT, or a Raymarine MFD over Bonjour — and renders live readings as customizable analog and digital gauges: wind, speed, heading, depth, engine, tanks, electrical, autopilot, AIS, and any custom path.
+WilhelmSK is a marine instrument display app for **iOS, iPadOS, and watchOS**. It connects to your boat's data — from a [SignalK](https://signalk.org) server, a Victron Venus device over MQTT, or an NMEA 2000/0183 gateway from Actisense, Yacht Devices, or Digital Yacht — and renders live readings as customizable analog and digital gauges: wind, speed, heading, depth, engine, tanks, electrical, autopilot, AIS, and any custom path.
 
 Discovery is automatic via Bonjour. Manual host/port entry is also supported.
 
