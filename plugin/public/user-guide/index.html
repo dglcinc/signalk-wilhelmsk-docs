@@ -2644,7 +2644,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <h3 id="known-quirks">Known Quirks<a class="headerlink" href="#known-quirks" title="Permanent link">&para;</a></h3>
 <p><strong>Watch goes blank if phone is out of range.</strong> If you move beyond Bluetooth range and the phone is not on the same Wi-Fi network, the watch stops receiving updates. The freshness indicator will change color. Data from before the connection dropped remains visible but frozen.</p>
 <p><strong>Phone must be awake for the first sync.</strong> The WCSession-based configuration push requires the phone to be active. If you open the watch app and the phone is asleep, the gauge layout may not load until the phone wakes.</p>
-<p><strong>Victron and Raymarine connections always require the phone.</strong> The watch app routes all non-SignalK data through the phone — it cannot speak Venus MQTT or Raymarine protocols directly. The phone must be reachable for these connections to work on the watch.</p>
+<p><strong>Non-SignalK connections always require the phone.</strong> The watch app routes all non-SignalK data (Victron MQTT, Actisense W2K, Yacht Devices YDWG, Digital Yacht RAW, generic NMEA 0183) through the phone — it cannot speak those protocols directly. The phone must be reachable for these connections to work on the watch.</p>
 <p><strong>SignalK connections also route through the phone.</strong> The watch uses the auth token and connection details obtained from the phone. If the phone is unreachable, the watch cannot fetch data from the server even if both are on the same Wi-Fi network.</p>
 <hr />
 <h2 id="gauges">Gauges<a class="headerlink" href="#gauges" title="Permanent link">&para;</a></h2>
@@ -3090,10 +3090,6 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <tr>
 <td>Freeboard-SK</td>
 <td>Embedded Freeboard-SK web chart — requires server-side Freeboard-SK</td>
-</tr>
-<tr>
-<td>Raymarine MFD</td>
-<td>Mirrors a Raymarine MFD display</td>
 </tr>
 </tbody>
 </table>
