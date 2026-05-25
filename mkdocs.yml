@@ -7,6 +7,7 @@ edit_uri: ""
 
 theme:
   name: material
+  custom_dir: overrides
   # Use the system font stack (sans-serif: San Francisco on iOS, Roboto on
   # Android, Segoe/Arial elsewhere) instead of fetching Roboto from Google
   # Fonts. The plugin serves these docs offline on the boat, where an external
