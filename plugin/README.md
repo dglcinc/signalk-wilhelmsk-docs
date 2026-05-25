@@ -2,8 +2,7 @@
 
 A [SignalK](https://signalk.org/) node-server plugin that serves the
 [WilhelmSK](https://wilhelmsk.com/) documentation site directly from your boat's
-SignalK server, and ships a small static detection file the WilhelmSK iOS app
-uses to confirm the plugin is installed.
+SignalK server, so the app's in-app help works offline.
 
 WilhelmSK is the marine instrument display app for iOS, iPadOS, and watchOS.
 Install this plugin and the app can offer in-app help straight from your own
@@ -13,26 +12,26 @@ SignalK server — no internet connection required once it's on the boat.
 
 - Serves the bundled MkDocs documentation site at `/signalk-wilhelmsk-docs/`.
 - Works fully offline — the entire docs site ships with the plugin.
-- Ships a static detection file at `/signalk-wilhelmsk-docs/info.json`:
+- Serves a small version/info file at `/signalk-wilhelmsk-docs/info.json`:
 
   ```json
   {
     "id": "signalk-wilhelmsk-docs",
-    "version": "0.1.2",
+    "version": "0.1.4",
     "docsPath": "/signalk-wilhelmsk-docs/"
   }
   ```
 
-  The WilhelmSK app can probe this (or just the docs root) to verify the plugin is
-  available before pointing its in-app docs picker at
-  `http://<host>:<port>/signalk-wilhelmsk-docs/`.
+  It reports the installed plugin version and the docs path. The WilhelmSK app
+  verifies the docs are reachable by probing the docs root before pointing its
+  in-app help at `http://<host>:<port>/signalk-wilhelmsk-docs/`.
 
   **Why a static file and not a plugin endpoint:** SignalK mounts
   `registerWithRouter` routes under `/plugins/*`, which the server's security
-  middleware gates behind authentication. The app probes for docs before any
-  login, so detection lives on the open static docs route instead — no token
-  required. `info.json` is generated from the plugin version by
-  `scripts/gen-info.js` during `npm run build-docs`.
+  middleware gates behind authentication. Keeping `info.json` (and the docs
+  themselves) on the open static route means they're reachable without a token.
+  `info.json` is generated from the plugin version by `scripts/gen-info.js`
+  during `npm run build-docs`.
 
 ## Install
 
@@ -41,9 +40,10 @@ SignalK server — no internet connection required once it's on the boat.
 In the SignalK server admin UI, open **Appstore → Available** and look for
 **WilhelmSK Documentation** (the WilhelmSK app icon, by David Lewis). Searching
 the list for `wilhelm` or `documentation` will find it. The entry shows the
-short description — *"serves the WilhelmSK documentation site and an
-installation-detection endpoint for the WilhelmSK iOS app"* — a version number,
-and an **Install** button.
+short description — *"Serves the WilhelmSK app documentation from your SignalK
+server, so in-app help and direct browser access work without an internet
+connection. Open it from the Webapps menu or browse to /signalk-wilhelmsk-docs/."*
+— a version number, and an **Install** button.
 
 Click **Install**, then restart the server when the admin UI prompts you. There
 are no configuration options — the docs start serving immediately, and the

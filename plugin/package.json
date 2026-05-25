@@ -1,8 +1,9 @@
 {
   "name": "signalk-wilhelmsk-docs",
-  "version": "0.1.4",
-  "description": "SignalK plugin that serves the WilhelmSK documentation site and an installation-detection endpoint for the WilhelmSK iOS app.",
+  "version": "0.1.5",
+  "description": "Serves the WilhelmSK app documentation from your SignalK server, so in-app help and direct browser access work without an internet connection. Open it from the Webapps menu or browse to /signalk-wilhelmsk-docs/.",
   "main": "index.js",
+  "signalk-plugin-enabled-by-default": true,
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0",
     "build-docs": "cd .. && mkdocs build --strict -d plugin/public/ && node plugin/scripts/gen-info.js"
@@ -10,6 +11,10 @@
   "keywords": [
     "signalk-node-server-plugin",
     "signalk-webapp",
+    "signalk-category-utility",
+    "signalk-category-instruments",
+    "signalk-category-notifications",
+    "signalk-category-ais",
     "wilhelmsk",
     "documentation"
   ],
@@ -25,11 +30,15 @@
   "signalk": {
     "displayName": "WilhelmSK Documentation",
     "appIcon": "icon.png",
+    "screenshots": [
+      "screenshot.png"
+    ],
     "appSupport": "https://github.com/dglcinc/signalk-wilhelmsk-docs/issues"
   },
   "files": [
     "index.js",
     "public/",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ]
 }

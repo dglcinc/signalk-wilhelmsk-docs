@@ -11,9 +11,9 @@ module.exports = function (app) {
     id: PLUGIN_ID,
     name: 'WilhelmSK Documentation',
     description:
-      'Serves the WilhelmSK documentation site at ' +
+      'Serves the WilhelmSK app documentation at ' +
       DOCS_MOUNT +
-      '/ and exposes an info endpoint the WilhelmSK iOS app uses to detect the plugin.',
+      '/, so in-app help and direct browser access work without an internet connection.',
 
     // No user-configurable options. SignalK's admin UI renders the schema
     // description as plain text (RJSF v5 with a custom FieldTemplate that emits
@@ -45,12 +45,11 @@ module.exports = function (app) {
     }
   }
 
-  // Note: detection is served as a static file at
-  // /signalk-wilhelmsk-docs/info.json (generated into public/ by
-  // scripts/gen-info.js at build time). It deliberately lives on the open
-  // static route rather than a registerWithRouter endpoint under /plugins/*,
-  // which SignalK's security middleware would gate behind authentication —
-  // the WilhelmSK app probes it before any login.
+  // A small version/info file is served at /signalk-wilhelmsk-docs/info.json
+  // (generated into public/ by scripts/gen-info.js at build time). It lives on
+  // the open static route rather than a registerWithRouter endpoint under
+  // /plugins/*, which SignalK's security middleware would gate behind
+  // authentication — so it (and the docs root) can be reached without a login.
 
   return plugin
 }
