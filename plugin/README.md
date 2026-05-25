@@ -5,21 +5,38 @@ documentation site directly from your SignalK server, and exposes a small
 detection endpoint that the WilhelmSK iOS app uses to confirm the plugin is
 installed.
 
+## Size
+
+The plugin ships the entire documentation site bundled with it (so it works
+without internet access on the boat). On a typical Raspberry Pi-class SignalK
+server, expect:
+
+| What | Size |
+|------|------|
+| npm tarball (download) | ~640 KB |
+| Installed on disk (`public/` + plugin) | ~2.7 MB |
+| File count | 52 |
+
+Almost all of that is the Material theme's bundled assets (fonts, icons, JS,
+CSS — about 2.5 MB) plus the rendered HTML pages. The plugin code itself is
+only a few KB. Numbers above include the documentation; they do not include
+`node_modules` (the plugin has no runtime npm dependencies).
+
 ## What it does
 
-- Serves the bundled MkDocs documentation site at `/wilhelmsk-docs/`.
+- Serves the bundled MkDocs documentation site at `/signalk-wilhelmsk-docs/`.
 - Exposes `GET /plugins/signalk-wilhelmsk-docs/info` returning:
 
   ```json
   {
     "id": "signalk-wilhelmsk-docs",
     "version": "0.1.0",
-    "docsPath": "/wilhelmsk-docs/"
+    "docsPath": "/signalk-wilhelmsk-docs/"
   }
   ```
 
   The WilhelmSK app hits this endpoint to verify the plugin is available before
-  pointing its in-app docs picker at `http://<host>:<port>/wilhelmsk-docs/`.
+  pointing its in-app docs picker at `http://<host>:<port>/signalk-wilhelmsk-docs/`.
 
 ## Install
 
@@ -44,7 +61,7 @@ Server → Plugin Config. There are no configuration options.
 
 ```sh
 curl http://localhost:3000/plugins/signalk-wilhelmsk-docs/info
-curl -I http://localhost:3000/wilhelmsk-docs/
+curl -I http://localhost:3000/signalk-wilhelmsk-docs/
 ```
 
 ## Documentation content
