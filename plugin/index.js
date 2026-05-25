@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 
 const PLUGIN_ID = 'signalk-wilhelmsk-docs'
-const DOCS_MOUNT = '/wilhelmsk-docs'
+const DOCS_MOUNT = '/signalk-wilhelmsk-docs'
 
 module.exports = function (app) {
   const pkg = require('./package.json')
