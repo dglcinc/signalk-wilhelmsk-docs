@@ -66,10 +66,14 @@ Read+write; scope *All packages*), passed inline so it isn't persisted:
 `dist-tags`. App Store appearance lags further: npm keyword-search must index it, then the SignalK server
 caches its "Available" list (restart the server to refresh).
 
-**Config-page docs link:** the plugin's `schema.description` (in `index.js`) carries an HTML `<a>` with a
-**relative** href (`/signalk-wilhelmsk-docs/`) so the Plugin Config page offers a one-click link to the
-docs; SignalK's admin UI renders the description as HTML and the relative href resolves against its own
-host:port.
+**Config-page docs link — not possible:** the Plugin Config page can't show a clickable link. SignalK's
+admin UI (`@rjsf/core` v5 with a custom `FieldTemplate` emitting `<p>{description}</p>` —
+`server-admin-ui/.../ServerConfig/PluginConfigurationForm.tsx`) renders the schema `description` as
+**plain text**; both HTML and markdown are escaped (verified 2026-05-25 after an HTML attempt showed raw
+tags). So `index.js`'s `schema.description` is plain text that points users to the **Webapps menu** (the
+real clickable launcher, present via the `signalk-webapp` keyword) and shows the `/signalk-wilhelmsk-docs/`
+path. A clickable config panel would require shipping a custom React component (PLUGIN_CONFIG_PANEL) — not
+worth it.
 
 ## Conventions
 

@@ -18,7 +18,7 @@ SignalK server — no internet connection required once it's on the boat.
   ```json
   {
     "id": "signalk-wilhelmsk-docs",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "docsPath": "/signalk-wilhelmsk-docs/"
   }
   ```
