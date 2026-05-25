@@ -1,9 +1,8 @@
 # signalk-wilhelmsk-docs (SignalK plugin)
 
 A [SignalK](https://signalk.org/) node-server plugin that serves the WilhelmSK
-documentation site directly from your SignalK server, and exposes a small
-detection endpoint that the WilhelmSK iOS app uses to confirm the plugin is
-installed.
+documentation site directly from your SignalK server, and ships a small static
+detection file the WilhelmSK iOS app can use to confirm the plugin is installed.
 
 ## Size
 
@@ -25,7 +24,7 @@ only a few KB. Numbers above include the documentation; they do not include
 ## What it does
 
 - Serves the bundled MkDocs documentation site at `/signalk-wilhelmsk-docs/`.
-- Exposes `GET /plugins/signalk-wilhelmsk-docs/info` returning:
+- Ships a static detection file at `/signalk-wilhelmsk-docs/info.json`:
 
   ```json
   {
@@ -35,8 +34,16 @@ only a few KB. Numbers above include the documentation; they do not include
   }
   ```
 
-  The WilhelmSK app hits this endpoint to verify the plugin is available before
-  pointing its in-app docs picker at `http://<host>:<port>/signalk-wilhelmsk-docs/`.
+  The WilhelmSK app can probe this (or just the docs root) to verify the plugin is
+  available before pointing its in-app docs picker at
+  `http://<host>:<port>/signalk-wilhelmsk-docs/`.
+
+  **Why a static file and not a plugin endpoint:** SignalK mounts
+  `registerWithRouter` routes under `/plugins/*`, which the server's security
+  middleware gates behind authentication. The app probes for docs before any
+  login, so detection lives on the open static docs route instead — no token
+  required. `info.json` is generated from the plugin version by
+  `scripts/gen-info.js` during `npm run build-docs`.
 
 ## Install
 
@@ -60,7 +67,7 @@ Server → Plugin Config. There are no configuration options.
 ## Verify
 
 ```sh
-curl http://localhost:3000/plugins/signalk-wilhelmsk-docs/info
+curl http://localhost:3000/signalk-wilhelmsk-docs/info.json
 curl -I http://localhost:3000/signalk-wilhelmsk-docs/
 ```
 

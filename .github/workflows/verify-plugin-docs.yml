@@ -34,7 +34,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Rebuild bundled docs
-        run: mkdocs build --strict -d plugin/public/
+        run: |
+          mkdocs build --strict -d plugin/public/
+          node plugin/scripts/gen-info.js   # regenerate public/info.json (ubuntu runner has node preinstalled)
 
       - name: Check for drift
         run: |
