@@ -639,6 +639,25 @@ Opens the widget editor for the iOS Today widget (legacy) and for configuring wh
 
 ---
 
+#### Help / Documentation
+
+Opens this documentation inside the app. WilhelmSK can show the docs from either of two sources:
+
+- **SignalK Server** — served by the [signalk-wilhelmsk-docs plugin](#server-plugins) running on the server you're connected to. This works even without an internet connection (handy on the water), as long as the plugin is installed.
+- **GitHub (web)** — the public documentation site at `https://dglcinc.github.io/signalk-wilhelmsk-docs/`. Always available wherever you have internet.
+
+The first time you open **Help / Documentation**, you're asked to choose a source. After that, the row goes straight to the documentation using your saved choice — it does not ask again. If you picked **SignalK Server** but the plugin isn't installed on the connected server, WilhelmSK offers to open the web documentation instead.
+
+To change your source later, use **Documentation Source** (below) — that's the only place the chooser reappears.
+
+---
+
+#### Documentation Source
+
+Shows the documentation-source chooser directly, so you can switch between **SignalK Server**, **GitHub (web)**, and **None** at any time. Choosing **None** turns off in-app documentation; **Help / Documentation** will then prompt you to pick a source again the next time you open it.
+
+---
+
 #### Share Settings
 
 Exports your current app settings — connections, layout names, unit preferences, and appearance settings — as a `.wsettings` file shared via the system share sheet (AirDrop, Mail, Files, etc.). Recipients can import the file by opening it with WilhelmSK. Useful for transferring your configuration to a new device or sharing with a crew member.

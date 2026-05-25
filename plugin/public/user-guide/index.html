@@ -2460,6 +2460,18 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <h4 id="today-widget-editor">Today / Widget Editor<a class="headerlink" href="#today-widget-editor" title="Permanent link">&para;</a></h4>
 <p>Opens the widget editor for the iOS Today widget (legacy) and for configuring which gauges appear in WidgetKit home screen widgets. Drag gauges to reorder them, or tap a gauge entry to choose a different gauge type or SignalK path.</p>
 <hr />
+<h4 id="help-documentation">Help / Documentation<a class="headerlink" href="#help-documentation" title="Permanent link">&para;</a></h4>
+<p>Opens this documentation inside the app. WilhelmSK can show the docs from either of two sources:</p>
+<ul>
+<li><strong>SignalK Server</strong> — served by the <a href="#server-plugins">signalk-wilhelmsk-docs plugin</a> running on the server you're connected to. This works even without an internet connection (handy on the water), as long as the plugin is installed.</li>
+<li><strong>GitHub (web)</strong> — the public documentation site at <code>https://dglcinc.github.io/signalk-wilhelmsk-docs/</code>. Always available wherever you have internet.</li>
+</ul>
+<p>The first time you open <strong>Help / Documentation</strong>, you're asked to choose a source. After that, the row goes straight to the documentation using your saved choice — it does not ask again. If you picked <strong>SignalK Server</strong> but the plugin isn't installed on the connected server, WilhelmSK offers to open the web documentation instead.</p>
+<p>To change your source later, use <strong>Documentation Source</strong> (below) — that's the only place the chooser reappears.</p>
+<hr />
+<h4 id="documentation-source">Documentation Source<a class="headerlink" href="#documentation-source" title="Permanent link">&para;</a></h4>
+<p>Shows the documentation-source chooser directly, so you can switch between <strong>SignalK Server</strong>, <strong>GitHub (web)</strong>, and <strong>None</strong> at any time. Choosing <strong>None</strong> turns off in-app documentation; <strong>Help / Documentation</strong> will then prompt you to pick a source again the next time you open it.</p>
+<hr />
 <h4 id="share-settings">Share Settings<a class="headerlink" href="#share-settings" title="Permanent link">&para;</a></h4>
 <p>Exports your current app settings — connections, layout names, unit preferences, and appearance settings — as a <code>.wsettings</code> file shared via the system share sheet (AirDrop, Mail, Files, etc.). Recipients can import the file by opening it with WilhelmSK. Useful for transferring your configuration to a new device or sharing with a crew member.</p>
 <hr />
