@@ -943,6 +943,7 @@ The tables below list all gauge categories and types with their primary SignalK 
 | AWA (Course Over Ground) | `environment.wind.angleTrueGround` |
 | AWA (True Wind Angle) | `environment.wind.angleTrueWater` |
 | AWA (Ground Wind Angle) | `environment.wind.angleGround` |
+| AWA (Compass Heading) | `environment.wind.angleApparent` + `navigation.headingMagnetic` |
 | AWS (Apparent Wind Speed) | `environment.wind.speedApparent` |
 | TWA (True Wind Angle) | `environment.wind.angleTrueWater` |
 | TWS (True Wind Speed) | `environment.wind.speedTrue` |
@@ -1011,6 +1012,7 @@ The tables below list all gauge categories and types with their primary SignalK 
 | Fresh Water | `tanks.freshWater.*.currentLevel` |
 | Black Water | `tanks.blackWater.*.currentLevel` |
 | Waste Water | `tanks.wasteWater.*.currentLevel` |
+| WavyTank | any `tanks.*.currentLevel` — animated "wavy" liquid-level display |
 
 Both percentage and volume (liters/gallons) display modes are available. Configure the tank instance number in gauge settings.
 
@@ -1065,6 +1067,7 @@ Switch paths follow `electrical.switches.{bank}.{switch}.state`.
 | Google Map | Vessel position on Google Maps |
 | Navionics | Marine chart overlay — requires Navionics subscription |
 | Freeboard-SK | Embedded Freeboard-SK web chart — requires server-side Freeboard-SK |
+| Raymarine MFD | Embedded view of a Raymarine multifunction display — requires a compatible Raymarine MFD on the network |
 
 #### Camera
 
@@ -1093,7 +1096,9 @@ Switch paths follow `electrical.switches.{bank}.{switch}.state`.
 | GaugeStack | Stacks two gauges vertically in one slot |
 | Scrollable | Scrollable list of values |
 | Time HHMM | Clock display |
-| Thermostat | Thermostat control (for compatible HVAC systems) |
+| Thermostat | Thermostat **control** — reads temperature, state, setting, and mode, and writes the setpoint and mode back to the server (for compatible HVAC systems) |
+| StaticThermostat | **Read-only** thermostat — displays temperature, **relative humidity**, state, and setpoint. Unlike `Thermostat`, it does not write changes back and adds a humidity reading. Use this for an HVAC source that publishes humidity or that you don't want to control from the app. |
+| WatchGridGauge | Multi-value grid tile (default 6 cells); primarily used on Apple Watch layouts |
 | AnchorAlarmControl | Anchor alarm drop/raise and radius control |
 | Anchor | Anchor position and drag distance |
 | Tide | Tide height and prediction |
@@ -1426,11 +1431,11 @@ Key fields:
 
 The pivac WilhelmSK layout (`wilhelmsk/iphone.wlyt`) demonstrates mixing gauge types on a single page:
 
-**Thermostat gauges** use a dedicated `Thermostat` class that reads temperature, humidity, and state from three related paths under a shared prefix:
+**Thermostat gauges** read temperature, state, and setpoint from related paths under a shared prefix. There are two classes: `Thermostat`, which also reads `mode` and writes the setpoint/mode back to the server, and `StaticThermostat`, which is read-only and additionally reads **humidity**. Because pivac publishes a humidity reading and the gauge is for display only, this layout uses `StaticThermostat`:
 
 ```json
 "10": {
-  "className": "Thermostat",
+  "className": "StaticThermostat",
   "title": "Kids Room",
   "temperature": "environment.inside.thermostat.KIDS_ROOM.temperature",
   "humidity": "environment.inside.thermostat.KIDS_ROOM.humidity",
