@@ -1,8 +1,9 @@
 {
   "name": "signalk-wilhelmsk-docs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "SignalK plugin that serves the WilhelmSK documentation site and an installation-detection endpoint for the WilhelmSK iOS app.",
   "main": "index.js",
+  "signalk-plugin-enabled-by-default": true,
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0",
     "build-docs": "cd .. && mkdocs build --strict -d plugin/public/ && node plugin/scripts/gen-info.js"
