@@ -1,0 +1,56 @@
+# signalk-wilhelmsk-docs
+
+Documentation source and SignalK plugin for **WilhelmSK**, the marine instrument display app
+(iOS / iPadOS / watchOS). This public monorepo produces two things from one `docs/` source:
+
+- **MkDocs site** → published to GitHub Pages at https://dglcinc.github.io/signalk-wilhelmsk-docs/
+- **SignalK node-server plugin** (`plugin/`) → serves the same built site locally so WilhelmSK can
+  offer in-app help straight from a boat's own SignalK server.
+
+The docs were originally embedded in the third-party `sbender9/Wilhelm` iOS app and extracted here;
+the app now offers a documentation-source picker (SignalK server / GitHub web / none).
+
+## Repo Layout
+
+| Path | Purpose |
+|------|---------|
+| `docs/` | MkDocs markdown sources (`index.md`, `user-guide.md`) |
+| `mkdocs.yml`, `requirements.txt` | MkDocs config + Python deps (Material theme) |
+| `plugin/` | SignalK plugin: `package.json`, `index.js`, `public/` (committed built site), `README.md` |
+| `site/` | Local MkDocs build output — gitignored |
+| `.github/workflows/deploy-pages.yml` | Builds + deploys docs to GitHub Pages on push to `main` |
+| `.github/workflows/verify-plugin-docs.yml` | Fails PRs where `plugin/public/` is stale vs `docs/` |
+
+## How the plugin serves docs
+
+SignalK node-server auto-mounts a plugin's `public/` directory at `/<package-name>/`. Since the
+package is `signalk-wilhelmsk-docs`, the docs serve at **`/signalk-wilhelmsk-docs/`** — not
+`/wilhelmsk-docs/` (an earlier hardcoded path, corrected in PR #5). The plugin also exposes
+`GET /plugins/signalk-wilhelmsk-docs/info` returning `{ id, version, docsPath }` so the iOS app can
+detect that the plugin is installed.
+
+## Editing workflow
+
+1. Edit markdown under `docs/`.
+2. Preview locally: `python3 -m mkdocs serve` (reuses the venv at `~/github/wilhelm/.venv/` — this
+   repo has no local venv yet; create one with `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
+   if doing sustained local work).
+3. **Rebuild the bundled plugin site** whenever `docs/` or `mkdocs.yml` changed:
+   `cd plugin && npm run build-docs` (runs `mkdocs build` into `plugin/public/`). Commit the result —
+   `verify-plugin-docs.yml` fails the PR otherwise.
+4. Verify clean build: `mkdocs build --strict`.
+
+## Conventions
+
+- **Branching:** all doc/code changes go through a feature branch + PR against `main`. Self-merge is
+  fine (sole reviewer). This CLAUDE.md is the one file that may be committed directly to `main`.
+- **Commits:** end every message with `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`.
+- **Commit identity:** `David Lewis <dglcinc@users.noreply.github.com>`.
+- **Content direction:** user guide leads with *Connecting*, with SignalK / Victron VRM / NMEA
+  gateways as parallel subsections. No public contributor docs (those live in the Wilhelm repo).
+  tvOS, CarPlay, iKommunicate, and Raymarine references have been intentionally removed.
+
+## Related repos
+
+- `sbender9/Wilhelm` (`~/github/wilhelm/`) — the iOS app this documents (third-party; David contributes upstream).
+- `WilhelmSKLibrary` (`~/github/WilhelmSKLibrary/`) — Swift package the app depends on.
