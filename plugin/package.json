@@ -1,6 +1,6 @@
 {
   "name": "signalk-wilhelmsk-docs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SignalK plugin that serves the WilhelmSK documentation site and an installation-detection endpoint for the WilhelmSK iOS app.",
   "main": "index.js",
   "scripts": {
