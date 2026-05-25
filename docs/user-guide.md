@@ -16,13 +16,12 @@ WilhelmSK is a display client — you'll connect it to a data source on your boa
 |----------|----------------|
 | iPhone / iPad | iOS 13 |
 | Apple Watch | watchOS 10.6 |
-| Apple TV | tvOS 17.6 |
 
 ---
 
 ### Installing WilhelmSK
 
-Search "WilhelmSK" on the App Store. The app is a universal binary — one purchase covers iPhone, iPad, and Apple TV. The Apple Watch app installs automatically from the iPhone app.
+Search "WilhelmSK" on the App Store. The app is a universal binary — one purchase covers iPhone and iPad. The Apple Watch app installs automatically from the iPhone app.
 
 ---
 
@@ -770,91 +769,6 @@ To add a complication: long-press your watch face → Edit → tap a complicatio
 **Victron and Raymarine connections always require the phone.** The watch app routes all non-SignalK data through the phone — it cannot speak Venus MQTT or Raymarine protocols directly. The phone must be reachable for these connections to work on the watch.
 
 **SignalK connections also route through the phone.** The watch uses the auth token and connection details obtained from the phone. If the phone is unreachable, the watch cannot fetch data from the server even if both are on the same Wi-Fi network.
-
----
-
-## tvOS
-
-The tvOS app turns an Apple TV into a dedicated full-screen instrument display — a live gauge panel you can mount at a nav station, chartroom, or anywhere else on the boat with a screen. It shows the same gauge types as the iOS app, arranged across pages that can rotate automatically.
-
-### What the App Does
-
-WilhelmTV connects to your SignalK server and renders gauge pages at full 1920×1080 resolution. The display is read-only: you watch the data, but you configure the layout from your iPhone or iPad. There is no editing UI on the Apple TV itself.
-
-Typical uses:
-- A nav station or chartroom screen showing heading, speed, depth, wind, and tide at a glance.
-- A helm-area display connected via HDMI where a tablet isn't practical.
-- A shared display for crew in a saloon.
-
-### Limitations vs iOS
-
-The tvOS app intentionally strips away features that don't make sense on a TV:
-- **No touch input.** All interaction is via the Apple TV remote and the tvOS focus engine.
-- **No layout editing on the TV.** Layouts are pushed from the iPhone app; you cannot create or modify them locally on the Apple TV.
-- **No Bonjour discovery for SignalK.** You must enter the server address and port manually.
-- **No split view, widgets, or push notifications.** tvOS doesn't support those features.
-- **Settings are minimal.** Only theme and auto-pagination are configurable on the device.
-
-### Navigating the App
-
-The app has three tabs, selected with the Apple TV remote:
-
-- **Gauges** — the main display. Shows the current layout page.
-- **Boats** — connection management. Add or switch SignalK servers here.
-- **Settings** — theme and auto-page options.
-
-Use the remote's touch surface or directional buttons to move between pages on the Gauges tab.
-
-### Connecting to SignalK
-
-Unlike the iPhone app, the Apple TV does not discover SignalK servers automatically via Bonjour. You must add the connection manually:
-
-1. Navigate to the **Boats** tab.
-2. Press the Select button to add a new connection.
-3. Enter the SignalK server's hostname or IP address and port (typically `3000` for WebSocket).
-4. Enter credentials if your server requires authentication.
-5. Select the connection and press **Connect**.
-
-The app connects using the same SignalK streaming WebSocket protocol as iOS. REST polling is used where WebSocket is unavailable.
-
-### Auto-Pagination
-
-The tvOS app can cycle through gauge pages automatically — useful when you want a rotating overview without touching the remote.
-
-In **Settings**:
-- Enable **Auto Page** to turn on automatic cycling.
-- Set **Auto Page Interval** (in seconds) to control how long each page stays on screen. The default is 10 seconds.
-
-When auto-page is active, manually swiping between pages pauses the timer briefly before it resumes.
-
-### Configuring Layouts from iPhone or iPad
-
-All layout editing for the Apple TV happens remotely from the iPhone or iPad app. The Apple TV advertises itself on the local network, and the iPhone app discovers it via Bonjour.
-
-**Requirements:** Both devices must be on the same Wi-Fi network.
-
-**Steps:**
-
-1. Open WilhelmSK on your iPhone or iPad.
-2. Go to **Layouts** (the page management screen).
-3. Tap **Edit AppleTV**.
-4. The app scans the local network and lists any Apple TVs running WilhelmSK. Tap the one you want to edit.
-5. A permission prompt appears **on the Apple TV** — confirm it there.
-6. The iPhone app downloads the Apple TV's current layout and opens the layout editor in TV mode (scaled to 1920×1080).
-7. Add, remove, or rearrange gauges using the same layout editor as iOS. See [iOS and iPadOS](#ios-and-ipados) for layout editor details.
-8. When you're done, tap **Save** — the new layout is pushed to the Apple TV over the local network and takes effect immediately.
-
-You can push any saved layout from your phone to the Apple TV. You cannot pull a TV-specific layout back to your phone's local layouts.
-
-### Theme
-
-The same dark/light/auto themes available on iOS are available on tvOS. Change them in **Settings**. The auto theme (day/night switching) follows the same logic as the iOS app — see your iPhone settings for the threshold.
-
-### Gauge Types
-
-WilhelmTV uses the same gauge rendering engine as iOS. All standard gauge types display on the Apple TV: analog dials, digital readouts, bar gauges, tank levels, rudder angle, autopilot status, tide, electrical overview, and navigation progress. Map views (Google Maps, Apple Maps) and Navionics charts are also available as layout pages.
-
-Gauges that require server-side plugins on iOS (autopilot control, Fusion stereo, anchor alarm) are display-only on tvOS — you can see the data but cannot send commands from the TV.
 
 ---
 
