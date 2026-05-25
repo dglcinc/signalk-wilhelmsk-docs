@@ -37,6 +37,9 @@ nav:
   - Home: index.md
   - User Guide: user-guide.md
 
+extra_javascript:
+  - javascripts/deeplink-scroll.js
+
 plugins:
   - search
 
