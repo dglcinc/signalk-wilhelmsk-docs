@@ -47,6 +47,30 @@ the docs; only removing the package from `node_modules` does.
    `verify-plugin-docs.yml` fails the PR otherwise.
 4. Verify clean build: `mkdocs build --strict`.
 
+## Publishing (npm / SignalK App Store)
+
+The plugin is published to npm as **`signalk-wilhelmsk-docs`**
+(https://www.npmjs.com/package/signalk-wilhelmsk-docs) under the **`dglcinc`** npm account, and
+discovered by the SignalK App Store via the `signalk-node-server-plugin` keyword (no registry
+submission). To cut a release: bump `plugin/package.json` `version`, `npm run build-docs` (regenerates
+`public/info.json` with the new version — commit it), then from `plugin/`: `npm publish`.
+
+**Auth gotcha:** the `dglcinc` npm account has **passkey-only 2FA** (no TOTP) and **no classic/automation
+tokens**, so interactive `npm publish` can't complete the passkey approval from a non-interactive shell.
+Publish with a **granular access token** instead (npmjs.com → Access Tokens → Generate New → Granular;
+Read+write; scope *All packages*), passed inline so it isn't persisted:
+`npm publish "--//registry.npmjs.org/:_authToken=npm_…"`. Revoke the token afterward.
+
+**Propagation:** the registry read CDN lags a publish by 1–2 min — verify with the version-specific GET
+`https://registry.npmjs.org/<pkg>/<ver>` (200) or `npm view <pkg>@<ver> version`, not the packument
+`dist-tags`. App Store appearance lags further: npm keyword-search must index it, then the SignalK server
+caches its "Available" list (restart the server to refresh).
+
+**Config-page docs link:** the plugin's `schema.description` (in `index.js`) carries an HTML `<a>` with a
+**relative** href (`/signalk-wilhelmsk-docs/`) so the Plugin Config page offers a one-click link to the
+docs; SignalK's admin UI renders the description as HTML and the relative href resolves against its own
+host:port.
+
 ## Conventions
 
 - **Branching:** all doc/code changes go through a feature branch + PR against `main`. Self-merge is
