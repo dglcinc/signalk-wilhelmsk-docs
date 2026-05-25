@@ -471,10 +471,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#victron-venus-mqtt" class="md-nav__link">
+  <a href="#victron-venus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Victron Venus MQTT
+        Victron Venus
       
     </span>
   </a>
@@ -1191,10 +1191,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#victron-venus-mqtt" class="md-nav__link">
+  <a href="#victron-venus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Victron Venus MQTT
+        Victron Venus
       
     </span>
   </a>
@@ -1869,8 +1869,8 @@
 <td>The flexible default — runs on a Raspberry Pi or similar, aggregates all your NMEA data, works with every WilhelmSK feature</td>
 </tr>
 <tr>
-<td><strong>Victron Venus MQTT</strong></td>
-<td>Victron Energy installations — batteries, inverters, solar, shore power. Local or via VRM cloud</td>
+<td><strong>Victron Venus</strong></td>
+<td>Victron Energy installations — batteries, inverters, solar, shore power. Local MQTT, VRM cloud MQTT, or VRM cloud SignalK</td>
 </tr>
 <tr>
 <td><strong>Actisense W2K</strong></td>
@@ -1933,8 +1933,8 @@
 <p>Manual connections (ones you added by hand rather than discovered via Bonjour) are synced to iCloud. If you add a connection on your iPhone, it appears on your iPad automatically without re-entering the details.</p>
 <p>Each connection can be marked as a <strong>favorite</strong>. Favorites appear at the top of the connections list, making it easy to jump to your most-used server when you have multiple connections configured.</p>
 <hr />
-<h3 id="victron-venus-mqtt">Victron Venus MQTT<a class="headerlink" href="#victron-venus-mqtt" title="Permanent link">&para;</a></h3>
-<p>Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks — via MQTT. WilhelmSK can connect directly to the local MQTT broker or through Victron's VRM cloud portal.</p>
+<h3 id="victron-venus">Victron Venus<a class="headerlink" href="#victron-venus" title="Permanent link">&para;</a></h3>
+<p>Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks. WilhelmSK supports three connection paths to it: local MQTT, VRM cloud MQTT, and VRM cloud SignalK.</p>
 <h4 id="local-mqtt">Local MQTT<a class="headerlink" href="#local-mqtt" title="Permanent link">&para;</a></h4>
 <p><strong>What it is:</strong> A direct connection to the MQTT broker running on your Venus device on your local network.</p>
 <p><strong>When to use it:</strong> You're on the boat, connected to the same Wi-Fi as your Venus device. This gives the lowest latency and works without internet access.</p>
@@ -1949,8 +1949,19 @@
 <p>Under the hood the app connects to <code>mqtt&lt;N&gt;.victronenergy.com:8883</code> using TLS. It keeps the connection alive by publishing a keepalive message every 62 seconds. You don't configure any of that manually.</p>
 <p><strong>Note:</strong> VRM cloud connections require internet access on both the phone and the Venus device. If the Venus device loses its cellular or marina Wi-Fi connection, the VRM connection drops.</p>
 <h4 id="vrm-cloud-signalk-endpoint">VRM Cloud — SignalK endpoint<a class="headerlink" href="#vrm-cloud-signalk-endpoint" title="Permanent link">&para;</a></h4>
-<p>If your Venus device runs the SignalK server package, you can reach its SignalK endpoint through the VRM cloud rather than over MQTT. Pick <strong>Venus VRM Signal K</strong> from the connection picker. Log in with VRM credentials the same way as the MQTT variant; the app handles the cloud-to-device routing.</p>
-<p>Use this variant when you want the full SignalK feature set (custom paths, server plugins) tunneled through VRM. The plain VRM MQTT path is simpler if you only need standard Victron data.</p>
+<p><strong>What it is:</strong> Reach your Venus device's SignalK server through the VRM cloud, instead of going through Victron's MQTT brokers. Picks up the same data the SignalK path would carry locally — custom paths, server plugins, and anything else SignalK offers — but tunneled over the internet via VRM.</p>
+<p><strong>When to use it:</strong> Same scenarios as the plain VRM MQTT variant (you're away from the boat, monitoring remotely), but you want the full SignalK feature set rather than the more limited MQTT view. If you only need standard Victron values (batteries, solar, etc.) the plain VRM MQTT path is simpler.</p>
+<p><strong>Prerequisite — SignalK enabled on the Venus device:</strong></p>
+<p>The Venus OS device must have the <strong>SignalK Server</strong> package installed and connected to your VRM portal. On Cerbo GX / Color Control GX, this is enabled via Venus OS's package manager (or <code>opkg</code>). Refer to Victron's documentation: <a href="https://www.victronenergy.com/live/venus-os:signalk-installation">Signal K Server on Venus OS</a> for the install steps. Once it's running on the Venus device and the device is online in your VRM account, WilhelmSK can reach it.</p>
+<p><strong>How to configure:</strong> Tap <strong>Add Connection → Venus VRM Signal K</strong>. Enter your VRM account credentials. The app:</p>
+<ol>
+<li>Calls VRM's <code>/v2/auth/login</code> to get an auth token.</li>
+<li>Fetches the list of installations registered to your account.</li>
+<li>Lets you pick which portal/site to connect to (same picker as VRM MQTT).</li>
+<li>Opens a SignalK proxy-relay at <code>/v2/installations/&lt;siteId&gt;/proxy-relay/signalk</code> using the token.</li>
+</ol>
+<p>After that, the connection behaves like a normal SignalK connection — auto-discovers REST and WebSocket endpoints from the relayed server, subscribes to deltas, drives gauges from the stream.</p>
+<p><strong>Note:</strong> VRM Cloud SignalK requires internet access on both the phone and the Venus device, plus the Venus device must be online in VRM (the same constraint as VRM MQTT). It does not require the phone to be on the same network as the boat.</p>
 <h4 id="data-format-note">Data format note<a class="headerlink" href="#data-format-note" title="Permanent link">&para;</a></h4>
 <p>Venus/MQTT data is converted to SignalK deltas internally using a JavaScript bridge (<code>venus.js</code>). The gauges you configure work the same way regardless of whether the source is SignalK or Venus — the connection type is transparent once you're past setup.</p>
 <hr />
