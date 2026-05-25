@@ -22,9 +22,15 @@
   "engines": {
     "node": ">=18"
   },
+  "signalk": {
+    "displayName": "WilhelmSK Documentation",
+    "appIcon": "./assets/icon.png",
+    "appSupport": "https://github.com/dglcinc/signalk-wilhelmsk-docs/issues"
+  },
   "files": [
     "index.js",
     "public/",
+    "assets/",
     "README.md"
   ]
 }
