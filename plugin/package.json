@@ -1,6 +1,6 @@
 {
   "name": "signalk-wilhelmsk-docs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "SignalK plugin that serves the WilhelmSK documentation site and an installation-detection endpoint for the WilhelmSK iOS app.",
   "main": "index.js",
   "scripts": {
@@ -24,13 +24,12 @@
   },
   "signalk": {
     "displayName": "WilhelmSK Documentation",
-    "appIcon": "./assets/icon.png",
+    "appIcon": "icon.png",
     "appSupport": "https://github.com/dglcinc/signalk-wilhelmsk-docs/issues"
   },
   "files": [
     "index.js",
     "public/",
-    "assets/",
     "README.md"
   ]
 }
