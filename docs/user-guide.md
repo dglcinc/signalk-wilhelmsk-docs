@@ -136,7 +136,13 @@ Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatibl
 
 **When to use it:** You're away from the boat and want to check on your system remotely, or you want to monitor multiple vessels registered in your VRM account.
 
-**How to configure:** Tap **Add Connection → Venus VRM**. Log in with your Victron VRM account credentials. The app fetches the list of portals (sites) registered to your account and lets you choose which one to connect to.
+**How to configure:**
+
+1. Tap **Add Connection → Venus VRM**.
+2. Enter your VRM account username and password.
+3. Tap **Refresh Installations**. The app logs in to VRM and lists every installation registered to your account.
+4. **Check the box next to the installation you want to monitor.** Multiple installations can be checked — the app uses the first checked one for this connection.
+5. Save.
 
 Under the hood the app connects to `mqtt<N>.victronenergy.com:8883` using TLS. It keeps the connection alive by publishing a keepalive message every 62 seconds. You don't configure any of that manually.
 
@@ -159,14 +165,15 @@ Signal K Server is only shipped in **Venus OS Large**, the extended firmware var
 
 Once Signal K is running on the device and the device is online in VRM, WilhelmSK can reach it through the VRM relay.
 
-**How to configure:** Tap **Add Connection → Venus VRM Signal K**. Enter your VRM account credentials. The app:
+**How to configure:**
 
-1. Calls VRM's `/v2/auth/login` to get an auth token.
-2. Fetches the list of installations registered to your account.
-3. Lets you pick which portal/site to connect to (same picker as VRM MQTT).
-4. Opens a SignalK proxy-relay at `/v2/installations/<siteId>/proxy-relay/signalk` using the token.
+1. Tap **Add Connection → Venus VRM Signal K**.
+2. Enter your VRM account username and password.
+3. Tap **Refresh Installations**. The app logs in to VRM and lists every installation registered to your account.
+4. **Check the box next to the installation whose Signal K server you want to reach.** Checking the box authorizes WilhelmSK to use your VRM credentials to relay through to the Signal K server running on that installation. Multiple installations can be checked.
+5. Save.
 
-After that, the connection behaves like a normal SignalK connection — auto-discovers REST and WebSocket endpoints from the relayed server, subscribes to deltas, drives gauges from the stream.
+Under the hood, on first connect the app calls VRM's `/v2/auth/login` for a token, then opens a Signal K proxy relay at `/v2/installations/<siteId>/proxy-relay/signalk` for the checked installation. From there it behaves like a normal Signal K connection — auto-discovers REST and WebSocket endpoints from the relayed server, subscribes to deltas, drives gauges from the stream.
 
 **Note:** VRM Cloud SignalK requires internet access on both the phone and the Venus device, plus the Venus device must be online in VRM (the same constraint as VRM MQTT). It does not require the phone to be on the same network as the boat.
 
