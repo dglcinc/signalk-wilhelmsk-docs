@@ -15,9 +15,17 @@ module.exports = function (app) {
       DOCS_MOUNT +
       '/ and exposes an info endpoint the WilhelmSK iOS app uses to detect the plugin.',
 
-    // No user-configurable options; the schema is intentionally empty.
+    // No user-configurable options. The schema description carries a link so
+    // the plugin config page offers a one-click way to open the docs — SignalK's
+    // admin UI renders the schema description as HTML. The href is relative so it
+    // resolves against whatever host:port the admin UI is served from.
     schema: {
       type: 'object',
+      description:
+        'No configuration needed — the documentation is served as soon as this ' +
+        'plugin is installed. Open it here: ' +
+        '<a href="/signalk-wilhelmsk-docs/" target="_blank" rel="noopener noreferrer">' +
+        '/signalk-wilhelmsk-docs/</a>',
       properties: {}
     },
 
