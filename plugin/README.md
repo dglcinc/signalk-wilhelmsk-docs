@@ -38,9 +38,16 @@ SignalK server — no internet connection required once it's on the boat.
 
 ### From the SignalK App Store
 
-Install **WilhelmSK Documentation** from the SignalK server admin UI
-(Appstore → Available), then restart the server when prompted. There are no
-configuration options — the docs start serving immediately.
+In the SignalK server admin UI, open **Appstore → Available** and look for
+**WilhelmSK Documentation** (the WilhelmSK app icon, by David Lewis). Searching
+the list for `wilhelm` or `documentation` will find it. The entry shows the
+short description — *"serves the WilhelmSK documentation site and an
+installation-detection endpoint for the WilhelmSK iOS app"* — a version number,
+and an **Install** button.
+
+Click **Install**, then restart the server when the admin UI prompts you. There
+are no configuration options — the docs start serving immediately, and the
+plugin appears afterward under **Appstore → Installed**.
 
 ### Manually (development)
 
@@ -60,6 +67,34 @@ Server → Plugin Config.
 curl http://localhost:3000/signalk-wilhelmsk-docs/info.json
 curl -I http://localhost:3000/signalk-wilhelmsk-docs/
 ```
+
+## Reading the docs
+
+There are two ways to get to the documentation, and **the first one needs
+nothing but a web browser** — the WilhelmSK app is not required.
+
+### Directly in a browser (no app needed)
+
+Once the plugin is installed, the full documentation site is live on your
+server. From any phone, tablet, or laptop on the boat's network, open:
+
+```
+http://<your-signalk-host>:3000/signalk-wilhelmsk-docs/
+```
+
+(substitute your server's address — e.g. `http://signalk.local:3000/signalk-wilhelmsk-docs/`
+or its LAN IP). It also shows up in the SignalK admin UI under the **Webapps**
+menu as a launchable web app. Because it's served as a standard static site, it
+works on the boat with no internet connection, and it does not depend on the
+plugin being "enabled" in plugin config — installing the package is enough.
+
+### From inside WilhelmSK
+
+The WilhelmSK iOS/iPadOS app can open this same server-hosted copy from
+**Settings → Help / Documentation** with the source set to **SignalK Server**,
+so the help is available in-app and offline. (This relies on the app build that
+includes the in-app documentation-source picker; until that ships, use the
+browser method above — it works with any version.)
 
 ## Size
 
