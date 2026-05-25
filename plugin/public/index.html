@@ -253,28 +253,6 @@
   
 
       
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="architecture/" class="md-tabs__link">
-          
-  
-  
-    
-  
-  For Contributors
-
-        </a>
-      </li>
-    
-  
-
-      
     </ul>
   </div>
 </nav>
@@ -460,127 +438,6 @@
   
 
     
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    For Contributors
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    For Contributors
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Architecture
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="contributing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Contributing
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -658,23 +515,24 @@
 
 
 <h1 id="wilhelmsk">WilhelmSK<a class="headerlink" href="#wilhelmsk" title="Permanent link">&para;</a></h1>
-<p>WilhelmSK is a marine instrument display app for <strong>iOS, iPadOS, watchOS, tvOS, and CarPlay</strong>. It connects to a <a href="https://signalk.org">SignalK</a> server on your vessel's network and renders live data as customizable analog and digital gauges — wind, speed, heading, depth, engine, tanks, electrical, autopilot, AIS, and any custom SignalK path.</p>
+<p>WilhelmSK is a marine instrument display app for <strong>iOS, iPadOS, watchOS, tvOS, and CarPlay</strong>. It connects to your boat's data — from a <a href="https://signalk.org">SignalK</a> server, a Victron Venus device over MQTT, or a Raymarine MFD over Bonjour — and renders live readings as customizable analog and digital gauges: wind, speed, heading, depth, engine, tanks, electrical, autopilot, AIS, and any custom path.</p>
 <p>Discovery is automatic via Bonjour. Manual host/port entry is also supported.</p>
 <hr />
 <h2 id="get-the-app">Get the App<a class="headerlink" href="#get-the-app" title="Permanent link">&para;</a></h2>
 <p>Search <strong>WilhelmSK</strong> on the App Store. One purchase covers iPhone, iPad, and Apple TV. The Apple Watch app installs automatically from your iPhone.</p>
 <hr />
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
+<p>The complete <a href="user-guide/">User Guide</a> covers setup and use across all platforms:</p>
 <ul>
-<li>
-<p><strong><a href="user-guide/">User Guide</a></strong> — Complete guide to setting up and using WilhelmSK across all platforms: connecting to SignalK, configuring gauges, managing layouts, alarms, widgets, remote access, and every Settings menu option.</p>
-</li>
-<li>
-<p><strong><a href="architecture/">Architecture Overview</a></strong> — How the codebase is structured. For contributors and advanced users.</p>
-</li>
-<li>
-<p><strong><a href="contributing/">Contributing</a></strong> — Build setup, branching model, and how to submit a pull request.</p>
-</li>
+<li><a href="user-guide/#prerequisites">Prerequisites</a> — what you need before launching the app</li>
+<li><a href="user-guide/#connecting-to-a-data-source">Connecting to a Data Source</a> — SignalK, Victron Venus, Raymarine MFD, iKommunicate, and remote access</li>
+<li><a href="user-guide/#ios-and-ipados">iOS and iPadOS</a> — navigation, layouts, settings, widgets, push notifications</li>
+<li><a href="user-guide/#watchos">watchOS</a> — setup, gauge types, complications, update rate</li>
+<li><a href="user-guide/#tvos">tvOS</a> — Apple TV setup and limitations</li>
+<li><a href="user-guide/#gauges">Gauges</a> — adding, configuring, the gauge reference</li>
+<li><a href="user-guide/#alarms-and-notifications">Alarms and Notifications</a> — server-side, local zone, anchor alarm, push</li>
+<li><a href="user-guide/#server-plugins">Server Plugins</a> — dependency matrix and feature details</li>
+<li><a href="user-guide/#custom-signalk-paths">Custom SignalK Paths</a> — naming conventions and worked examples</li>
 </ul>
 <hr />
 <h2 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h2>

@@ -36,9 +36,6 @@ theme:
 nav:
   - Home: index.md
   - User Guide: user-guide.md
-  - For Contributors:
-    - Architecture: architecture.md
-    - Contributing: contributing.md
 
 plugins:
   - search

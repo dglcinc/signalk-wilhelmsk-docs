@@ -1,18 +1,6 @@
 # WilhelmSK User Guide
 
-Everything you need to set up and use WilhelmSK across all supported platforms.
-
-## Contents
-
-- [Prerequisites](#prerequisites)
-- [Connecting to a Data Source](#connecting-to-a-data-source)
-- [iOS and iPadOS](#ios-and-ipados)
-- [watchOS](#watchos)
-- [tvOS](#tvos)
-- [Gauges](#gauges)
-- [Alarms and Notifications](#alarms-and-notifications)
-- [Server Plugins](#server-plugins)
-- [Custom SignalK Paths](#custom-signalk-paths)
+Everything you need to set up and use WilhelmSK across all supported platforms. The table of contents above (or on the home page) is the fastest way to jump to a section.
 
 ---
 
