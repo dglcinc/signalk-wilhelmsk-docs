@@ -37,14 +37,17 @@ For monitoring from outside the boat's network (cellular, marina Wi-Fi, shore), 
 
 ## Connecting to a Data Source
 
-This is where most of your one-time setup happens. WilhelmSK supports four kinds of data sources, used in different installations:
+This is where most of your one-time setup happens. WilhelmSK can connect directly to a range of marine data products over your boat's network. All connections below are IP-based — Wi-Fi or Ethernet:
 
 | Source | Best for |
 |---|---|
 | **SignalK server** | The flexible default — runs on a Raspberry Pi or similar, aggregates all your NMEA data, works with every WilhelmSK feature |
-| **Victron Venus MQTT** | Victron Energy installations — batteries, inverters, solar, shore power |
-| **Raymarine MFD** | Raymarine chart-plotter owners; no separate server needed |
-| **iKommunicate** | B&G/Simrad users who bought the iKommunicate NMEA-to-SignalK gateway |
+| **Victron Venus MQTT** | Victron Energy installations — batteries, inverters, solar, shore power. Local or via VRM cloud |
+| **Actisense W2K** | Direct NMEA 2000 over Wi-Fi via an Actisense W2K-1 or W2K-2 gateway |
+| **Yacht Devices YDWG** | Direct NMEA 2000 over Wi-Fi via a Yacht Devices YDWG-02 gateway |
+| **Digital Yacht RAW** | Digital Yacht Wi-Fi NMEA 0183 gateways (WLN10/WLN30/NavLink2/LANLink); also Yacht Devices YDEN-02 |
+| **NMEA 0183 over TCP/IP** | Any device streaming raw NMEA 0183 sentences over a TCP socket |
+| **Multiple Connections** | Aggregate two or more of the above into one combined source |
 
 You can have several connections configured at once (e.g., local SignalK at the dock and Victron VRM cloud when away). Pick the section below that matches your installation.
 
@@ -112,24 +115,6 @@ Each connection can be marked as a **favorite**. Favorites appear at the top of 
 
 ---
 
-### iKommunicate
-
-#### What it is
-
-iKommunicate is a hardware gateway from B&G/Simrad that bridges NMEA 0183 and NMEA 2000 instrument networks to SignalK over Wi-Fi. It acts as a SignalK server, but with a cloud-hosted endpoint rather than a local one.
-
-#### When to use it
-
-Choose iKommunicate if you have a B&G or Simrad chartplotter/instrument system and purchased the iKommunicate gateway. It is plug-and-play: the gateway handles all the protocol translation, and WilhelmSK connects to it as if it were a local SignalK server.
-
-#### How to configure
-
-Add a SignalK connection and enter `ikommunicate.cloud` as the host along with the port and credentials provided with your iKommunicate device. WilhelmSK detects this hostname and skips the normal server-endpoint discovery step, since iKommunicate's endpoint structure differs from a standard signalk-server-node installation.
-
-Authentication is username/password (HTTP Basic or JWT depending on your iKommunicate firmware version). Check the documentation that came with your device for the exact credentials format.
-
----
-
 ### Victron Venus MQTT
 
 Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks — via MQTT. WilhelmSK can connect directly to the local MQTT broker or through Victron's VRM cloud portal.
@@ -157,27 +142,103 @@ Under the hood the app connects to `mqtt<N>.victronenergy.com:8883` using TLS. I
 
 **Note:** VRM cloud connections require internet access on both the phone and the Venus device. If the Venus device loses its cellular or marina Wi-Fi connection, the VRM connection drops.
 
+#### VRM Cloud — SignalK endpoint
+
+If your Venus device runs the SignalK server package, you can reach its SignalK endpoint through the VRM cloud rather than over MQTT. Pick **Venus VRM Signal K** from the connection picker. Log in with VRM credentials the same way as the MQTT variant; the app handles the cloud-to-device routing.
+
+Use this variant when you want the full SignalK feature set (custom paths, server plugins) tunneled through VRM. The plain VRM MQTT path is simpler if you only need standard Victron data.
+
 #### Data format note
 
 Venus/MQTT data is converted to SignalK deltas internally using a JavaScript bridge (`venus.js`). The gauges you configure work the same way regardless of whether the source is SignalK or Venus — the connection type is transparent once you're past setup.
 
 ---
 
-### Raymarine MFD
+### Actisense W2K
 
-WilhelmSK can use a Raymarine chart plotter (MFD) on the same network as a data source. The MFD streams instrument data over a local TCP connection — no separate SignalK server needed.
+The **Actisense W2K-1** picker entry works with both the Actisense W2K-1 and the newer **W2K-2** NMEA 2000 Wi-Fi gateways. Both stream NMEA 2000 directly over a TCP server you configure on the device.
 
-#### How to configure
+#### Setup
 
-No manual entry is needed. If your Raymarine MFD is on the same Wi-Fi or Ethernet network as your iOS device, it advertises itself via Bonjour (`_rym_rrc._tcp`). Open **Settings → Connections** and the MFD appears in the list. Tap to connect.
+1. Power up the gateway. By default it creates its own Wi-Fi access point named `w2k-<serial>` (the serial is printed on the rear of the case, along with the Wi-Fi password). Connect your iOS device to that AP, or bring the W2K onto your boat's Wi-Fi via its admin UI.
+2. Open the gateway's admin page at [http://192.168.4.1/](http://192.168.4.1/). Default login is `admin` with the password printed on the case.
+3. In the admin UI's server/output configuration, enable a TCP server and note the port number — it's user-configurable and the gateway ships with no single default port.
+4. In WilhelmSK, **Settings → Connections → +** and pick **Actisense W2K-1**. Enter the gateway's IP address and the TCP port you configured.
 
-If the MFD doesn't appear, confirm that:
-- The MFD's Wi-Fi or Ethernet is connected to the same network as your iOS device.
-- The MFD's "SeaTalkNG" or network data sharing option is enabled in its settings (exact menu path varies by MFD model — consult your Raymarine documentation).
+#### Vendor docs
 
-#### Capabilities
+- W2K-1: [actisense.com/products/w2k-1](https://actisense.com/products/w2k-1-nmea-2000-wifi-gateway/)
+- W2K-2: [actisense.com/products/w2k-2](https://actisense.com/products/w2k-2-nmea-2000-wifi-gateway/)
 
-In addition to receiving instrument data, WilhelmSK can send remote-control inputs to the MFD (key presses, dial rotations, touch events) when the Raymarine connection type is configured. This is an advanced feature — most users only need data display.
+---
+
+### Yacht Devices YDWG
+
+The **Yacht Devices YDWG-02** NMEA 2000 Wi-Fi gateway supports up to three configurable TCP/UDP servers. Server #1 ships pre-configured for NMEA 0183 on TCP port **1456**, which works as-is with WilhelmSK's YDWG picker entry.
+
+#### Setup
+
+1. Power up the gateway. Default Wi-Fi SSID and password are printed on the case. Connect your iOS device to that AP, or bridge the YDWG onto your boat's Wi-Fi via its admin UI.
+2. Admin UI at [http://192.168.4.1/](http://192.168.4.1/) or [http://ydwg.local/](http://ydwg.local/) (mDNS supported). Default login `admin` / `admin`.
+3. Server #1's defaults work out of the box. If you've reconfigured it, note the IP, port, and protocol in the gateway's status page.
+4. In WilhelmSK, **Settings → Connections → +** and pick **YDWG**. Enter the gateway's IP and port `1456` (or whatever you've set Server #1 to).
+
+#### Vendor docs
+
+- [yachtd.com/products/wifi_gateway.html](https://www.yachtd.com/products/wifi_gateway.html)
+- [YDWG-02 manual (PDF)](https://www.yachtd.com/downloads/ydwg02.pdf)
+
+---
+
+### Digital Yacht RAW
+
+The **Digital Yacht RAW** picker entry accepts NMEA 0183 sentences ("RAW" 0183) over TCP. It's compatible with Digital Yacht's Wi-Fi and Ethernet NMEA gateway lineup, and also with the **Yacht Devices YDEN-02** Ethernet gateway when its Server #1 is set to NMEA 0183.
+
+#### Compatible products
+
+- **Digital Yacht:** WLN10 / WLN10SM, WLN30, NavLink2 (Wi-Fi); LANLink (Ethernet); iKonvert in Wi-Fi mode.
+- **Yacht Devices:** YDEN-02 (Ethernet) with Server #1 configured for NMEA 0183.
+
+#### Setup — Digital Yacht Wi-Fi gateways (WLN / NavLink)
+
+1. Power up the gateway. It creates a Wi-Fi AP — `DY-WiFi-xxxx` (WLN30) or `NAVLink-xxxx` (NavLink2). Password is `PASS-xxxx` matching the 4-char SSID code. Join that AP from your iOS device, or bring the gateway onto your boat's Wi-Fi via its admin UI.
+2. Admin UI at [http://192.168.1.1/](http://192.168.1.1/). No login required on first connection from the gateway's own AP.
+3. Default TCP port is **2000** (UDP 2000 serves the same stream).
+4. In WilhelmSK, **Settings → Connections → +** and pick **Digital Yacht RAW**. Enter the gateway's IP and port `2000`.
+
+#### Setup — Yacht Devices YDEN-02
+
+1. Power up the gateway. Admin UI at [http://192.168.4.1/](http://192.168.4.1/) or [http://yden.local/](http://yden.local/). Default login `admin` / `admin`.
+2. In the admin UI, configure Server #1 with protocol **NMEA 0183** and note the TCP port (Yacht Devices convention is port `1456`; verify on the status page).
+3. In WilhelmSK, pick **Digital Yacht RAW** and enter the YDEN's IP and the configured port.
+
+#### Vendor docs
+
+- Digital Yacht: [digitalyacht.support](https://digitalyacht.support/) — [WLN30](https://digitalyacht.support/product/wln30-smart-wireless-nmea-multiplexer/), [NavLink2](https://digitalyacht.support/product/navlink2/), [LANLink](https://digitalyachtamerica.com/product/lanlink/)
+- Yacht Devices YDEN: [yachtd.com/products/ethernet_gateway.html](https://www.yachtd.com/products/ethernet_gateway.html)
+
+---
+
+### NMEA 0183 over TCP/IP
+
+For any device that streams raw NMEA 0183 sentences over a TCP socket — multiplexers, AIS receivers, software bridges, custom gateways — use the **NMEA 0183** picker entry.
+
+#### Setup
+
+In WilhelmSK, **Settings → Connections → +** and pick **NMEA 0183**. Enter:
+
+- **Host** — IP or hostname of the device producing the NMEA 0183 stream
+- **Port** — the device's NMEA-over-TCP port. The IANA-registered default is **10110**, but many vendors override (Digital Yacht uses `2000`, Yacht Devices uses `1456` — for those, use the dedicated picker entries above)
+
+The wire format is standard NMEA 0183: `$GPRMC,...*hh\r\n` lines. "RAW" in vendor parlance just means "unfiltered pass-through" — same wire format as plain NMEA 0183.
+
+---
+
+### Multiple Connections
+
+If your boat has more than one data source — for example, a SignalK server for navigation data and a separate NMEA 2000 gateway for engine data — you can aggregate them into one combined connection. Each source feeds the same gauge layout.
+
+In WilhelmSK, **Settings → Connections → +** and pick **Multiple Connections**. Add the individual connections (each already configured per the sections above), and the app merges their data streams.
 
 ---
 
