@@ -2,14 +2,17 @@
 //
 // Stages the plugin's non-doc runtime files into plugin/public/:
 //
-//   * info.json  - the unauthenticated detection artifact the WilhelmSK iOS app
-//                  probes to confirm the plugin is installed. It lives on the
-//                  open static docs route (/signalk-wilhelmsk-docs/info.json),
-//                  not under the security-gated /plugins/* namespace.
+//   * info.json  - a small version/info file (reports the installed plugin
+//                  version and docs path) on the open static docs route
+//                  (/signalk-wilhelmsk-docs/info.json), not under the
+//                  security-gated /plugins/* namespace, so it needs no token.
 //   * icon.png   - the webapp icon shown on the SignalK server's WebApps page.
 //                  package.json's signalk.appIcon is resolved relative to the
 //                  served public/ dir, so the icon must live there (the source
 //                  of truth is assets/icon.png, copied in here).
+//   * screenshot.png - App Store listing screenshot (signalk.screenshots),
+//                  resolved the same public/-relative way as appIcon. Source of
+//                  truth is assets/screenshot.png.
 //
 // Run after `mkdocs build` (which cleans public/), so build-docs and CI both
 // invoke this. Output is deterministic, keeping the committed copy in sync with
@@ -34,6 +37,8 @@ const infoFile = path.join(outDir, 'info.json')
 fs.writeFileSync(infoFile, JSON.stringify(info, null, 2) + '\n')
 console.log('wrote ' + infoFile + ' (version ' + pkg.version + ')')
 
-const iconFile = path.join(outDir, 'icon.png')
-fs.copyFileSync(path.join(pluginDir, 'assets', 'icon.png'), iconFile)
-console.log('copied ' + iconFile)
+for (const asset of ['icon.png', 'screenshot.png']) {
+  const dest = path.join(outDir, asset)
+  fs.copyFileSync(path.join(pluginDir, 'assets', asset), dest)
+  console.log('copied ' + dest)
+}
