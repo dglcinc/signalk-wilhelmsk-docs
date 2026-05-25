@@ -17,7 +17,7 @@ Search **WilhelmSK** on the App Store. One purchase covers iPhone and iPad. The 
 The complete [User Guide](user-guide.md) covers setup and use across all platforms:
 
 - [Before You Start](user-guide.md#before-you-start) — device requirements, install, network basics
-- [Connecting to a Data Source](user-guide.md#connecting-to-a-data-source) — SignalK, Victron Venus, Raymarine MFD, iKommunicate, and remote access
+- [Connecting to a Data Source](user-guide.md#connecting-to-a-data-source) — SignalK, Victron Venus, NMEA 2000/0183 gateways (Actisense, Yacht Devices, Digital Yacht), and remote access
 - [iOS and iPadOS](user-guide.md#ios-and-ipados) — navigation, layouts, settings, widgets, push notifications
 - [watchOS](user-guide.md#watchos) — setup, gauge types, complications, update rate
 - [Gauges](user-guide.md#gauges) — adding, configuring, the gauge reference

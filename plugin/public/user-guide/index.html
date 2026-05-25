@@ -471,17 +471,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ikommunicate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        iKommunicate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#victron-venus-mqtt" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -493,10 +482,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#raymarine-mfd" class="md-nav__link">
+  <a href="#actisense-w2k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Raymarine MFD
+        Actisense W2K
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yacht-devices-ydwg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Yacht Devices YDWG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#digital-yacht-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Digital Yacht RAW
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nmea-0183-over-tcpip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NMEA 0183 over TCP/IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Connections
       
     </span>
   </a>
@@ -1158,17 +1191,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ikommunicate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        iKommunicate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#victron-venus-mqtt" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1180,10 +1202,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#raymarine-mfd" class="md-nav__link">
+  <a href="#actisense-w2k" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Raymarine MFD
+        Actisense W2K
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yacht-devices-ydwg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Yacht Devices YDWG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#digital-yacht-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Digital Yacht RAW
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nmea-0183-over-tcpip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NMEA 0183 over TCP/IP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Connections
       
     </span>
   </a>
@@ -1789,7 +1855,7 @@
 <p>For monitoring from outside the boat's network (cellular, marina Wi-Fi, shore), see <a href="#remote-access">Remote Access</a> further down.</p>
 <hr />
 <h2 id="connecting-to-a-data-source">Connecting to a Data Source<a class="headerlink" href="#connecting-to-a-data-source" title="Permanent link">&para;</a></h2>
-<p>This is where most of your one-time setup happens. WilhelmSK supports four kinds of data sources, used in different installations:</p>
+<p>This is where most of your one-time setup happens. WilhelmSK can connect directly to a range of marine data products over your boat's network. All connections below are IP-based — Wi-Fi or Ethernet:</p>
 <table>
 <thead>
 <tr>
@@ -1804,15 +1870,27 @@
 </tr>
 <tr>
 <td><strong>Victron Venus MQTT</strong></td>
-<td>Victron Energy installations — batteries, inverters, solar, shore power</td>
+<td>Victron Energy installations — batteries, inverters, solar, shore power. Local or via VRM cloud</td>
 </tr>
 <tr>
-<td><strong>Raymarine MFD</strong></td>
-<td>Raymarine chart-plotter owners; no separate server needed</td>
+<td><strong>Actisense W2K</strong></td>
+<td>Direct NMEA 2000 over Wi-Fi via an Actisense W2K-1 or W2K-2 gateway</td>
 </tr>
 <tr>
-<td><strong>iKommunicate</strong></td>
-<td>B&amp;G/Simrad users who bought the iKommunicate NMEA-to-SignalK gateway</td>
+<td><strong>Yacht Devices YDWG</strong></td>
+<td>Direct NMEA 2000 over Wi-Fi via a Yacht Devices YDWG-02 gateway</td>
+</tr>
+<tr>
+<td><strong>Digital Yacht RAW</strong></td>
+<td>Digital Yacht Wi-Fi NMEA 0183 gateways (WLN10/WLN30/NavLink2/LANLink); also Yacht Devices YDEN-02</td>
+</tr>
+<tr>
+<td><strong>NMEA 0183 over TCP/IP</strong></td>
+<td>Any device streaming raw NMEA 0183 sentences over a TCP socket</td>
+</tr>
+<tr>
+<td><strong>Multiple Connections</strong></td>
+<td>Aggregate two or more of the above into one combined source</td>
 </tr>
 </tbody>
 </table>
@@ -1855,15 +1933,6 @@
 <p>Manual connections (ones you added by hand rather than discovered via Bonjour) are synced to iCloud. If you add a connection on your iPhone, it appears on your iPad automatically without re-entering the details.</p>
 <p>Each connection can be marked as a <strong>favorite</strong>. Favorites appear at the top of the connections list, making it easy to jump to your most-used server when you have multiple connections configured.</p>
 <hr />
-<h3 id="ikommunicate">iKommunicate<a class="headerlink" href="#ikommunicate" title="Permanent link">&para;</a></h3>
-<h4 id="what-it-is_1">What it is<a class="headerlink" href="#what-it-is_1" title="Permanent link">&para;</a></h4>
-<p>iKommunicate is a hardware gateway from B&amp;G/Simrad that bridges NMEA 0183 and NMEA 2000 instrument networks to SignalK over Wi-Fi. It acts as a SignalK server, but with a cloud-hosted endpoint rather than a local one.</p>
-<h4 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h4>
-<p>Choose iKommunicate if you have a B&amp;G or Simrad chartplotter/instrument system and purchased the iKommunicate gateway. It is plug-and-play: the gateway handles all the protocol translation, and WilhelmSK connects to it as if it were a local SignalK server.</p>
-<h4 id="how-to-configure">How to configure<a class="headerlink" href="#how-to-configure" title="Permanent link">&para;</a></h4>
-<p>Add a SignalK connection and enter <code>ikommunicate.cloud</code> as the host along with the port and credentials provided with your iKommunicate device. WilhelmSK detects this hostname and skips the normal server-endpoint discovery step, since iKommunicate's endpoint structure differs from a standard signalk-server-node installation.</p>
-<p>Authentication is username/password (HTTP Basic or JWT depending on your iKommunicate firmware version). Check the documentation that came with your device for the exact credentials format.</p>
-<hr />
 <h3 id="victron-venus-mqtt">Victron Venus MQTT<a class="headerlink" href="#victron-venus-mqtt" title="Permanent link">&para;</a></h3>
 <p>Victron Energy's Venus OS (running on a Cerbo GX, Color Control GX, or compatible Raspberry Pi) exposes vessel electrical data — batteries, solar, inverters, shore power, tanks — via MQTT. WilhelmSK can connect directly to the local MQTT broker or through Victron's VRM cloud portal.</p>
 <h4 id="local-mqtt">Local MQTT<a class="headerlink" href="#local-mqtt" title="Permanent link">&para;</a></h4>
@@ -1879,18 +1948,81 @@
 <p><strong>How to configure:</strong> Tap <strong>Add Connection → Venus VRM</strong>. Log in with your Victron VRM account credentials. The app fetches the list of portals (sites) registered to your account and lets you choose which one to connect to.</p>
 <p>Under the hood the app connects to <code>mqtt&lt;N&gt;.victronenergy.com:8883</code> using TLS. It keeps the connection alive by publishing a keepalive message every 62 seconds. You don't configure any of that manually.</p>
 <p><strong>Note:</strong> VRM cloud connections require internet access on both the phone and the Venus device. If the Venus device loses its cellular or marina Wi-Fi connection, the VRM connection drops.</p>
+<h4 id="vrm-cloud-signalk-endpoint">VRM Cloud — SignalK endpoint<a class="headerlink" href="#vrm-cloud-signalk-endpoint" title="Permanent link">&para;</a></h4>
+<p>If your Venus device runs the SignalK server package, you can reach its SignalK endpoint through the VRM cloud rather than over MQTT. Pick <strong>Venus VRM Signal K</strong> from the connection picker. Log in with VRM credentials the same way as the MQTT variant; the app handles the cloud-to-device routing.</p>
+<p>Use this variant when you want the full SignalK feature set (custom paths, server plugins) tunneled through VRM. The plain VRM MQTT path is simpler if you only need standard Victron data.</p>
 <h4 id="data-format-note">Data format note<a class="headerlink" href="#data-format-note" title="Permanent link">&para;</a></h4>
 <p>Venus/MQTT data is converted to SignalK deltas internally using a JavaScript bridge (<code>venus.js</code>). The gauges you configure work the same way regardless of whether the source is SignalK or Venus — the connection type is transparent once you're past setup.</p>
 <hr />
-<h3 id="raymarine-mfd">Raymarine MFD<a class="headerlink" href="#raymarine-mfd" title="Permanent link">&para;</a></h3>
-<p>WilhelmSK can use a Raymarine chart plotter (MFD) on the same network as a data source. The MFD streams instrument data over a local TCP connection — no separate SignalK server needed.</p>
-<h4 id="how-to-configure_1">How to configure<a class="headerlink" href="#how-to-configure_1" title="Permanent link">&para;</a></h4>
-<p>No manual entry is needed. If your Raymarine MFD is on the same Wi-Fi or Ethernet network as your iOS device, it advertises itself via Bonjour (<code>_rym_rrc._tcp</code>). Open <strong>Settings → Connections</strong> and the MFD appears in the list. Tap to connect.</p>
-<p>If the MFD doesn't appear, confirm that:
-- The MFD's Wi-Fi or Ethernet is connected to the same network as your iOS device.
-- The MFD's "SeaTalkNG" or network data sharing option is enabled in its settings (exact menu path varies by MFD model — consult your Raymarine documentation).</p>
-<h4 id="capabilities">Capabilities<a class="headerlink" href="#capabilities" title="Permanent link">&para;</a></h4>
-<p>In addition to receiving instrument data, WilhelmSK can send remote-control inputs to the MFD (key presses, dial rotations, touch events) when the Raymarine connection type is configured. This is an advanced feature — most users only need data display.</p>
+<h3 id="actisense-w2k">Actisense W2K<a class="headerlink" href="#actisense-w2k" title="Permanent link">&para;</a></h3>
+<p>The <strong>Actisense W2K-1</strong> picker entry works with both the Actisense W2K-1 and the newer <strong>W2K-2</strong> NMEA 2000 Wi-Fi gateways. Both stream NMEA 2000 directly over a TCP server you configure on the device.</p>
+<h4 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Power up the gateway. By default it creates its own Wi-Fi access point named <code>w2k-&lt;serial&gt;</code> (the serial is printed on the rear of the case, along with the Wi-Fi password). Connect your iOS device to that AP, or bring the W2K onto your boat's Wi-Fi via its admin UI.</li>
+<li>Open the gateway's admin page at <a href="http://192.168.4.1/">http://192.168.4.1/</a>. Default login is <code>admin</code> with the password printed on the case.</li>
+<li>In the admin UI's server/output configuration, enable a TCP server and note the port number — it's user-configurable and the gateway ships with no single default port.</li>
+<li>In WilhelmSK, <strong>Settings → Connections → +</strong> and pick <strong>Actisense W2K-1</strong>. Enter the gateway's IP address and the TCP port you configured.</li>
+</ol>
+<h4 id="vendor-docs">Vendor docs<a class="headerlink" href="#vendor-docs" title="Permanent link">&para;</a></h4>
+<ul>
+<li>W2K-1: <a href="https://actisense.com/products/w2k-1-nmea-2000-wifi-gateway/">actisense.com/products/w2k-1</a></li>
+<li>W2K-2: <a href="https://actisense.com/products/w2k-2-nmea-2000-wifi-gateway/">actisense.com/products/w2k-2</a></li>
+</ul>
+<hr />
+<h3 id="yacht-devices-ydwg">Yacht Devices YDWG<a class="headerlink" href="#yacht-devices-ydwg" title="Permanent link">&para;</a></h3>
+<p>The <strong>Yacht Devices YDWG-02</strong> NMEA 2000 Wi-Fi gateway supports up to three configurable TCP/UDP servers. Server #1 ships pre-configured for NMEA 0183 on TCP port <strong>1456</strong>, which works as-is with WilhelmSK's YDWG picker entry.</p>
+<h4 id="setup_1">Setup<a class="headerlink" href="#setup_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Power up the gateway. Default Wi-Fi SSID and password are printed on the case. Connect your iOS device to that AP, or bridge the YDWG onto your boat's Wi-Fi via its admin UI.</li>
+<li>Admin UI at <a href="http://192.168.4.1/">http://192.168.4.1/</a> or <a href="http://ydwg.local/">http://ydwg.local/</a> (mDNS supported). Default login <code>admin</code> / <code>admin</code>.</li>
+<li>Server #1's defaults work out of the box. If you've reconfigured it, note the IP, port, and protocol in the gateway's status page.</li>
+<li>In WilhelmSK, <strong>Settings → Connections → +</strong> and pick <strong>YDWG</strong>. Enter the gateway's IP and port <code>1456</code> (or whatever you've set Server #1 to).</li>
+</ol>
+<h4 id="vendor-docs_1">Vendor docs<a class="headerlink" href="#vendor-docs_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://www.yachtd.com/products/wifi_gateway.html">yachtd.com/products/wifi_gateway.html</a></li>
+<li><a href="https://www.yachtd.com/downloads/ydwg02.pdf">YDWG-02 manual (PDF)</a></li>
+</ul>
+<hr />
+<h3 id="digital-yacht-raw">Digital Yacht RAW<a class="headerlink" href="#digital-yacht-raw" title="Permanent link">&para;</a></h3>
+<p>The <strong>Digital Yacht RAW</strong> picker entry accepts NMEA 0183 sentences ("RAW" 0183) over TCP. It's compatible with Digital Yacht's Wi-Fi and Ethernet NMEA gateway lineup, and also with the <strong>Yacht Devices YDEN-02</strong> Ethernet gateway when its Server #1 is set to NMEA 0183.</p>
+<h4 id="compatible-products">Compatible products<a class="headerlink" href="#compatible-products" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Digital Yacht:</strong> WLN10 / WLN10SM, WLN30, NavLink2 (Wi-Fi); LANLink (Ethernet); iKonvert in Wi-Fi mode.</li>
+<li><strong>Yacht Devices:</strong> YDEN-02 (Ethernet) with Server #1 configured for NMEA 0183.</li>
+</ul>
+<h4 id="setup-digital-yacht-wi-fi-gateways-wln-navlink">Setup — Digital Yacht Wi-Fi gateways (WLN / NavLink)<a class="headerlink" href="#setup-digital-yacht-wi-fi-gateways-wln-navlink" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Power up the gateway. It creates a Wi-Fi AP — <code>DY-WiFi-xxxx</code> (WLN30) or <code>NAVLink-xxxx</code> (NavLink2). Password is <code>PASS-xxxx</code> matching the 4-char SSID code. Join that AP from your iOS device, or bring the gateway onto your boat's Wi-Fi via its admin UI.</li>
+<li>Admin UI at <a href="http://192.168.1.1/">http://192.168.1.1/</a>. No login required on first connection from the gateway's own AP.</li>
+<li>Default TCP port is <strong>2000</strong> (UDP 2000 serves the same stream).</li>
+<li>In WilhelmSK, <strong>Settings → Connections → +</strong> and pick <strong>Digital Yacht RAW</strong>. Enter the gateway's IP and port <code>2000</code>.</li>
+</ol>
+<h4 id="setup-yacht-devices-yden-02">Setup — Yacht Devices YDEN-02<a class="headerlink" href="#setup-yacht-devices-yden-02" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Power up the gateway. Admin UI at <a href="http://192.168.4.1/">http://192.168.4.1/</a> or <a href="http://yden.local/">http://yden.local/</a>. Default login <code>admin</code> / <code>admin</code>.</li>
+<li>In the admin UI, configure Server #1 with protocol <strong>NMEA 0183</strong> and note the TCP port (Yacht Devices convention is port <code>1456</code>; verify on the status page).</li>
+<li>In WilhelmSK, pick <strong>Digital Yacht RAW</strong> and enter the YDEN's IP and the configured port.</li>
+</ol>
+<h4 id="vendor-docs_2">Vendor docs<a class="headerlink" href="#vendor-docs_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Digital Yacht: <a href="https://digitalyacht.support/">digitalyacht.support</a> — <a href="https://digitalyacht.support/product/wln30-smart-wireless-nmea-multiplexer/">WLN30</a>, <a href="https://digitalyacht.support/product/navlink2/">NavLink2</a>, <a href="https://digitalyachtamerica.com/product/lanlink/">LANLink</a></li>
+<li>Yacht Devices YDEN: <a href="https://www.yachtd.com/products/ethernet_gateway.html">yachtd.com/products/ethernet_gateway.html</a></li>
+</ul>
+<hr />
+<h3 id="nmea-0183-over-tcpip">NMEA 0183 over TCP/IP<a class="headerlink" href="#nmea-0183-over-tcpip" title="Permanent link">&para;</a></h3>
+<p>For any device that streams raw NMEA 0183 sentences over a TCP socket — multiplexers, AIS receivers, software bridges, custom gateways — use the <strong>NMEA 0183</strong> picker entry.</p>
+<h4 id="setup_2">Setup<a class="headerlink" href="#setup_2" title="Permanent link">&para;</a></h4>
+<p>In WilhelmSK, <strong>Settings → Connections → +</strong> and pick <strong>NMEA 0183</strong>. Enter:</p>
+<ul>
+<li><strong>Host</strong> — IP or hostname of the device producing the NMEA 0183 stream</li>
+<li><strong>Port</strong> — the device's NMEA-over-TCP port. The IANA-registered default is <strong>10110</strong>, but many vendors override (Digital Yacht uses <code>2000</code>, Yacht Devices uses <code>1456</code> — for those, use the dedicated picker entries above)</li>
+</ul>
+<p>The wire format is standard NMEA 0183: <code>$GPRMC,...*hh\r\n</code> lines. "RAW" in vendor parlance just means "unfiltered pass-through" — same wire format as plain NMEA 0183.</p>
+<hr />
+<h3 id="multiple-connections">Multiple Connections<a class="headerlink" href="#multiple-connections" title="Permanent link">&para;</a></h3>
+<p>If your boat has more than one data source — for example, a SignalK server for navigation data and a separate NMEA 2000 gateway for engine data — you can aggregate them into one combined connection. Each source feeds the same gauge layout.</p>
+<p>In WilhelmSK, <strong>Settings → Connections → +</strong> and pick <strong>Multiple Connections</strong>. Add the individual connections (each already configured per the sections above), and the app merges their data streams.</p>
 <hr />
 <h3 id="remote-access">Remote Access<a class="headerlink" href="#remote-access" title="Permanent link">&para;</a></h3>
 <p>By default WilhelmSK connects over the local Wi-Fi on the boat. If you want to monitor your vessel from shore, a marina Wi-Fi, or a cellular connection, you need to make the SignalK server reachable from the internet. Two approaches are common.</p>
