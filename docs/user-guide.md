@@ -933,171 +933,234 @@ See [Custom SignalK Paths](#custom-signalk-paths) for a worked example using non
 
 ### Gauge Reference
 
-The tables below list all gauge categories and types with their primary SignalK paths. Paths marked with `*` are instance wildcards — configure the specific instance (e.g., `propulsion.0` or `propulsion.port`) in the gauge settings.
+The tables below list all gauge categories and types, a short description of what each shows, and their primary SignalK paths. Paths marked with `*` are instance wildcards — configure the specific instance (e.g., `propulsion.0` or `propulsion.port`) in the gauge settings.
 
 #### Wind
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| AWA (Apparent Wind Angle) | `environment.wind.angleApparent` |
-| AWA (Course Over Ground) | `environment.wind.angleTrueGround` |
-| AWA (True Wind Angle) | `environment.wind.angleTrueWater` |
-| AWA (Ground Wind Angle) | `environment.wind.angleGround` |
-| AWS (Apparent Wind Speed) | `environment.wind.speedApparent` |
-| TWA (True Wind Angle) | `environment.wind.angleTrueWater` |
-| TWS (True Wind Speed) | `environment.wind.speedTrue` |
-| TWD (True Wind Direction) | `environment.wind.directionTrue` |
-| GWA (Ground Wind Angle) | `environment.wind.angleGround` |
-| GWS (Ground Wind Speed) | `environment.wind.speedOverGround` |
-| GWD (Ground Wind Direction) | `environment.wind.directionGround` |
-| TWA or GWA | `environment.wind.angleTrueWater` / `angleGround` |
-| Drift | `environment.current.drift` |
-| Set | `environment.current.setTrue` |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| AWA | Apparent wind angle on a wind dial | `environment.wind.angleApparent` |
+| AWA & COG | Apparent wind angle with a course-over-ground reference needle | `environment.wind.angleApparent` + `navigation.courseOverGroundTrue` |
+| AWA & TWA | Apparent and true wind angle together on one dial | `environment.wind.angleApparent` + `environment.wind.angleTrueWater` |
+| AWA & GWA | Apparent and ground wind angle together on one dial | `environment.wind.angleApparent` + `environment.wind.angleTrueGround` |
+| AWA CH (Close Hauled) | Apparent wind angle on a ±60° close-hauled scale (port red / starboard green) | `environment.wind.angleApparent` |
+| AWS | Apparent wind speed | `environment.wind.speedApparent` |
+| TWA | True wind angle on a wind dial | `environment.wind.angleTrueWater` |
+| TWS | True wind speed | `environment.wind.speedTrue` |
+| TWD | True wind direction (compass) | `environment.wind.directionTrue` |
+| GWA | Ground wind angle on a wind dial | `environment.wind.angleTrueGround` |
+| GWS | Ground (over-ground) wind speed | `environment.wind.speedOverGround` |
+| GWD | Ground wind direction (compass) | `environment.wind.directionGround` |
+| TWA or GWA | True wind angle when available, otherwise ground wind angle | `environment.wind.angleTrueWater` (falls back to `angleTrueGround`) |
+| Drift | Current speed (drift) | `environment.current.drift` |
+| Set | Current direction (set) | `environment.current.setTrue` |
+
+</div>
 
 #### Navigation
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| SOG (Speed Over Ground) | `navigation.speedOverGround` |
-| COG (Course Over Ground) | `navigation.courseOverGroundTrue` |
-| Speed (Through Water) | `navigation.speedThroughWater` |
-| Heading (True) | `navigation.headingTrue` |
-| Heading (Magnetic) | `navigation.headingMagnetic` |
-| Head Wind (COG) | `navigation.courseOverGroundTrue` + wind |
-| Head Wind (Mag COG) | `navigation.headingMagnetic` + wind |
-| Position | `navigation.position` |
-| XTE (Cross-Track Error) | `navigation.courseRhumbline.crossTrackError` |
-| DTW (Distance to Waypoint) | `navigation.courseRhumbline.nextPoint.distance` |
-| TTW (Time to Waypoint) | derived from DTW + SOG |
-| ETA | `navigation.destination.eta` |
-| Rate of Turn | `navigation.rateOfTurn` |
-| Pitch | `navigation.pitch` |
-| Roll | `navigation.roll` |
-| Yaw | `navigation.yaw` |
-| Date/Time | `navigation.datetime` |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| SOG | Speed over ground — analog dial with digital readout | `navigation.speedOverGround` |
+| COG | Course over ground on a compass-rose dial | `navigation.courseOverGroundTrue` |
+| Speed | Boat speed through the water (paddle/log) — analog dial | `navigation.speedThroughWater` |
+| Heading | True heading on a compass-rose dial | `navigation.headingTrue` |
+| Magnetic Heading | Magnetic heading on a compass-rose dial | `navigation.headingMagnetic` |
+| Head Wind COG | Triple-needle compass: true heading + apparent-wind direction + course over ground on one dial | `navigation.headingTrue` + `environment.wind.angleApparent` + `navigation.courseOverGroundTrue` |
+| MHDG Wind COG | Same triple-needle compass referenced to magnetic heading (magnetic COG derived from variation) | `navigation.headingMagnetic` + `environment.wind.angleApparent` + `navigation.courseOverGroundTrue` + `navigation.magneticVariation` |
+| Position | Latitude / longitude readout tile | `navigation.position` |
+| XTE | Cross-track error off the active leg — digital readout | `navigation.courseGreatCircle.crossTrackError` |
+| DTW | Distance to the next waypoint — digital readout | `navigation.courseGreatCircle.nextPoint.distance` |
+| Time To Wypt | Time to the next waypoint (HH:mm:ss), read directly from the server | `navigation.courseGreatCircle.nextPoint.timeToGo` |
+| ETA Time | Estimated time of arrival (clock time) | `navigation.courseGreatCircle.activeRoute.estimatedTimeOfArrival` |
+| Rate Of Turn | Rate of turn on an analog dial (±40, red→green zones) | `navigation.rateOfTurn` |
+| Pitch | Vessel pitch on an inclinometer dial (±90°) | `navigation.attitude` → `pitch` |
+| Roll | Vessel roll / heel on an inclinometer dial (±90°) | `navigation.attitude` → `roll` |
+| Yaw | Vessel yaw on a compass-rose dial | `navigation.attitude` → `yaw` |
+| GNSS Date/Time | Date and time readout (configurable format) | `navigation.datetime` |
+
+</div>
 
 #### Depth & Environment
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| Depth | `environment.depth.belowSurface` (falls back to `belowTransducer` + `surfaceToTransducer`) |
-| Water Temperature | `environment.water.temperature` |
-| Atmospheric Pressure | `environment.outside.pressure` |
-| Air Temperature | `environment.outside.temperature` |
-| Tide | tide/current data |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| Depth | Water depth below the surface — digital/bar, with a draft marker | `environment.depth.belowSurface` (falls back to `belowTransducer` + `surfaceToTransducer`) |
+| Water Temperature | Sea-water temperature on an analog dial | `environment.water.temperature` |
+| Atmospheric Pressure | Barometric pressure on an analog dial (scale auto-adjusts to inHg/mbar/mmHg) | `environment.outside.pressure` |
+| Tide | Next high / low / current tide heights and times | `environment.tide` |
+
+</div>
+
+To show outside air temperature, point a **Water Temperature** or generic gauge at `environment.outside.temperature` — there is no separate air-temperature gauge type.
 
 #### Engine & Propulsion
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| RPM | `propulsion.*.revolutions` |
-| Coolant Temperature | `propulsion.*.temperature` |
-| Oil Pressure | `propulsion.*.oilPressure` |
-| Oil Temperature | `propulsion.*.oilTemperature` |
-| Alternator Voltage | `propulsion.*.alternatorVoltage` |
-| Engine Runtime | `propulsion.*.runTime` |
-| Fuel Rate | `propulsion.*.fuelRate` |
-| Engine Load | `propulsion.*.engineLoad` |
-| Engine Torque | `propulsion.*.engineTorque` |
-| Fuel Economy | derived from fuel rate + speed |
+<div class="gauge-ref" markdown="1">
 
-`*` is a placeholder for the engine instance — configure `0`, `port`, `starboard`, or another instance in gauge settings.
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| RPM | Engine speed on an analog dial (with x1/x10/x100 scaling) | `propulsion.*.revolutions` |
+| Coolant Temperature | Engine coolant temperature on an analog dial | `propulsion.*.temperature` |
+| Oil Pressure | Engine oil pressure on an analog dial | `propulsion.*.oilPressure` |
+| Oil Temperature | Engine oil temperature on an analog dial | `propulsion.*.oilTemperature` |
+| Alternator Voltage | Alternator output voltage on a dial | `propulsion.*.alternatorVoltage` |
+| Engine Runtime | Cumulative engine hours — digital HH:mm:ss | `propulsion.*.runTime` |
+| Fuel Rate | Instantaneous fuel-consumption rate — digital/bar | `propulsion.*.fuel.rate` |
+| Engine Load | Engine load as a percentage dial | `propulsion.*.engineLoad` |
+| Engine Torque | Engine torque as a percentage dial | `propulsion.*.engineTorque` |
+| Fuel Economy | Distance per volume (or, inverted, volume per distance) read from the server | `propulsion.*.fuel.economy` |
+
+</div>
+
+`*` is a placeholder for the engine instance — the gauge auto-resolves `port`, `0`, `1`, or `starboard`; set a specific instance in gauge settings.
 
 #### Tanks
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| Fuel | `tanks.fuel.*.currentLevel` |
-| Fresh Water | `tanks.freshWater.*.currentLevel` |
-| Black Water | `tanks.blackWater.*.currentLevel` |
-| Waste Water | `tanks.wasteWater.*.currentLevel` |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| Fuel | Fuel-tank level on an analog percentage dial | `tanks.fuel.*.currentLevel` |
+| Fresh Water | Fresh-water-tank level on an analog dial | `tanks.freshWater.*.currentLevel` |
+| Black Water | Black-water (sewage) tank level on an analog dial | `tanks.blackWater.*.currentLevel` |
+| Waste Water | Grey / waste-water tank level on an analog dial | `tanks.wasteWater.*.currentLevel` |
+| WavyTank | Any tank level, shown as an animated "wavy" liquid fill | any `tanks.*.currentLevel` |
+
+</div>
+
+The Fuel / Fresh / Black / Waste Water gauges are all the same gauge class pre-pointed at a different tank path; point any of them at another `tanks.*.currentLevel` instance in gauge settings.
 
 Both percentage and volume (liters/gallons) display modes are available. Configure the tank instance number in gauge settings.
 
 #### Electrical
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| Battery Voltage (1) | `electrical.batteries.1.voltage` |
-| Battery Voltage (2) | `electrical.batteries.2.voltage` |
-| Battery Voltage (24V) | `electrical.batteries.*.voltage` |
-| Amps | `electrical.batteries.*.current` |
-| Watts | `electrical.batteries.*.power` |
-| State of Charge | `electrical.batteries.*.capacity.stateOfCharge` |
-| Joules | `electrical.batteries.*.capacity.stateOfCharge` (energy) |
-| Charge Mode | `electrical.batteries.*.chargeState` |
-| Battery Overview | multi-path summary |
-| Electrical Overview | multi-path summary |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| Starter Battery | Battery voltage on an analog dial (10–16 V, low/ok/over zones) | `electrical.batteries.1.voltage` |
+| House Battery | Battery voltage on an analog dial (10–16 V) | `electrical.batteries.0.voltage` |
+| Voltage 24V | Battery voltage on a 24 V-range dial (20–32 V) | a `*.voltage` path (no preset) |
+| Generic Amps | Current (charge / discharge) in amps — digital/bar/dial | any current path, e.g. `electrical.batteries.*.current` |
+| Generic Watts | Power in watts — digital/bar/dial | any power path, e.g. `electrical.batteries.*.power` |
+| Generic Charge | Battery charge in amp-hours — digital/dial | any charge (Ah) path |
+| Generic kWh | Stored energy in kWh — digital/bar/dial | any energy path |
+| Charger Mode | Charger state (bulk / absorption / float) as a colored status bar | a charger-mode string path, e.g. `electrical.chargers.*.chargingMode` |
+| Battery Overview | Multi-value tile: state of charge, voltage, current, time remaining, plus charger and solar | multi-path summary |
+| Electrical Overview | Large multi-section tile: battery, inverter, charger, solar, alternator, DC loads, grid and system state | multi-path summary |
+
+</div>
+
+The "Generic" gauges (Amps, Watts, Charge, kWh) and Voltage 24V ship with a unit and scale but **no preset path** — assign the SignalK path yourself when you add the gauge. For battery **state of charge (%)**, point a Percent or generic gauge at `electrical.batteries.*.capacity.stateOfCharge`. ("Starter Battery" is battery instance 1 and "House Battery" is instance 0 by default; change the instance in gauge settings.)
 
 #### Switches and Relays
 
-| Gauge | Notes |
-|-------|-------|
-| SwitchBank | Displays a bank of on/off switches; paths from `electrical.switches.*` |
-| SwitchGauge | Single switch/relay indicator |
-| SwitchLED | LED-style indicator for a switch state |
-| LEDGauge | Single LED indicator |
-| LEDBank | Bank of LED indicators |
-| MultiSwitch | Grid of toggle switches for relay control |
-| Slider | Dimmer/level slider for compatible devices |
+<div class="gauge-ref" markdown="1">
 
-Switch paths follow `electrical.switches.{bank}.{switch}.state`.
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| SwitchBank | **Control.** A bank/grid of switches from one switches subtree — toggle each on/off, with optional dimming and colored (hue / saturation / Kelvin) lighting | `electrical.switches.{bank}` subtree |
+| SwitchGauge | **Control.** A single switch/relay you toggle on/off; also supports dimming and color | `electrical.switches.{bank}.{switch}.state` |
+| SwitchLED | **Control + indicator.** A switch you toggle, paired with a separate LED that reflects a *different* feedback path | a switch `.state` path + a separate LED `.state` path |
+| LEDGauge | **Read-only.** A single LED status indicator with configurable on/off colors | any state path, e.g. `electrical.switches.*.state` |
+| LEDBank | **Read-only.** A bank/grid of LED status indicators from one subtree | `electrical.switches.{bank}` subtree |
+| MultiSwitch | **Control.** A single multi-state selector — choose one of several values; includes an accidental-tap guard | a multi-state path (with `possibleValues`) |
+| Slider | **Control.** A dimmer/level slider for a continuous (ratio or ranged) value | any PUT-able ratio/ranged path |
+
+</div>
+
+The Switch* / MultiSwitch / Slider gauges *write* values back to the server (the path must support PUT); LED gauges only display.
 
 #### Autopilot
 
-| Gauge | Notes |
-|-------|-------|
-| AutoPilotControl | Full autopilot control panel — requires the [Raymarine autopilot server plugin](#server-plugins) |
-| RudderAngle | `steering.rudderAngle` |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| AutoPilotControl | **Control.** Full autopilot panel — engage/standby, auto/wind modes, adjust heading, tack/confirm; issues commands to the [Raymarine autopilot server plugin](#server-plugins). Can select among multiple pilots | `steering.autopilot.state`, `steering.autopilot.target.*` (commands via plugin) |
+| RudderAngle | **Read-only** analog dial of rudder angle (±45°, green→red zones) | `steering.rudderAngle` |
+
+</div>
 
 #### AIS
 
-| Gauge | Notes |
-|-------|-------|
-| AIS Targets | Overlay of AIS vessel positions — requires AIS data in SignalK (`vessels.*`) |
-| AIS Targets Table | Tabular list of nearby vessels with CPA/TCPA |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| AIS Targets | Sortable table of nearby vessels — toggle columns for type, distance, speed, COG and state | `vessels.*` (+ own `navigation.position`) |
+
+</div>
+
+AIS targets also appear as an overlay on the **Map**, **Google Map** and **Navionics** gauges. (The picker may list a second "AISTargetsTable" entry; it is a leftover with no gauge behind it and does nothing — use **AIS Targets**.)
 
 #### Maps and Charts
 
-| Gauge | Notes |
-|-------|-------|
-| Map (Apple Maps) | Vessel position on Apple Maps |
-| Google Map | Vessel position on Google Maps |
-| Navionics | Marine chart overlay — requires Navionics subscription |
-| Freeboard-SK | Embedded Freeboard-SK web chart — requires server-side Freeboard-SK |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| Map (Apple Maps) | Embedded Apple Maps with own-vessel position, anchor circle, COG/heading and next waypoint; map/satellite/hybrid and course/head/north-up modes | `navigation.position` (+ anchor, COG, heading, next waypoint) |
+| Google Map | The same position map rendered with Google Maps | `navigation.position` (+ anchor, COG, heading, next waypoint) |
+| Navionics | Embedded Navionics marine chart — requires a Navionics chart subscription | `navigation.position` (+ anchor, COG, heading, next waypoint) |
+| Freeboard-SK | Embedded web view of the server's Freeboard-SK chartplotter — requires the Freeboard-SK webapp on the server | server URL (not a SignalK path) |
+| Raymarine MFD | Embedded view of a Raymarine multifunction display — requires a compatible Raymarine MFD on the network | MFD on the network (not a SignalK path) |
+
+</div>
 
 #### Camera
 
-| Gauge | Notes |
-|-------|-------|
-| IP Camera | RTSP/IP camera stream — enter the camera URL in gauge settings |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| IP Camera | Embedded live video from an IP camera — HTTP/MJPEG or RTSP (decoded with FFmpeg) | camera URL (not a SignalK path) |
+
+</div>
 
 #### Fusion Stereo
 
-| Gauge | Notes |
-|-------|-------|
-| Fusion | Stereo playback controls — requires the [Fusion server plugin](#server-plugins) |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| Fusion | **Control.** Full Fusion stereo: power, source select, transport (play/pause/next/prev) and per-zone volume; sends commands through the [Fusion server plugin](#server-plugins) | `entertainment.device.fusion1.*` (commands via plugin) |
+
+</div>
 
 #### Utility
 
-| Gauge | Notes |
-|-------|-------|
-| Text | Generic gauge for any SignalK path — numeric or string |
-| Ratio | Displays a ratio derived from two paths |
-| Percent | Percentage display for any 0–1 value path |
-| Volume | Volume display |
-| Image | Static image tile |
-| Label | Static text label |
-| Web | Embedded web view (enter a URL) |
-| Empty | Placeholder / blank slot |
-| GaugeStack | Stacks two gauges vertically in one slot |
-| Scrollable | Scrollable list of values |
-| Time HHMM | Clock display |
-| Thermostat | Thermostat control (for compatible HVAC systems) |
-| AnchorAlarmControl | Anchor alarm drop/raise and radius control |
-| Anchor | Anchor position and drag distance |
-| Tide | Tide height and prediction |
-| MultiGauge | Composite gauge combining multiple readings |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| Text | Generic **digital readout** for any SignalK path — numeric or string. The base for many built-in text gauges | any path |
+| Ratio | Generic dial that shows a **decimal-ratio (0–1)** value as a percentage | any 0–1 ratio path |
+| Percent | Generic dial for a value **already in 0–100 percent** (no ratio conversion) | any percent path |
+| Volume | Volume readout (m³ source converted to your units), with bar/analog styles | any volume (m³) path |
+| Image | Static image tile | none — static |
+| Label | Static text-label tile | none — static |
+| Web | Embedded web view | a URL (not a SignalK path) |
+| Empty | Blank placeholder slot | none |
+| GaugeStack | Stacks multiple gauges vertically in one slot | none — container |
+| Scrollable | A scrollable/paged container holding several gauges | none — container |
+| Time HHMM | Formats a path value as `HH:mm` — seconds-of-day or an ISO-8601 time (12/24-hour), not a wall clock | any time / seconds path |
+| Thermostat | Thermostat **control** — reads temperature, state, setting and mode, and writes the setpoint and mode back to the server (for compatible HVAC systems) | `environment.inside.*` — temperature, state, `thermostat.setting`, `thermostat.mode` |
+| StaticThermostat | **Read-only** thermostat — displays temperature, **relative humidity**, state and setpoint. Unlike `Thermostat`, it does not write changes back and adds a humidity reading. Use this for an HVAC source that publishes humidity or that you don't want to control from the app | `environment.inside.*` — temperature, humidity, state, setting |
+| WatchGridGauge | Multi-value grid tile (default 6 cells); primarily used on Apple Watch layouts | the paths of its child gauges |
+| AnchorAlarmControl | **Control.** Drop/raise the anchor and set the alarm radius (works with the anchor-alarm server plugin) | `navigation.anchor.*` |
+| Anchor | **Read-only** anchor view — position, drag distance and track | `navigation.anchor.*`, `navigation.headingTrue` |
+| Tide | Tide height and prediction | `environment.tide` |
+| MultiGauge | Composite tile combining several readings in one slot | multiple (composite) |
+
+</div>
 
 ---
 
@@ -1426,11 +1489,11 @@ Key fields:
 
 The pivac WilhelmSK layout (`wilhelmsk/iphone.wlyt`) demonstrates mixing gauge types on a single page:
 
-**Thermostat gauges** use a dedicated `Thermostat` class that reads temperature, humidity, and state from three related paths under a shared prefix:
+**Thermostat gauges** read temperature, state, and setpoint from related paths under a shared prefix. There are two classes: `Thermostat`, which also reads `mode` and writes the setpoint/mode back to the server, and `StaticThermostat`, which is read-only and additionally reads **humidity**. Because pivac publishes a humidity reading and the gauge is for display only, this layout uses `StaticThermostat`:
 
 ```json
 "10": {
-  "className": "Thermostat",
+  "className": "StaticThermostat",
   "title": "Kids Room",
   "temperature": "environment.inside.thermostat.KIDS_ROOM.temperature",
   "humidity": "environment.inside.thermostat.KIDS_ROOM.humidity",

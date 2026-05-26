@@ -47,6 +47,9 @@ nav:
 extra_javascript:
   - javascripts/deeplink-scroll.js
 
+extra_css:
+  - stylesheets/extra.css
+
 plugins:
   - search
 
@@ -61,3 +64,4 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - attr_list
+  - md_in_html
