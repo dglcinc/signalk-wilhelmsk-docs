@@ -45,7 +45,7 @@ This is where most of your one-time setup happens. WilhelmSK can connect directl
 | **Victron Venus** | Victron Energy installations — batteries, inverters, solar, shore power. Local MQTT, VRM cloud MQTT, or VRM cloud SignalK |
 | **Actisense W2K** | Direct NMEA 2000 over Wi-Fi via an Actisense W2K-1 or W2K-2 gateway |
 | **Yacht Devices YDWG** | Direct NMEA 2000 over Wi-Fi via a Yacht Devices YDWG-02 gateway |
-| **Digital Yacht RAW** | Digital Yacht Wi-Fi NMEA 0183 gateways (WLN10/WLN30/NavLink2/LANLink); also Yacht Devices YDEN-02 |
+| **Digital Yacht RAW** | Generic connection for Yacht Devices products; does same thing as YDWG |
 | **NMEA 0183 over TCP/IP** | Any device streaming raw NMEA 0183 sentences over a TCP socket |
 | **Multiple Connections** | Aggregate two or more of the above into one combined source |
 
