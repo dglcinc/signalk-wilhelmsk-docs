@@ -45,7 +45,7 @@ This is where most of your one-time setup happens. WilhelmSK can connect directl
 | **Victron Venus** | Victron Energy installations — batteries, inverters, solar, shore power. Local MQTT, VRM cloud MQTT, or VRM cloud SignalK |
 | **Actisense W2K** | Direct NMEA 2000 over Wi-Fi via an Actisense W2K-1 or W2K-2 gateway |
 | **Yacht Devices YDWG** | Direct NMEA 2000 over Wi-Fi via a Yacht Devices YDWG-02 gateway |
-| **Digital Yacht RAW** | Digital Yacht Wi-Fi NMEA 0183 gateways (WLN10/WLN30/NavLink2/LANLink); also Yacht Devices YDEN-02 |
+| **Digital Yacht RAW** | Generic connection for Yacht Devices products; does same thing as YDWG |
 | **NMEA 0183 over TCP/IP** | Any device streaming raw NMEA 0183 sentences over a TCP socket |
 | **Multiple Connections** | Aggregate two or more of the above into one combined source |
 
@@ -189,10 +189,14 @@ The **Actisense W2K-1** picker entry works with both the Actisense W2K-1 and the
 
 #### Setup
 
+Recent W2K firmware no longer streams in a directly-usable format out of the box — you have to enable the gateway's **DS2 server** and set its output to **N2K ASCII** before anything can read it. The exact menus depend on firmware version; the steps below follow Signal K's [W2K-1 configuration FAQ](https://github.com/SignalK/signalk-server/wiki/FAQ:-Frequently-Asked-Questions#how-do-i-configure-a-actisense-w2k-1-as-a-nmea-2000-source), which is the authoritative reference.
+
 1. Power up the gateway. By default it creates its own Wi-Fi access point named `w2k-<serial>` (the serial is printed on the rear of the case, along with the Wi-Fi password). Connect your iOS device to that AP, or bring the W2K onto your boat's Wi-Fi via its admin UI.
 2. Open the gateway's admin page at [http://192.168.4.1/](http://192.168.4.1/). Default login is `admin` with the password printed on the case.
-3. In the admin UI's server/output configuration, enable a TCP server and note the port number — it's user-configurable and the gateway ships with no single default port.
-4. In WilhelmSK, **Settings → Connections → +** and pick **Actisense W2K-1**. Enter the gateway's IP address and the TCP port you configured.
+3. **Firmware ≥ 1.3878:** under **Settings → Data Server**, activate the **DS2 Server** with Direction **Both** on port **60002**; under **Settings → Serial**, set the Tx Format to **"N2K ASCII for the DS2 Interface"**; under **Settings → Routing**, enable **DS2** for Source **N2K** and **N2KV1** for Source **DS2**. **Older firmware:** configure a Server with format **N2K ASCII**, direction **Both**, protocol **TCP**, and note the port.
+4. In WilhelmSK, **Settings → Connections → +** and pick **Actisense W2K-1**. Enter the gateway's IP address and the TCP port (`60002` on current firmware).
+
+The same N2K ASCII TCP stream can instead feed a Signal K server (add it there as a **"W2K-1 N2K ASCII (canboatjs)"** NMEA 2000 connection), then connect WilhelmSK to that server — the recommended path if you want plugins, alarms, and history.
 
 #### Vendor docs
 
@@ -221,30 +225,19 @@ The **Yacht Devices YDWG-02** NMEA 2000 Wi-Fi gateway supports up to three confi
 
 ### Digital Yacht RAW
 
-The **Digital Yacht RAW** picker entry accepts NMEA 0183 sentences ("RAW" 0183) over TCP. It's compatible with Digital Yacht's Wi-Fi and Ethernet NMEA gateway lineup, and also with the **Yacht Devices YDEN-02** Ethernet gateway when its Server #1 is set to NMEA 0183.
+The **Digital Yacht RAW** picker entry is functionally **identical to the [YDWG](#yacht-devices-ydwg) entry** — it's an alias of the same connection type, kept so that new products don't each need their own entry in the picker. Pick whichever name matches your hardware — the behavior is the same.
 
-#### Compatible products
+#### Setup
 
-- **Digital Yacht:** WLN10 / WLN10SM, WLN30, NavLink2 (Wi-Fi); LANLink (Ethernet); iKonvert in Wi-Fi mode.
-- **Yacht Devices:** YDEN-02 (Ethernet) with Server #1 configured for NMEA 0183.
+1. Power up the gateway. Digital Yacht Wi-Fi units create their own AP — `DY-WiFi-xxxx` (WLN30) or `NAVLink-xxxx` (NavLink2), with password `PASS-xxxx` matching the 4-char SSID code. Join that AP from your iOS device, or bring the gateway onto your boat's Wi-Fi via its admin UI at [http://192.168.1.1/](http://192.168.1.1/) (no login on first connection from its own AP).
+2. Digital Yacht gateways default to TCP port **2000** (UDP 2000 serves the same stream).
+3. In WilhelmSK, **Settings → Connections → +** and pick **Digital Yacht RAW**. Enter the gateway's IP and port `2000`.
 
-#### Setup — Digital Yacht Wi-Fi gateways (WLN / NavLink)
-
-1. Power up the gateway. It creates a Wi-Fi AP — `DY-WiFi-xxxx` (WLN30) or `NAVLink-xxxx` (NavLink2). Password is `PASS-xxxx` matching the 4-char SSID code. Join that AP from your iOS device, or bring the gateway onto your boat's Wi-Fi via its admin UI.
-2. Admin UI at [http://192.168.1.1/](http://192.168.1.1/). No login required on first connection from the gateway's own AP.
-3. Default TCP port is **2000** (UDP 2000 serves the same stream).
-4. In WilhelmSK, **Settings → Connections → +** and pick **Digital Yacht RAW**. Enter the gateway's IP and port `2000`.
-
-#### Setup — Yacht Devices YDEN-02
-
-1. Power up the gateway. Admin UI at [http://192.168.4.1/](http://192.168.4.1/) or [http://yden.local/](http://yden.local/). Default login `admin` / `admin`.
-2. In the admin UI, configure Server #1 with protocol **NMEA 0183** and note the TCP port (Yacht Devices convention is port `1456`; verify on the status page).
-3. In WilhelmSK, pick **Digital Yacht RAW** and enter the YDEN's IP and the configured port.
+Compatible with Digital Yacht's Wi-Fi and Ethernet NMEA gateway lineup (WLN10 / WLN10SM, WLN30, NavLink2, LANLink, iKonvert in Wi-Fi mode). For any other device that streams NMEA 0183 over TCP — including the Yacht Devices YDEN-02 Ethernet gateway — this entry, [YDWG](#yacht-devices-ydwg), and [NMEA 0183](#nmea-0183-over-tcpip) are interchangeable; just enter the host and port.
 
 #### Vendor docs
 
 - Digital Yacht: [digitalyacht.support](https://digitalyacht.support/) — [WLN30](https://digitalyacht.support/product/wln30-smart-wireless-nmea-multiplexer/), [NavLink2](https://digitalyacht.support/product/navlink2/), [LANLink](https://digitalyachtamerica.com/product/lanlink/)
-- Yacht Devices YDEN: [yachtd.com/products/ethernet_gateway.html](https://www.yachtd.com/products/ethernet_gateway.html)
 
 ---
 
@@ -273,7 +266,7 @@ In WilhelmSK, **Settings → Connections → +** and pick **Multiple Connections
 
 ### Remote Access
 
-By default WilhelmSK connects over the local Wi-Fi on the boat. If you want to monitor your vessel from shore, a marina Wi-Fi, or a cellular connection, you need to make the SignalK server reachable from the internet. Two approaches are common.
+By default WilhelmSK connects over the local Wi-Fi on the boat. If you want to monitor your vessel from shore, a marina Wi-Fi, or a cellular connection, you need to make the SignalK server reachable from off the boat. The two direct-exposure approaches below (port forwarding, reverse proxy) are common, but a VPN or tunnel service is usually the safer choice — see [VPN and Tunnel Services](#vpn-and-tunnel-services) and Signal K's own [remote-access FAQ](https://github.com/SignalK/signalk-server/wiki/FAQ:-Frequently-Asked-Questions#how-can-i-get-remote-access-to-signal-k).
 
 #### Port Forwarding (Simple)
 
@@ -313,6 +306,17 @@ location /signalk/ {
 5. In the SignalK admin panel, go to **Server → Settings** and enable **"Trust Proxy"**. Without this, SignalK ignores the `X-Forwarded-Proto` header and still generates `ws://` WebSocket URLs, causing WilhelmSK to attempt an unencrypted connection on port 80 — which nginx immediately redirects (301), breaking the handshake.
 
 6. In WilhelmSK, add a manual connection using your external hostname (`https://yourhostname.example.com`), port 443, with SSL enabled. The app will discover the server endpoints through the standard `/signalk` path and connect via WSS.
+
+#### VPN and Tunnel Services
+
+Rather than exposing the server directly, you can join your phone and your boat to the same private network, or let a hosted service tunnel the connection for you. These avoid opening any inbound ports on your boat's router and are what the Signal K project's [remote-access FAQ](https://github.com/SignalK/signalk-server/wiki/FAQ:-Frequently-Asked-Questions#how-can-i-get-remote-access-to-signal-k) recommends:
+
+- **[Tailscale](https://tailscale.com/)** — a zero-config WireGuard-based VPN. Install it on the boat's server and on your iPhone, and the server appears at a stable private IP from anywhere. The simplest option for most boats.
+- **[ZeroTier](https://www.zerotier.com/)** — a peer-to-peer mesh VPN, similar in effect to Tailscale; both put your devices on one virtual LAN with no port forwarding.
+- **[ngrok](https://ngrok.com/)** — a tunnel service that gives the local server a public HTTPS URL without touching the router. Good for occasional access.
+- **[remote.it](https://remote.it/)** — a remote-access platform that brokers connections to the server without inbound ports.
+
+With any of these, connect WilhelmSK using the address the service assigns (a Tailscale/ZeroTier private IP, or an ngrok/remote.it hostname) and the SignalK port, exactly as you would on the local network.
 
 ---
 
@@ -789,6 +793,43 @@ The alarm indicator in the app's top bar lights up for any active unacknowledged
 
 ---
 
+## Shortcuts and Siri
+
+WilhelmSK exposes its core actions to Apple's **Shortcuts** app, so you can trigger them from a Control Center button, an Automation, the Share Sheet, or by voice through **Siri** — without opening the app. These features require a **SignalK connection** and the [`signalk-wilhelmsk-plugin`](#watch-widgets-shortcuts-siri-signalk-wilhelmsk-plugin) on the server; they don't work with the non-SignalK connection types.
+
+### Available actions
+
+Build shortcuts in the Shortcuts app from any of these WilhelmSK actions:
+
+- **Set a Multi Switch** — choose a state on a multi-position switch (e.g. set a Victron inverter to *On*, *Charge Only*, etc.)
+- **Flip a Switch** — turn a switch on or off
+- **Toggle a Switch** — flip a switch to its opposite state
+- **Launch WilhelmSK** — open the app
+- **Drop / Set / Raise Anchor** — control the anchor alarm
+- **Control a Fusion stereo** — power, source, transport, volume
+- **Send a PUT to any path** — write a value to any SignalK path
+- **Get the value of a path** — read the current value of any SignalK path
+- **Control an autopilot** — set state and heading, or advance to the next waypoint
+
+Because these are standard Shortcuts actions, you can drop them into Control Center, attach them to Automations (time, location, NFC tag, etc.), or run them from your Home Screen.
+
+### Siri commands
+
+WilhelmSK ships built-in Siri phrases that work as soon as the app is installed:
+
+- *"Drop the anchor in WilhelmSK"*
+- *"Raise the anchor in WilhelmSK"*
+- *"Set the anchor in WilhelmSK"*
+- *"Tack to port in WilhelmSK"*
+- *"Tack to starboard in WilhelmSK"*
+- *"Toggle the [switch display name] in WilhelmSK"*
+- *"Turn the autopilot ten degrees to port in WilhelmSK"*
+- *"Turn the autopilot one degree to starboard in WilhelmSK"*
+
+**Tip:** if you create your own shortcut and give it a custom name, Siri runs it by that name — so you can drop the *"in WilhelmSK"* suffix and say something shorter and more natural.
+
+---
+
 ## watchOS
 
 WilhelmSK includes a native Apple Watch app for glancing at instrument data from your wrist. It shows the same gauge types as the iPhone — wind, speed, depth, battery, switches, autopilot — but on a compact watch face.
@@ -871,13 +912,13 @@ To add a complication: long-press your watch face → Edit → tap a complicatio
 
 ### Known Quirks
 
-**Watch goes blank if phone is out of range.** If you move beyond Bluetooth range and the phone is not on the same Wi-Fi network, the watch stops receiving updates. The freshness indicator will change color. Data from before the connection dropped remains visible but frozen.
+**Non-SignalK connections go stale if the phone is out of range.** SignalK connections keep working independently — the watch talks to the server directly over Wi-Fi or cellular even when the phone is unreachable (see below). For non-SignalK sources, which route through the phone, moving beyond Bluetooth range while off the phone's Wi-Fi stops the updates: the freshness indicator changes color and the last-received data remains visible but frozen.
 
 **Phone must be awake for the first sync.** The WCSession-based configuration push requires the phone to be active. If you open the watch app and the phone is asleep, the gauge layout may not load until the phone wakes.
 
 **Non-SignalK connections always require the phone.** The watch app routes all non-SignalK data (Victron MQTT, Actisense W2K, Yacht Devices YDWG, Digital Yacht RAW, generic NMEA 0183) through the phone — it cannot speak those protocols directly. The phone must be reachable for these connections to work on the watch.
 
-**SignalK connections also route through the phone.** The watch uses the auth token and connection details obtained from the phone. If the phone is unreachable, the watch cannot fetch data from the server even if both are on the same Wi-Fi network.
+**SignalK connections keep working without the phone.** The watch caches the auth token and connection details it obtained from the phone on its last sync, and reuses them to reach the server on its own. As long as the watch can reach the server (same Wi-Fi, or over cellular), SignalK data keeps flowing even when the phone is out of range or unreachable — only the initial setup sync needs the phone.
 
 ---
 
@@ -1084,7 +1125,7 @@ The Switch* / MultiSwitch / Slider gauges *write* values back to the server (the
 
 | Gauge | Notes | SignalK Path(s) / Source |
 |-------|-------|--------------------------|
-| AutoPilotControl | **Control.** Full autopilot panel — engage/standby, auto/wind modes, adjust heading, tack/confirm; issues commands to the [Raymarine autopilot server plugin](#server-plugins). Can select among multiple pilots | `steering.autopilot.state`, `steering.autopilot.target.*` (commands via plugin) |
+| AutoPilotControl | **Control.** Full autopilot panel — engage/standby, auto/wind modes, adjust heading, tack/confirm; issues commands via the vendor-agnostic [autopilot server plugin](#server-plugins). Can select among multiple pilots | `steering.autopilot.state`, `steering.autopilot.target.*` (commands via plugin) |
 | RudderAngle | **Read-only** analog dial of rudder angle (±45°, green→red zones) | `steering.rudderAngle` |
 
 </div>
@@ -1305,25 +1346,30 @@ Several advanced WilhelmSK features require companion plugins running on your Si
 
 | Feature | Plugin name | Plugin repo | Notes |
 |---------|-------------|-------------|-------|
-| Server-side alarms | `signalk-zones` | [sbender9/signalk-zones](https://github.com/sbender9/signalk-zones) | Publishes threshold alerts to `notifications.*`; WilhelmSK reads and displays them |
+| Watch, widgets, Shortcuts & Siri | `signalk-wilhelmsk-plugin` | [sbender9/signalk-wilhelmsk-plugin](https://github.com/sbender9/signalk-wilhelmsk-plugin) | Required for the Apple Watch app, Watch & Home Screen widgets, and the Shortcuts/Siri integration |
+| Server-side alarms | *(built into the server)* | — | Configure zones on the server; it writes `notifications.*` which WilhelmSK reads and displays. The old `signalk-zones` plugin is deprecated |
 | Push notifications | `signalk-push-notifications` | [sbender9/signalk-push-notifications](https://github.com/sbender9/signalk-push-notifications) | Local push via persistent TCP; remote push via AWS SNS when off-network |
 | Anchor alarm | `signalk-anchoralarm-plugin` | [sbender9/signalk-anchoralarm-plugin](https://github.com/sbender9/signalk-anchoralarm-plugin) | Monitors vessel position and raises `notifications.anchoralarm.*` on drift |
-| Raymarine autopilot control | `signalk-raymarine-autopilot` | [sbender9/signalk-raymarine-autopilot](https://github.com/sbender9/signalk-raymarine-autopilot) | Enables the autopilot control panel: mode, heading/wind target, tack/gybe |
-| Fusion stereo control | *(none required)* | — | WilhelmSK sends commands directly via NMEA 2000 paths; no plugin needed |
+| Autopilot control | `@signalk/signalk-autopilot` | [SignalK/signalk-autopilot](https://github.com/SignalK/signalk-autopilot) | Vendor-agnostic autopilot control panel: mode, heading/wind target, tack/gybe, advance waypoint |
+| Fusion stereo control | `signalk-fusion-stereo` | [sbender9/signalk-fusion-stereo](https://github.com/sbender9/signalk-fusion-stereo) | Required for the Fusion stereo gauge: power, source, transport, per-zone volume |
 | AIS targets | *(none required)* | — | AIS data flows through SignalK natively as `vessels.*`; no plugin needed |
-| Navionics track overlay | *(none required)* | — | WilhelmSK reads the vessel's own track from `vessels.self.track`; no plugin needed |
-| Freeboard-SK integration | *(none required)* | — | WilhelmSK can link to a Freeboard-SK instance on the same server; no server-side plugin needed |
+| Track overlay | *(a Tracks-API plugin)* | — | Requires a plugin that provides the Signal K Tracks API; WilhelmSK reads the track from it |
+| Freeboard-SK integration | `freeboard-sk` | [SignalK/freeboard-sk](https://github.com/SignalK/freeboard-sk) | Requires the Freeboard-SK plugin installed on the server; WilhelmSK links to it |
 | In-app documentation (offline) | `signalk-wilhelmsk-docs` | [dglcinc/signalk-wilhelmsk-docs](https://github.com/dglcinc/signalk-wilhelmsk-docs) | Serves this documentation site from the server so **Help / Documentation** works without an internet connection |
 
 ---
 
 ### Feature details
 
-#### Server-side alarms (`signalk-zones`)
+#### Watch, widgets, Shortcuts & Siri (`signalk-wilhelmsk-plugin`)
 
-SignalK zone alarms let the server watch any data path and emit a notification when a value crosses a threshold. WilhelmSK monitors `notifications.*` and surfaces active alarms in the alarm indicator at the top of the screen. The zones plugin is what actually generates those notifications — without it, you only see alarms that originate from connected instruments themselves.
+The `signalk-wilhelmsk-plugin` adds the server-side support WilhelmSK's companion features need. It's required for the **Apple Watch app**, the **Watch and Home Screen widgets**, and the **[Shortcuts and Siri](#shortcuts-and-siri)** integration — without it, those features can't talk to the server. Install it from the SignalK App Store (server admin panel → App Store) and restart the server; there's nothing to configure. These features all require a SignalK connection.
 
-Install `signalk-zones` from the SignalK app store (server admin panel → App Store), configure one or more zones on a path (e.g. `environment.water.temperature`), and the next time the value crosses the boundary WilhelmSK will alert.
+#### Server-side alarms
+
+SignalK zone alarms let the server watch any data path and emit a notification when a value crosses a threshold. WilhelmSK monitors `notifications.*` and surfaces active alarms in the alarm indicator at the top of the screen. Without server-side zones you only see alarms that originate from connected instruments themselves.
+
+Zones are now **built into signalk-server** — no plugin required. Configure one or more zones on a path (e.g. `environment.water.temperature`) in the server's data/metadata settings, and the next time the value crosses the boundary WilhelmSK will alert. (The standalone `signalk-zones` plugin that older setups used is deprecated.)
 
 #### Push notifications (`signalk-push-notifications`)
 
@@ -1338,25 +1384,25 @@ See the [setup guide](https://github.com/sbender9/wilhelmsk-node-server-setup) f
 
 The anchor alarm gauge in WilhelmSK shows a **Drop Anchor** button that sets a GPS fix and radius. The plugin watches the vessel's position and publishes a `notifications.anchoralarm.*` notification when the vessel drifts beyond the set radius. WilhelmSK picks that notification up through the standard alarm path, so you see and hear the alert even if the app is backgrounded (combined with the push notifications plugin).
 
-#### Raymarine autopilot control (`signalk-raymarine-autopilot`)
+#### Autopilot control (`@signalk/signalk-autopilot`)
 
-This plugin bridges WilhelmSK's autopilot control panel to a Raymarine SeaTalk or EVO autopilot. It translates SignalK commands into the Raymarine proprietary protocol and exposes heading, wind mode, track mode, and tack/gybe controls to the app. Without this plugin the autopilot gauge is read-only (it will display current pilot state from NMEA 2000 but cannot send commands).
+WilhelmSK's autopilot control panel drives the **vendor-agnostic** [`@signalk/signalk-autopilot`](https://github.com/SignalK/signalk-autopilot) plugin, which presents one common SignalK autopilot interface regardless of the underlying brand (Raymarine, and others supported by the plugin and its providers). It exposes engage/standby, auto and wind modes, heading/wind target adjustment, tack/gybe, and advance-waypoint to the app. Without it the autopilot gauge is read-only — it displays current pilot state but cannot send commands.
 
-#### Fusion stereo control
+#### Fusion stereo control (`signalk-fusion-stereo`)
 
-WilhelmSK communicates with Fusion marine stereos via standard NMEA 2000 paths that SignalK already exposes. No additional plugin is needed — the stereo gauge works as long as your Fusion head unit is connected to the NMEA 2000 network and your SignalK server has a CAN bus interface.
+The Fusion stereo gauge requires the [`signalk-fusion-stereo`](https://github.com/sbender9/signalk-fusion-stereo) plugin on the server. With your Fusion head unit on the NMEA 2000 network and the plugin installed, WilhelmSK can control power, source selection, transport (play/pause/next/prev), and per-zone volume. Install it from the SignalK App Store and restart the server.
 
 #### AIS targets
 
 AIS vessel data arrives through your AIS receiver, is decoded by SignalK, and appears in the `vessels.*` tree. WilhelmSK reads that data directly. No plugin is required.
 
-#### Navionics track overlay
+#### Track overlay
 
-Your vessel's GPS track is logged by SignalK as `vessels.self.track`. WilhelmSK reads that path to draw the track on the Navionics chart. No plugin is needed, but the track is only as long as your server has been running — there is no persistent track storage unless you add a logging plugin such as `signalk-to-influxdb`.
+To draw your vessel's track on the chart, WilhelmSK reads the Signal K **Tracks API**, which is supplied by a server plugin. Install any plugin that provides the Tracks API and WilhelmSK will pick the track up automatically — we don't recommend a specific one here, since the available options change. Without such a plugin there is no track to overlay.
 
 #### Freeboard-SK integration
 
-[Freeboard-SK](https://github.com/SignalK/freeboard-sk) is a browser-based chart plotter that runs alongside signalk-server-node. WilhelmSK can open a Freeboard-SK session in the in-app browser using the server's local address. No additional plugin is needed beyond having Freeboard-SK installed on the server.
+[Freeboard-SK](https://github.com/SignalK/freeboard-sk) is a browser-based chart plotter that runs alongside signalk-server. It's delivered as a server plugin — install **Freeboard-SK** from the SignalK App Store, and WilhelmSK can then open a Freeboard-SK session in the in-app browser using the server's address.
 
 #### In-app documentation (`signalk-wilhelmsk-docs`)
 
