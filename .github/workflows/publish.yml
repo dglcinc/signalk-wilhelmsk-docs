@@ -1,0 +1,63 @@
+name: Publish plugin to npm
+
+# Publishes the signalk-wilhelmsk-docs plugin to npm using OIDC "trusted
+# publishing" — no long-lived npm token and no OTP. npm must be configured to
+# trust this workflow: npmjs.com -> the package -> Settings -> Trusted Publisher
+# -> GitHub Actions, with repository dglcinc/signalk-wilhelmsk-docs and workflow
+# file "publish.yml".
+#
+# Trigger by pushing a version tag (git tag v0.1.7 && git push origin v0.1.7),
+# or run it manually from the Actions tab (workflow_dispatch) to publish whatever
+# version is currently in plugin/package.json.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write   # required: lets npm exchange the GitHub OIDC token for a short-lived publish token
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm
+        # Trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 ships an older npm.
+        run: npm install -g npm@latest
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install docs build dependencies
+        run: pip install -r requirements.txt
+
+      - name: Rebuild the bundled docs
+        # Publish a bundle built fresh from source at this commit.
+        run: |
+          mkdocs build --strict -d plugin/public/
+          node plugin/scripts/gen-info.js
+
+      - name: Check the tag matches the package version
+        if: github.event_name == 'push'
+        run: |
+          PKG=$(node -p "require('./plugin/package.json').version")
+          TAG="${GITHUB_REF_NAME#v}"
+          if [ "$PKG" != "$TAG" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match plugin version $PKG"
+            exit 1
+          fi
+
+      - name: Publish to npm
+        working-directory: plugin
+        run: npm publish
