@@ -45,6 +45,8 @@
       
     
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -2725,525 +2727,676 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <p>See <a href="#custom-signalk-paths">Custom SignalK Paths</a> for a worked example using non-marine data.</p>
 <hr />
 <h3 id="gauge-reference">Gauge Reference<a class="headerlink" href="#gauge-reference" title="Permanent link">&para;</a></h3>
-<p>The tables below list all gauge categories and types with their primary SignalK paths. Paths marked with <code>*</code> are instance wildcards — configure the specific instance (e.g., <code>propulsion.0</code> or <code>propulsion.port</code>) in the gauge settings.</p>
+<p>The tables below list all gauge categories and types, a short description of what each shows, and their primary SignalK paths. Paths marked with <code>*</code> are instance wildcards — configure the specific instance (e.g., <code>propulsion.0</code> or <code>propulsion.port</code>) in the gauge settings.</p>
 <h4 id="wind">Wind<a class="headerlink" href="#wind" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
+<th>Displays</th>
 <th>SignalK Path(s)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>AWA (Apparent Wind Angle)</td>
+<td>AWA</td>
+<td>Apparent wind angle on a wind dial</td>
 <td><code>environment.wind.angleApparent</code></td>
 </tr>
 <tr>
-<td>AWA (Course Over Ground)</td>
-<td><code>environment.wind.angleTrueGround</code></td>
+<td>AWA &amp; COG</td>
+<td>Apparent wind angle with a course-over-ground reference needle</td>
+<td><code>environment.wind.angleApparent</code> + <code>navigation.courseOverGroundTrue</code></td>
 </tr>
 <tr>
-<td>AWA (True Wind Angle)</td>
-<td><code>environment.wind.angleTrueWater</code></td>
+<td>AWA &amp; TWA</td>
+<td>Apparent and true wind angle together on one dial</td>
+<td><code>environment.wind.angleApparent</code> + <code>environment.wind.angleTrueWater</code></td>
 </tr>
 <tr>
-<td>AWA (Ground Wind Angle)</td>
-<td><code>environment.wind.angleGround</code></td>
+<td>AWA &amp; GWA</td>
+<td>Apparent and ground wind angle together on one dial</td>
+<td><code>environment.wind.angleApparent</code> + <code>environment.wind.angleTrueGround</code></td>
 </tr>
 <tr>
-<td>AWS (Apparent Wind Speed)</td>
+<td>AWA CH (Close Hauled)</td>
+<td>Apparent wind angle on a ±60° close-hauled scale (port red / starboard green)</td>
+<td><code>environment.wind.angleApparent</code></td>
+</tr>
+<tr>
+<td>AWS</td>
+<td>Apparent wind speed</td>
 <td><code>environment.wind.speedApparent</code></td>
 </tr>
 <tr>
-<td>TWA (True Wind Angle)</td>
+<td>TWA</td>
+<td>True wind angle on a wind dial</td>
 <td><code>environment.wind.angleTrueWater</code></td>
 </tr>
 <tr>
-<td>TWS (True Wind Speed)</td>
+<td>TWS</td>
+<td>True wind speed</td>
 <td><code>environment.wind.speedTrue</code></td>
 </tr>
 <tr>
-<td>TWD (True Wind Direction)</td>
+<td>TWD</td>
+<td>True wind direction (compass)</td>
 <td><code>environment.wind.directionTrue</code></td>
 </tr>
 <tr>
-<td>GWA (Ground Wind Angle)</td>
-<td><code>environment.wind.angleGround</code></td>
+<td>GWA</td>
+<td>Ground wind angle on a wind dial</td>
+<td><code>environment.wind.angleTrueGround</code></td>
 </tr>
 <tr>
-<td>GWS (Ground Wind Speed)</td>
+<td>GWS</td>
+<td>Ground (over-ground) wind speed</td>
 <td><code>environment.wind.speedOverGround</code></td>
 </tr>
 <tr>
-<td>GWD (Ground Wind Direction)</td>
+<td>GWD</td>
+<td>Ground wind direction (compass)</td>
 <td><code>environment.wind.directionGround</code></td>
 </tr>
 <tr>
 <td>TWA or GWA</td>
-<td><code>environment.wind.angleTrueWater</code> / <code>angleGround</code></td>
+<td>True wind angle when available, otherwise ground wind angle</td>
+<td><code>environment.wind.angleTrueWater</code> (falls back to <code>angleTrueGround</code>)</td>
 </tr>
 <tr>
 <td>Drift</td>
+<td>Current speed (drift)</td>
 <td><code>environment.current.drift</code></td>
 </tr>
 <tr>
 <td>Set</td>
+<td>Current direction (set)</td>
 <td><code>environment.current.setTrue</code></td>
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="navigation_1">Navigation<a class="headerlink" href="#navigation_1" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
+<th>Displays</th>
 <th>SignalK Path(s)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>SOG (Speed Over Ground)</td>
+<td>SOG</td>
+<td>Speed over ground — analog dial with digital readout</td>
 <td><code>navigation.speedOverGround</code></td>
 </tr>
 <tr>
-<td>COG (Course Over Ground)</td>
+<td>COG</td>
+<td>Course over ground on a compass-rose dial</td>
 <td><code>navigation.courseOverGroundTrue</code></td>
 </tr>
 <tr>
-<td>Speed (Through Water)</td>
+<td>Speed</td>
+<td>Boat speed through the water (paddle/log) — analog dial</td>
 <td><code>navigation.speedThroughWater</code></td>
 </tr>
 <tr>
-<td>Heading (True)</td>
+<td>Heading</td>
+<td>True heading on a compass-rose dial</td>
 <td><code>navigation.headingTrue</code></td>
 </tr>
 <tr>
-<td>Heading (Magnetic)</td>
+<td>Magnetic Heading</td>
+<td>Magnetic heading on a compass-rose dial</td>
 <td><code>navigation.headingMagnetic</code></td>
 </tr>
 <tr>
-<td>Head Wind (COG)</td>
-<td><code>navigation.courseOverGroundTrue</code> + wind</td>
+<td>Head Wind COG</td>
+<td>Triple-needle compass: true heading + apparent-wind direction + course over ground on one dial</td>
+<td><code>navigation.headingTrue</code> + <code>environment.wind.angleApparent</code> + <code>navigation.courseOverGroundTrue</code></td>
 </tr>
 <tr>
-<td>Head Wind (Mag COG)</td>
-<td><code>navigation.headingMagnetic</code> + wind</td>
+<td>MHDG Wind COG</td>
+<td>Same triple-needle compass referenced to magnetic heading (magnetic COG derived from variation)</td>
+<td><code>navigation.headingMagnetic</code> + <code>environment.wind.angleApparent</code> + <code>navigation.courseOverGroundTrue</code> + <code>navigation.magneticVariation</code></td>
 </tr>
 <tr>
 <td>Position</td>
+<td>Latitude / longitude readout tile</td>
 <td><code>navigation.position</code></td>
 </tr>
 <tr>
-<td>XTE (Cross-Track Error)</td>
-<td><code>navigation.courseRhumbline.crossTrackError</code></td>
+<td>XTE</td>
+<td>Cross-track error off the active leg — digital readout</td>
+<td><code>navigation.courseGreatCircle.crossTrackError</code></td>
 </tr>
 <tr>
-<td>DTW (Distance to Waypoint)</td>
-<td><code>navigation.courseRhumbline.nextPoint.distance</code></td>
+<td>DTW</td>
+<td>Distance to the next waypoint — digital readout</td>
+<td><code>navigation.courseGreatCircle.nextPoint.distance</code></td>
 </tr>
 <tr>
-<td>TTW (Time to Waypoint)</td>
-<td>derived from DTW + SOG</td>
+<td>Time To Wypt</td>
+<td>Time to the next waypoint (HH:mm:ss), read directly from the server</td>
+<td><code>navigation.courseGreatCircle.nextPoint.timeToGo</code></td>
 </tr>
 <tr>
-<td>ETA</td>
-<td><code>navigation.destination.eta</code></td>
+<td>ETA Time</td>
+<td>Estimated time of arrival (clock time)</td>
+<td><code>navigation.courseGreatCircle.activeRoute.estimatedTimeOfArrival</code></td>
 </tr>
 <tr>
-<td>Rate of Turn</td>
+<td>Rate Of Turn</td>
+<td>Rate of turn on an analog dial (±40, red→green zones)</td>
 <td><code>navigation.rateOfTurn</code></td>
 </tr>
 <tr>
 <td>Pitch</td>
-<td><code>navigation.pitch</code></td>
+<td>Vessel pitch on an inclinometer dial (±90°)</td>
+<td><code>navigation.attitude</code> → <code>pitch</code></td>
 </tr>
 <tr>
 <td>Roll</td>
-<td><code>navigation.roll</code></td>
+<td>Vessel roll / heel on an inclinometer dial (±90°)</td>
+<td><code>navigation.attitude</code> → <code>roll</code></td>
 </tr>
 <tr>
 <td>Yaw</td>
-<td><code>navigation.yaw</code></td>
+<td>Vessel yaw on a compass-rose dial</td>
+<td><code>navigation.attitude</code> → <code>yaw</code></td>
 </tr>
 <tr>
-<td>Date/Time</td>
+<td>GNSS Date/Time</td>
+<td>Date and time readout (configurable format)</td>
 <td><code>navigation.datetime</code></td>
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="depth-environment">Depth &amp; Environment<a class="headerlink" href="#depth-environment" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
+<th>Displays</th>
 <th>SignalK Path(s)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Depth</td>
+<td>Water depth below the surface — digital/bar, with a draft marker</td>
 <td><code>environment.depth.belowSurface</code> (falls back to <code>belowTransducer</code> + <code>surfaceToTransducer</code>)</td>
 </tr>
 <tr>
 <td>Water Temperature</td>
+<td>Sea-water temperature on an analog dial</td>
 <td><code>environment.water.temperature</code></td>
 </tr>
 <tr>
 <td>Atmospheric Pressure</td>
+<td>Barometric pressure on an analog dial (scale auto-adjusts to inHg/mbar/mmHg)</td>
 <td><code>environment.outside.pressure</code></td>
 </tr>
 <tr>
-<td>Air Temperature</td>
-<td><code>environment.outside.temperature</code></td>
-</tr>
-<tr>
 <td>Tide</td>
-<td>tide/current data</td>
+<td>Next high / low / current tide heights and times</td>
+<td><code>environment.tide</code></td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>To show outside air temperature, point a <strong>Water Temperature</strong> or generic gauge at <code>environment.outside.temperature</code> — there is no separate air-temperature gauge type.</p>
 <h4 id="engine-propulsion">Engine &amp; Propulsion<a class="headerlink" href="#engine-propulsion" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
+<th>Displays</th>
 <th>SignalK Path(s)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>RPM</td>
+<td>Engine speed on an analog dial (with x1/x10/x100 scaling)</td>
 <td><code>propulsion.*.revolutions</code></td>
 </tr>
 <tr>
 <td>Coolant Temperature</td>
+<td>Engine coolant temperature on an analog dial</td>
 <td><code>propulsion.*.temperature</code></td>
 </tr>
 <tr>
 <td>Oil Pressure</td>
+<td>Engine oil pressure on an analog dial</td>
 <td><code>propulsion.*.oilPressure</code></td>
 </tr>
 <tr>
 <td>Oil Temperature</td>
+<td>Engine oil temperature on an analog dial</td>
 <td><code>propulsion.*.oilTemperature</code></td>
 </tr>
 <tr>
 <td>Alternator Voltage</td>
+<td>Alternator output voltage on a dial</td>
 <td><code>propulsion.*.alternatorVoltage</code></td>
 </tr>
 <tr>
 <td>Engine Runtime</td>
+<td>Cumulative engine hours — digital HH:mm:ss</td>
 <td><code>propulsion.*.runTime</code></td>
 </tr>
 <tr>
 <td>Fuel Rate</td>
-<td><code>propulsion.*.fuelRate</code></td>
+<td>Instantaneous fuel-consumption rate — digital/bar</td>
+<td><code>propulsion.*.fuel.rate</code></td>
 </tr>
 <tr>
 <td>Engine Load</td>
+<td>Engine load as a percentage dial</td>
 <td><code>propulsion.*.engineLoad</code></td>
 </tr>
 <tr>
 <td>Engine Torque</td>
+<td>Engine torque as a percentage dial</td>
 <td><code>propulsion.*.engineTorque</code></td>
 </tr>
 <tr>
 <td>Fuel Economy</td>
-<td>derived from fuel rate + speed</td>
+<td>Distance per volume (or, inverted, volume per distance) read from the server</td>
+<td><code>propulsion.*.fuel.economy</code></td>
 </tr>
 </tbody>
 </table>
-<p><code>*</code> is a placeholder for the engine instance — configure <code>0</code>, <code>port</code>, <code>starboard</code>, or another instance in gauge settings.</p>
+</div>
+<p><code>*</code> is a placeholder for the engine instance — the gauge auto-resolves <code>port</code>, <code>0</code>, <code>1</code>, or <code>starboard</code>; set a specific instance in gauge settings.</p>
 <h4 id="tanks">Tanks<a class="headerlink" href="#tanks" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
+<th>Displays</th>
 <th>SignalK Path(s)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Fuel</td>
+<td>Fuel-tank level on an analog percentage dial</td>
 <td><code>tanks.fuel.*.currentLevel</code></td>
 </tr>
 <tr>
 <td>Fresh Water</td>
+<td>Fresh-water-tank level on an analog dial</td>
 <td><code>tanks.freshWater.*.currentLevel</code></td>
 </tr>
 <tr>
 <td>Black Water</td>
+<td>Black-water (sewage) tank level on an analog dial</td>
 <td><code>tanks.blackWater.*.currentLevel</code></td>
 </tr>
 <tr>
 <td>Waste Water</td>
+<td>Grey / waste-water tank level on an analog dial</td>
 <td><code>tanks.wasteWater.*.currentLevel</code></td>
+</tr>
+<tr>
+<td>WavyTank</td>
+<td>Any tank level, shown as an animated "wavy" liquid fill</td>
+<td>any <code>tanks.*.currentLevel</code></td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>The Fuel / Fresh / Black / Waste Water gauges are all the same gauge class pre-pointed at a different tank path; point any of them at another <code>tanks.*.currentLevel</code> instance in gauge settings.</p>
 <p>Both percentage and volume (liters/gallons) display modes are available. Configure the tank instance number in gauge settings.</p>
 <h4 id="electrical">Electrical<a class="headerlink" href="#electrical" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
+<th>Displays</th>
 <th>SignalK Path(s)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Battery Voltage (1)</td>
+<td>Starter Battery</td>
+<td>Battery voltage on an analog dial (10–16 V, low/ok/over zones)</td>
 <td><code>electrical.batteries.1.voltage</code></td>
 </tr>
 <tr>
-<td>Battery Voltage (2)</td>
-<td><code>electrical.batteries.2.voltage</code></td>
+<td>House Battery</td>
+<td>Battery voltage on an analog dial (10–16 V)</td>
+<td><code>electrical.batteries.0.voltage</code></td>
 </tr>
 <tr>
-<td>Battery Voltage (24V)</td>
-<td><code>electrical.batteries.*.voltage</code></td>
+<td>Voltage 24V</td>
+<td>Battery voltage on a 24 V-range dial (20–32 V)</td>
+<td>a <code>*.voltage</code> path (no preset)</td>
 </tr>
 <tr>
-<td>Amps</td>
-<td><code>electrical.batteries.*.current</code></td>
+<td>Generic Amps</td>
+<td>Current (charge / discharge) in amps — digital/bar/dial</td>
+<td>any current path, e.g. <code>electrical.batteries.*.current</code></td>
 </tr>
 <tr>
-<td>Watts</td>
-<td><code>electrical.batteries.*.power</code></td>
+<td>Generic Watts</td>
+<td>Power in watts — digital/bar/dial</td>
+<td>any power path, e.g. <code>electrical.batteries.*.power</code></td>
 </tr>
 <tr>
-<td>State of Charge</td>
-<td><code>electrical.batteries.*.capacity.stateOfCharge</code></td>
+<td>Generic Charge</td>
+<td>Battery charge in amp-hours — digital/dial</td>
+<td>any charge (Ah) path</td>
 </tr>
 <tr>
-<td>Joules</td>
-<td><code>electrical.batteries.*.capacity.stateOfCharge</code> (energy)</td>
+<td>Generic kWh</td>
+<td>Stored energy in kWh — digital/bar/dial</td>
+<td>any energy path</td>
 </tr>
 <tr>
-<td>Charge Mode</td>
-<td><code>electrical.batteries.*.chargeState</code></td>
+<td>Charger Mode</td>
+<td>Charger state (bulk / absorption / float) as a colored status bar</td>
+<td>a charger-mode string path, e.g. <code>electrical.chargers.*.chargingMode</code></td>
 </tr>
 <tr>
 <td>Battery Overview</td>
+<td>Multi-value tile: state of charge, voltage, current, time remaining, plus charger and solar</td>
 <td>multi-path summary</td>
 </tr>
 <tr>
 <td>Electrical Overview</td>
+<td>Large multi-section tile: battery, inverter, charger, solar, alternator, DC loads, grid and system state</td>
 <td>multi-path summary</td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>The "Generic" gauges (Amps, Watts, Charge, kWh) and Voltage 24V ship with a unit and scale but <strong>no preset path</strong> — assign the SignalK path yourself when you add the gauge. For battery <strong>state of charge (%)</strong>, point a Percent or generic gauge at <code>electrical.batteries.*.capacity.stateOfCharge</code>. ("Starter Battery" is battery instance 1 and "House Battery" is instance 0 by default; change the instance in gauge settings.)</p>
 <h4 id="switches-and-relays">Switches and Relays<a class="headerlink" href="#switches-and-relays" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
 <th>Notes</th>
+<th>SignalK Path(s) / Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>SwitchBank</td>
-<td>Displays a bank of on/off switches; paths from <code>electrical.switches.*</code></td>
+<td><strong>Control.</strong> A bank/grid of switches from one switches subtree — toggle each on/off, with optional dimming and colored (hue / saturation / Kelvin) lighting</td>
+<td><code>electrical.switches.{bank}</code> subtree</td>
 </tr>
 <tr>
 <td>SwitchGauge</td>
-<td>Single switch/relay indicator</td>
+<td><strong>Control.</strong> A single switch/relay you toggle on/off; also supports dimming and color</td>
+<td><code>electrical.switches.{bank}.{switch}.state</code></td>
 </tr>
 <tr>
 <td>SwitchLED</td>
-<td>LED-style indicator for a switch state</td>
+<td><strong>Control + indicator.</strong> A switch you toggle, paired with a separate LED that reflects a <em>different</em> feedback path</td>
+<td>a switch <code>.state</code> path + a separate LED <code>.state</code> path</td>
 </tr>
 <tr>
 <td>LEDGauge</td>
-<td>Single LED indicator</td>
+<td><strong>Read-only.</strong> A single LED status indicator with configurable on/off colors</td>
+<td>any state path, e.g. <code>electrical.switches.*.state</code></td>
 </tr>
 <tr>
 <td>LEDBank</td>
-<td>Bank of LED indicators</td>
+<td><strong>Read-only.</strong> A bank/grid of LED status indicators from one subtree</td>
+<td><code>electrical.switches.{bank}</code> subtree</td>
 </tr>
 <tr>
 <td>MultiSwitch</td>
-<td>Grid of toggle switches for relay control</td>
+<td><strong>Control.</strong> A single multi-state selector — choose one of several values; includes an accidental-tap guard</td>
+<td>a multi-state path (with <code>possibleValues</code>)</td>
 </tr>
 <tr>
 <td>Slider</td>
-<td>Dimmer/level slider for compatible devices</td>
+<td><strong>Control.</strong> A dimmer/level slider for a continuous (ratio or ranged) value</td>
+<td>any PUT-able ratio/ranged path</td>
 </tr>
 </tbody>
 </table>
-<p>Switch paths follow <code>electrical.switches.{bank}.{switch}.state</code>.</p>
+</div>
+<p>The Switch<em> / MultiSwitch / Slider gauges </em>write* values back to the server (the path must support PUT); LED gauges only display.</p>
 <h4 id="autopilot">Autopilot<a class="headerlink" href="#autopilot" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
 <th>Notes</th>
+<th>SignalK Path(s) / Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AutoPilotControl</td>
-<td>Full autopilot control panel — requires the <a href="#server-plugins">Raymarine autopilot server plugin</a></td>
+<td><strong>Control.</strong> Full autopilot panel — engage/standby, auto/wind modes, adjust heading, tack/confirm; issues commands to the <a href="#server-plugins">Raymarine autopilot server plugin</a>. Can select among multiple pilots</td>
+<td><code>steering.autopilot.state</code>, <code>steering.autopilot.target.*</code> (commands via plugin)</td>
 </tr>
 <tr>
 <td>RudderAngle</td>
+<td><strong>Read-only</strong> analog dial of rudder angle (±45°, green→red zones)</td>
 <td><code>steering.rudderAngle</code></td>
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="ais">AIS<a class="headerlink" href="#ais" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
 <th>Notes</th>
+<th>SignalK Path(s) / Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AIS Targets</td>
-<td>Overlay of AIS vessel positions — requires AIS data in SignalK (<code>vessels.*</code>)</td>
-</tr>
-<tr>
-<td>AIS Targets Table</td>
-<td>Tabular list of nearby vessels with CPA/TCPA</td>
+<td>Sortable table of nearby vessels — toggle columns for type, distance, speed, COG and state</td>
+<td><code>vessels.*</code> (+ own <code>navigation.position</code>)</td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>AIS targets also appear as an overlay on the <strong>Map</strong>, <strong>Google Map</strong> and <strong>Navionics</strong> gauges. (The picker may list a second "AISTargetsTable" entry; it is a leftover with no gauge behind it and does nothing — use <strong>AIS Targets</strong>.)</p>
 <h4 id="maps-and-charts">Maps and Charts<a class="headerlink" href="#maps-and-charts" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
 <th>Notes</th>
+<th>SignalK Path(s) / Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Map (Apple Maps)</td>
-<td>Vessel position on Apple Maps</td>
+<td>Embedded Apple Maps with own-vessel position, anchor circle, COG/heading and next waypoint; map/satellite/hybrid and course/head/north-up modes</td>
+<td><code>navigation.position</code> (+ anchor, COG, heading, next waypoint)</td>
 </tr>
 <tr>
 <td>Google Map</td>
-<td>Vessel position on Google Maps</td>
+<td>The same position map rendered with Google Maps</td>
+<td><code>navigation.position</code> (+ anchor, COG, heading, next waypoint)</td>
 </tr>
 <tr>
 <td>Navionics</td>
-<td>Marine chart overlay — requires Navionics subscription</td>
+<td>Embedded Navionics marine chart — requires a Navionics chart subscription</td>
+<td><code>navigation.position</code> (+ anchor, COG, heading, next waypoint)</td>
 </tr>
 <tr>
 <td>Freeboard-SK</td>
-<td>Embedded Freeboard-SK web chart — requires server-side Freeboard-SK</td>
+<td>Embedded web view of the server's Freeboard-SK chartplotter — requires the Freeboard-SK webapp on the server</td>
+<td>server URL (not a SignalK path)</td>
+</tr>
+<tr>
+<td>Raymarine MFD</td>
+<td>Embedded view of a Raymarine multifunction display — requires a compatible Raymarine MFD on the network</td>
+<td>MFD on the network (not a SignalK path)</td>
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="camera">Camera<a class="headerlink" href="#camera" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
 <th>Notes</th>
+<th>SignalK Path(s) / Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>IP Camera</td>
-<td>RTSP/IP camera stream — enter the camera URL in gauge settings</td>
+<td>Embedded live video from an IP camera — HTTP/MJPEG or RTSP (decoded with FFmpeg)</td>
+<td>camera URL (not a SignalK path)</td>
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="fusion-stereo">Fusion Stereo<a class="headerlink" href="#fusion-stereo" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
 <th>Notes</th>
+<th>SignalK Path(s) / Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Fusion</td>
-<td>Stereo playback controls — requires the <a href="#server-plugins">Fusion server plugin</a></td>
+<td><strong>Control.</strong> Full Fusion stereo: power, source select, transport (play/pause/next/prev) and per-zone volume; sends commands through the <a href="#server-plugins">Fusion server plugin</a></td>
+<td><code>entertainment.device.fusion1.*</code> (commands via plugin)</td>
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="utility">Utility<a class="headerlink" href="#utility" title="Permanent link">&para;</a></h4>
+<div class="gauge-ref">
 <table>
 <thead>
 <tr>
 <th>Gauge</th>
 <th>Notes</th>
+<th>SignalK Path(s) / Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Text</td>
-<td>Generic gauge for any SignalK path — numeric or string</td>
+<td>Generic <strong>digital readout</strong> for any SignalK path — numeric or string. The base for many built-in text gauges</td>
+<td>any path</td>
 </tr>
 <tr>
 <td>Ratio</td>
-<td>Displays a ratio derived from two paths</td>
+<td>Generic dial that shows a <strong>decimal-ratio (0–1)</strong> value as a percentage</td>
+<td>any 0–1 ratio path</td>
 </tr>
 <tr>
 <td>Percent</td>
-<td>Percentage display for any 0–1 value path</td>
+<td>Generic dial for a value <strong>already in 0–100 percent</strong> (no ratio conversion)</td>
+<td>any percent path</td>
 </tr>
 <tr>
 <td>Volume</td>
-<td>Volume display</td>
+<td>Volume readout (m³ source converted to your units), with bar/analog styles</td>
+<td>any volume (m³) path</td>
 </tr>
 <tr>
 <td>Image</td>
 <td>Static image tile</td>
+<td>none — static</td>
 </tr>
 <tr>
 <td>Label</td>
-<td>Static text label</td>
+<td>Static text-label tile</td>
+<td>none — static</td>
 </tr>
 <tr>
 <td>Web</td>
-<td>Embedded web view (enter a URL)</td>
+<td>Embedded web view</td>
+<td>a URL (not a SignalK path)</td>
 </tr>
 <tr>
 <td>Empty</td>
-<td>Placeholder / blank slot</td>
+<td>Blank placeholder slot</td>
+<td>none</td>
 </tr>
 <tr>
 <td>GaugeStack</td>
-<td>Stacks two gauges vertically in one slot</td>
+<td>Stacks multiple gauges vertically in one slot</td>
+<td>none — container</td>
 </tr>
 <tr>
 <td>Scrollable</td>
-<td>Scrollable list of values</td>
+<td>A scrollable/paged container holding several gauges</td>
+<td>none — container</td>
 </tr>
 <tr>
 <td>Time HHMM</td>
-<td>Clock display</td>
+<td>Formats a path value as <code>HH:mm</code> — seconds-of-day or an ISO-8601 time (12/24-hour), not a wall clock</td>
+<td>any time / seconds path</td>
 </tr>
 <tr>
 <td>Thermostat</td>
-<td>Thermostat control (for compatible HVAC systems)</td>
+<td>Thermostat <strong>control</strong> — reads temperature, state, setting and mode, and writes the setpoint and mode back to the server (for compatible HVAC systems)</td>
+<td><code>environment.inside.*</code> — temperature, state, <code>thermostat.setting</code>, <code>thermostat.mode</code></td>
+</tr>
+<tr>
+<td>StaticThermostat</td>
+<td><strong>Read-only</strong> thermostat — displays temperature, <strong>relative humidity</strong>, state and setpoint. Unlike <code>Thermostat</code>, it does not write changes back and adds a humidity reading. Use this for an HVAC source that publishes humidity or that you don't want to control from the app</td>
+<td><code>environment.inside.*</code> — temperature, humidity, state, setting</td>
+</tr>
+<tr>
+<td>WatchGridGauge</td>
+<td>Multi-value grid tile (default 6 cells); primarily used on Apple Watch layouts</td>
+<td>the paths of its child gauges</td>
 </tr>
 <tr>
 <td>AnchorAlarmControl</td>
-<td>Anchor alarm drop/raise and radius control</td>
+<td><strong>Control.</strong> Drop/raise the anchor and set the alarm radius (works with the anchor-alarm server plugin)</td>
+<td><code>navigation.anchor.*</code></td>
 </tr>
 <tr>
 <td>Anchor</td>
-<td>Anchor position and drag distance</td>
+<td><strong>Read-only</strong> anchor view — position, drag distance and track</td>
+<td><code>navigation.anchor.*</code>, <code>navigation.headingTrue</code></td>
 </tr>
 <tr>
 <td>Tide</td>
 <td>Tide height and prediction</td>
+<td><code>environment.tide</code></td>
 </tr>
 <tr>
 <td>MultiGauge</td>
-<td>Composite gauge combining multiple readings</td>
+<td>Composite tile combining several readings in one slot</td>
+<td>multiple (composite)</td>
 </tr>
 </tbody>
 </table>
+</div>
 <hr />
 <h2 id="alarms-and-notifications">Alarms and Notifications<a class="headerlink" href="#alarms-and-notifications" title="Permanent link">&para;</a></h2>
 <p>WilhelmSK surfaces two kinds of alarms: <strong>server-side notifications</strong> raised by the SignalK server (or its plugins) and delivered to the app over the live data stream, and <strong>local zone alarms</strong> configured per gauge on the device. The anchor alarm is a special case that bridges both: the app sends a drop-anchor command to a server plugin, and the plugin raises a SignalK notification when the vessel drifts.</p>
@@ -3642,9 +3795,9 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 </table>
 <h4 id="layout-configuration">Layout configuration<a class="headerlink" href="#layout-configuration" title="Permanent link">&para;</a></h4>
 <p>The pivac WilhelmSK layout (<code>wilhelmsk/iphone.wlyt</code>) demonstrates mixing gauge types on a single page:</p>
-<p><strong>Thermostat gauges</strong> use a dedicated <code>Thermostat</code> class that reads temperature, humidity, and state from three related paths under a shared prefix:</p>
+<p><strong>Thermostat gauges</strong> read temperature, state, and setpoint from related paths under a shared prefix. There are two classes: <code>Thermostat</code>, which also reads <code>mode</code> and writes the setpoint/mode back to the server, and <code>StaticThermostat</code>, which is read-only and additionally reads <strong>humidity</strong>. Because pivac publishes a humidity reading and the gauge is for display only, this layout uses <code>StaticThermostat</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&quot;10&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thermostat&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;StaticThermostat&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kids Room&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;environment.inside.thermostat.KIDS_ROOM.temperature&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;environment.inside.thermostat.KIDS_ROOM.humidity&quot;</span><span class="p">,</span>

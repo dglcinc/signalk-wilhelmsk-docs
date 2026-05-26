@@ -1,0 +1,31 @@
+/* Gauge Reference path tables.
+   These three-column tables (Gauge | Displays | SignalK Path) are wrapped in
+   <div class="gauge-ref" markdown> in user-guide.md. A fixed layout with
+   explicit column widths lets the Displays column absorb the wrapping so the
+   SignalK paths stay on as few lines as possible, and keeps each path name from
+   breaking mid-token. Scoped to .gauge-ref so other tables are unaffected. */
+.md-typeset .gauge-ref table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.md-typeset .gauge-ref th:nth-child(1),
+.md-typeset .gauge-ref td:nth-child(1) {
+  width: 15%;
+}
+
+.md-typeset .gauge-ref th:nth-child(2),
+.md-typeset .gauge-ref td:nth-child(2) {
+  width: 52%;
+}
+
+.md-typeset .gauge-ref th:nth-child(3),
+.md-typeset .gauge-ref td:nth-child(3) {
+  width: 33%;
+}
+
+/* Never break a single SignalK path mid-name; multi-path cells still wrap
+   between the separate paths. */
+.md-typeset .gauge-ref td code {
+  white-space: nowrap;
+}
