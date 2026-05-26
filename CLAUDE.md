@@ -19,7 +19,8 @@ the app now offers a documentation-source picker (SignalK server / GitHub web / 
 | `plugin/` | SignalK plugin: `package.json`, `index.js`, `public/` (committed built site), `README.md` |
 | `site/` | Local MkDocs build output — gitignored |
 | `.github/workflows/deploy-pages.yml` | Builds + deploys docs to GitHub Pages on push to `main` |
-| `.github/workflows/verify-plugin-docs.yml` | Fails PRs where `plugin/public/` is stale vs `docs/` |
+| `.github/workflows/verify-plugin-docs.yml` | Rebuilds `plugin/public/` and **auto-commits** it back to the branch (PR or `main`) so the bundle is never stale |
+| `.github/workflows/publish.yml` | Publishes to npm via OIDC **trusted publishing** on a `v*` tag push or manual run — no token, no OTP |
 
 ## How the plugin serves docs
 
@@ -42,24 +43,29 @@ the docs; only removing the package from `node_modules` does.
 2. Preview locally: `python3 -m mkdocs serve` (reuses the venv at `~/github/wilhelm/.venv/` — this
    repo has no local venv yet; create one with `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
    if doing sustained local work).
-3. **Rebuild the bundled plugin site** whenever `docs/` or `mkdocs.yml` changed:
-   `cd plugin && npm run build-docs` (runs `mkdocs build` into `plugin/public/`). Commit the result —
-   `verify-plugin-docs.yml` fails the PR otherwise.
-4. Verify clean build: `mkdocs build --strict`.
+3. Verify a clean build: `mkdocs build --strict`.
+4. You no longer have to rebuild `plugin/public/` by hand — `verify-plugin-docs.yml` rebuilds it and
+   commits it back to your PR branch (and to `main` on merge). If you prefer to commit it yourself,
+   `cd plugin && npm run build-docs` still works. Note CI's auto-commit lands as a `github-actions[bot]`
+   commit on your branch, so `git pull` before adding more local commits.
 
 ## Publishing (npm / SignalK App Store)
 
 The plugin is published to npm as **`signalk-wilhelmsk-docs`**
 (https://www.npmjs.com/package/signalk-wilhelmsk-docs) under the **`dglcinc`** npm account, and
 discovered by the SignalK App Store via the `signalk-node-server-plugin` keyword (no registry
-submission). To cut a release: bump `plugin/package.json` `version`, `npm run build-docs` (regenerates
-`public/info.json` with the new version — commit it), then from `plugin/`: `npm publish`.
+submission).
 
-**Auth gotcha:** the `dglcinc` npm account has **passkey-only 2FA** (no TOTP) and **no classic/automation
-tokens**, so interactive `npm publish` can't complete the passkey approval from a non-interactive shell.
-Publish with a **granular access token** instead (npmjs.com → Access Tokens → Generate New → Granular;
-Read+write; scope *All packages*), passed inline so it isn't persisted:
-`npm publish "--//registry.npmjs.org/:_authToken=npm_…"`. Revoke the token afterward.
+**Releasing is hands-free via OIDC trusted publishing** (configured on npmjs.com → the package →
+Trusted Publisher → this repo + `publish.yml`). To cut a release: bump `plugin/package.json` `version`,
+add a `plugin/CHANGELOG.md` entry, merge, then `git tag vX.Y.Z && git push origin vX.Y.Z`. The
+`publish.yml` workflow rebuilds the bundle, checks the tag matches the package version, and runs
+`npm publish` authenticated by a short-lived OIDC token (no npm token, no OTP; provenance attached).
+A manual `workflow_dispatch` run publishes whatever version is on `main`.
+
+**Old manual method (no longer needed):** `dglcinc` has passkey-only 2FA and no automation tokens, so
+local `npm publish` requires an interactive OTP or a granular token. Trusted publishing replaced this;
+fall back to it only if Actions is down.
 
 **Propagation:** the registry read CDN lags a publish by 1–2 min — verify with the version-specific GET
 `https://registry.npmjs.org/<pkg>/<ver>` (200) or `npm view <pkg>@<ver> version`, not the packument
