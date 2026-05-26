@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.6
+
+- Docs: comprehensive **Gauge Reference** overhaul. Added five gauge types that
+  were missing from the catalog (StaticThermostat, Raymarine MFD, WavyTank,
+  AWA Close-Hauled, Watch Grid) and corrected the `StaticThermostat`/`Thermostat`
+  humidity example.
+- Docs: verified every gauge's SignalK path against the WilhelmSK source and
+  fixed the wrong ones (Navigation `courseGreatCircle.*` and `navigation.attitude`
+  members, engine `fuel.rate`/`fuel.economy`, the AWA-variant and ground-wind
+  paths, the electrical battery instances, and more).
+- Docs: added a plain-language description to every gauge (display style, and
+  whether it is a control or read-only) and a SignalK path / source column to
+  every section, plus a fixed-width layout that keeps the path column readable.
+
 ## 0.1.5
 
 - App Store: rewrote the plugin description to focus on the real value — offline

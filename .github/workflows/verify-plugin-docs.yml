@@ -1,8 +1,10 @@
-name: Verify bundled plugin docs
+name: Build bundled plugin docs
 
 # The SignalK plugin ships the built MkDocs site under plugin/public/.
-# This job rebuilds it and fails if the committed copy is stale, so a
-# developer is reminded to run `npm run build-docs` (in plugin/) and commit.
+# Rather than failing when the committed copy is stale, this job rebuilds it and
+# commits the result back (to the PR branch, or to main on direct pushes), so the
+# bundle is always in sync and nobody has to run `npm run build-docs` by hand.
+# Commits made with GITHUB_TOKEN do not re-trigger workflows, so there is no loop.
 on:
   push:
     branches:
@@ -11,20 +13,29 @@ on:
       - 'docs/**'
       - 'mkdocs.yml'
       - 'requirements.txt'
+      - 'plugin/scripts/**'
       - 'plugin/public/**'
   pull_request:
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
       - 'requirements.txt'
+      - 'plugin/scripts/**'
       - 'plugin/public/**'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  verify-bundle:
+  build-bundle:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Check out the branch tip (PR source branch, or main on push) so the
+          # rebuilt bundle can be pushed back to it.
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
@@ -38,12 +49,18 @@ jobs:
           mkdocs build --strict -d plugin/public/
           node plugin/scripts/gen-info.js   # regenerate public/info.json (ubuntu runner has node preinstalled)
 
-      - name: Check for drift
+      - name: Commit the bundle if it changed
+        # Only same-repo pushes/PRs can write back; a fork PR just verifies the
+        # build (main self-heals when the PR merges).
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
         run: |
           if [ -n "$(git status --porcelain -- plugin/public/)" ]; then
-            echo "::error::plugin/public/ is out of date. Run 'npm run build-docs' in plugin/ and commit the result."
-            git status --porcelain -- plugin/public/
-            git diff --stat -- plugin/public/
-            exit 1
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add plugin/public/
+            git commit -m "chore: rebuild plugin/public docs bundle [skip ci]"
+            git push
+            echo "Rebuilt and committed plugin/public/."
+          else
+            echo "plugin/public/ already up to date."
           fi
-          echo "plugin/public/ is up to date."
