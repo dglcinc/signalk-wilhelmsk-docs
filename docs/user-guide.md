@@ -937,6 +937,8 @@ The tables below list all gauge categories and types, a short description of wha
 
 #### Wind
 
+<div class="gauge-ref" markdown="1">
+
 | Gauge | Displays | SignalK Path(s) |
 |-------|----------|----------------|
 | AWA | Apparent wind angle on a wind dial | `environment.wind.angleApparent` |
@@ -955,7 +957,11 @@ The tables below list all gauge categories and types, a short description of wha
 | Drift | Current speed (drift) | `environment.current.drift` |
 | Set | Current direction (set) | `environment.current.setTrue` |
 
+</div>
+
 #### Navigation
+
+<div class="gauge-ref" markdown="1">
 
 | Gauge | Displays | SignalK Path(s) |
 |-------|----------|----------------|
@@ -977,7 +983,11 @@ The tables below list all gauge categories and types, a short description of wha
 | Yaw | Vessel yaw on a compass-rose dial | `navigation.attitude` → `yaw` |
 | GNSS Date/Time | Date and time readout (configurable format) | `navigation.datetime` |
 
+</div>
+
 #### Depth & Environment
+
+<div class="gauge-ref" markdown="1">
 
 | Gauge | Displays | SignalK Path(s) |
 |-------|----------|----------------|
@@ -986,9 +996,13 @@ The tables below list all gauge categories and types, a short description of wha
 | Atmospheric Pressure | Barometric pressure on an analog dial (scale auto-adjusts to inHg/mbar/mmHg) | `environment.outside.pressure` |
 | Tide | Next high / low / current tide heights and times | `environment.tide` |
 
+</div>
+
 To show outside air temperature, point a **Water Temperature** or generic gauge at `environment.outside.temperature` — there is no separate air-temperature gauge type.
 
 #### Engine & Propulsion
+
+<div class="gauge-ref" markdown="1">
 
 | Gauge | Displays | SignalK Path(s) |
 |-------|----------|----------------|
@@ -1003,9 +1017,13 @@ To show outside air temperature, point a **Water Temperature** or generic gauge 
 | Engine Torque | Engine torque as a percentage dial | `propulsion.*.engineTorque` |
 | Fuel Economy | Distance per volume (or, inverted, volume per distance) read from the server | `propulsion.*.fuel.economy` |
 
+</div>
+
 `*` is a placeholder for the engine instance — the gauge auto-resolves `port`, `0`, `1`, or `starboard`; set a specific instance in gauge settings.
 
 #### Tanks
+
+<div class="gauge-ref" markdown="1">
 
 | Gauge | Displays | SignalK Path(s) |
 |-------|----------|----------------|
@@ -1015,11 +1033,15 @@ To show outside air temperature, point a **Water Temperature** or generic gauge 
 | Waste Water | Grey / waste-water tank level on an analog dial | `tanks.wasteWater.*.currentLevel` |
 | WavyTank | Any tank level, shown as an animated "wavy" liquid fill | any `tanks.*.currentLevel` |
 
+</div>
+
 The Fuel / Fresh / Black / Waste Water gauges are all the same gauge class pre-pointed at a different tank path; point any of them at another `tanks.*.currentLevel` instance in gauge settings.
 
 Both percentage and volume (liters/gallons) display modes are available. Configure the tank instance number in gauge settings.
 
 #### Electrical
+
+<div class="gauge-ref" markdown="1">
 
 | Gauge | Displays | SignalK Path(s) |
 |-------|----------|----------------|
@@ -1033,6 +1055,8 @@ Both percentage and volume (liters/gallons) display modes are available. Configu
 | Charger Mode | Charger state (bulk / absorption / float) as a colored status bar | a charger-mode string path, e.g. `electrical.chargers.*.chargingMode` |
 | Battery Overview | Multi-value tile: state of charge, voltage, current, time remaining, plus charger and solar | multi-path summary |
 | Electrical Overview | Large multi-section tile: battery, inverter, charger, solar, alternator, DC loads, grid and system state | multi-path summary |
+
+</div>
 
 The "Generic" gauges (Amps, Watts, Charge, kWh) and Voltage 24V ship with a unit and scale but **no preset path** — assign the SignalK path yourself when you add the gauge. For battery **state of charge (%)**, point a Percent or generic gauge at `electrical.batteries.*.capacity.stateOfCharge`. ("Starter Battery" is battery instance 1 and "House Battery" is instance 0 by default; change the instance in gauge settings.)
 
