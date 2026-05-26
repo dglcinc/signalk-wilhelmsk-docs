@@ -90,6 +90,11 @@ worth it.
 - **Content direction:** user guide leads with *Connecting*, with SignalK / Victron VRM / NMEA
   gateways as parallel subsections. No public contributor docs (those live in the Wilhelm repo).
   tvOS, CarPlay, iKommunicate, and Raymarine references have been intentionally removed.
+- **Theme:** the Material theme is brand-matched to **wilhelmsk.com** — a **deep-brown** (`#574035`)
+  body with brass/gold (`#CFB57C`) accents and a brass wordmark, white text, dark scheme default.
+  Palette lives in `docs/stylesheets/extra.css` (`primary/accent: custom` in `mkdocs.yml`). It is
+  **deep brown, not teal/near-black** — the site's Wix near-black token misleads; don't reintroduce
+  teal. Color-only (system fonts kept for offline serving).
 
 ## Related repos
 
