@@ -1,18 +1,16 @@
 /* WilhelmSK brand palette — mirrors wilhelmsk.com. Exact colors sampled by David
    with Digital Color Meter: dark teal-black title bar #0A1C1D (rgb 10,28,29) over
-   a deep-brown body #312520 (rgb 49,37,32), with white text and brass/gold
-   accents. (Brass left at #CFB57C pending re-sample — the supplied 161,238,92
-   reads as a lime green, likely a sampling/color-space mismatch.) Applied to
-   Material's two schemes (slate = dark default, default = light) via
-   `primary/accent: custom` in mkdocs.yml. */
+   a deep-brown body #312520 (rgb 49,37,32), white text, and a brass accent
+   #A18A5C (rgb 161,138,92). Applied to Material's two schemes (slate = dark
+   default, default = light) via `primary/accent: custom` in mkdocs.yml. */
 :root {
   --wsk-body:        #312520;  /* deep brown — main content background */
   --wsk-body-raised: #3d2e28;  /* slightly lifted brown — cards, admonitions */
   --wsk-header:      #0a1c1d;  /* dark teal-black — title bar */
   --wsk-header-light:#14302f;  /* lifted header — nav hover */
   --wsk-header-dark: #06090a;  /* deepest header shade */
-  --wsk-brass:       #cfb57c;  /* gold/sand accent — links on dark */
-  --wsk-brass-dark:  #7e6e4c;  /* darker brass — readable links on light */
+  --wsk-brass:       #a18a5c;  /* brass accent — links/wordmark on dark */
+  --wsk-brass-dark:  #7e6e4c;  /* darker brass — readable links on light scheme */
 }
 
 /* Dark scheme — the default: dark teal-black title bar over a deep-brown body */
