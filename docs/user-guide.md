@@ -933,103 +933,103 @@ See [Custom SignalK Paths](#custom-signalk-paths) for a worked example using non
 
 ### Gauge Reference
 
-The tables below list all gauge categories and types with their primary SignalK paths. Paths marked with `*` are instance wildcards — configure the specific instance (e.g., `propulsion.0` or `propulsion.port`) in the gauge settings.
+The tables below list all gauge categories and types, a short description of what each shows, and their primary SignalK paths. Paths marked with `*` are instance wildcards — configure the specific instance (e.g., `propulsion.0` or `propulsion.port`) in the gauge settings.
 
 #### Wind
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| AWA (Apparent Wind Angle) | `environment.wind.angleApparent` |
-| AWA (Course Over Ground) | `environment.wind.angleTrueGround` |
-| AWA (True Wind Angle) | `environment.wind.angleTrueWater` |
-| AWA (Ground Wind Angle) | `environment.wind.angleGround` |
-| AWA (Compass Heading) | `environment.wind.angleApparent` + `navigation.headingMagnetic` |
-| AWS (Apparent Wind Speed) | `environment.wind.speedApparent` |
-| TWA (True Wind Angle) | `environment.wind.angleTrueWater` |
-| TWS (True Wind Speed) | `environment.wind.speedTrue` |
-| TWD (True Wind Direction) | `environment.wind.directionTrue` |
-| GWA (Ground Wind Angle) | `environment.wind.angleGround` |
-| GWS (Ground Wind Speed) | `environment.wind.speedOverGround` |
-| GWD (Ground Wind Direction) | `environment.wind.directionGround` |
-| TWA or GWA | `environment.wind.angleTrueWater` / `angleGround` |
-| Drift | `environment.current.drift` |
-| Set | `environment.current.setTrue` |
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| AWA (Apparent Wind Angle) | Apparent wind angle on a wind dial | `environment.wind.angleApparent` |
+| AWA (Course Over Ground) | Apparent wind angle with a course-over-ground reference needle | `environment.wind.angleTrueGround` |
+| AWA (True Wind Angle) | Apparent and true wind angle together on one dial | `environment.wind.angleTrueWater` |
+| AWA (Ground Wind Angle) | Apparent and ground wind angle together on one dial | `environment.wind.angleGround` |
+| AWA (Compass Heading) | Apparent wind angle with a compass-heading reference needle | `environment.wind.angleApparent` + `navigation.headingMagnetic` |
+| AWS (Apparent Wind Speed) | Apparent wind speed | `environment.wind.speedApparent` |
+| TWA (True Wind Angle) | True wind angle on a wind dial | `environment.wind.angleTrueWater` |
+| TWS (True Wind Speed) | True wind speed | `environment.wind.speedTrue` |
+| TWD (True Wind Direction) | True wind direction (compass) | `environment.wind.directionTrue` |
+| GWA (Ground Wind Angle) | Ground wind angle on a wind dial | `environment.wind.angleGround` |
+| GWS (Ground Wind Speed) | Ground (over-ground) wind speed | `environment.wind.speedOverGround` |
+| GWD (Ground Wind Direction) | Ground wind direction (compass) | `environment.wind.directionGround` |
+| TWA or GWA | True wind angle when available, otherwise ground wind angle | `environment.wind.angleTrueWater` / `angleGround` |
+| Drift | Current speed (drift) | `environment.current.drift` |
+| Set | Current direction (set) | `environment.current.setTrue` |
 
 #### Navigation
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| SOG (Speed Over Ground) | `navigation.speedOverGround` |
-| COG (Course Over Ground) | `navigation.courseOverGroundTrue` |
-| Speed (Through Water) | `navigation.speedThroughWater` |
-| Heading (True) | `navigation.headingTrue` |
-| Heading (Magnetic) | `navigation.headingMagnetic` |
-| Head Wind (COG) | `navigation.courseOverGroundTrue` + wind |
-| Head Wind (Mag COG) | `navigation.headingMagnetic` + wind |
-| Position | `navigation.position` |
-| XTE (Cross-Track Error) | `navigation.courseRhumbline.crossTrackError` |
-| DTW (Distance to Waypoint) | `navigation.courseRhumbline.nextPoint.distance` |
-| TTW (Time to Waypoint) | derived from DTW + SOG |
-| ETA | `navigation.destination.eta` |
-| Rate of Turn | `navigation.rateOfTurn` |
-| Pitch | `navigation.pitch` |
-| Roll | `navigation.roll` |
-| Yaw | `navigation.yaw` |
-| Date/Time | `navigation.datetime` |
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| SOG (Speed Over Ground) | Speed over ground | `navigation.speedOverGround` |
+| COG (Course Over Ground) | Course over ground (compass) | `navigation.courseOverGroundTrue` |
+| Speed (Through Water) | Boat speed through the water | `navigation.speedThroughWater` |
+| Heading (True) | True heading (compass) | `navigation.headingTrue` |
+| Heading (Magnetic) | Magnetic heading (compass) | `navigation.headingMagnetic` |
+| Head Wind (COG) | Heading and apparent wind over a course-over-ground reference | `navigation.courseOverGroundTrue` + wind |
+| Head Wind (Mag COG) | Magnetic heading and wind over a course-over-ground reference | `navigation.headingMagnetic` + wind |
+| Position | Latitude / longitude | `navigation.position` |
+| XTE (Cross-Track Error) | Distance off the active route leg | `navigation.courseRhumbline.crossTrackError` |
+| DTW (Distance to Waypoint) | Distance to the next waypoint | `navigation.courseRhumbline.nextPoint.distance` |
+| TTW (Time to Waypoint) | Estimated time to the next waypoint (computed) | derived from DTW + SOG |
+| ETA | Estimated time of arrival at the destination | `navigation.destination.eta` |
+| Rate of Turn | Rate of turn | `navigation.rateOfTurn` |
+| Pitch | Vessel pitch angle | `navigation.pitch` |
+| Roll | Vessel roll / heel angle | `navigation.roll` |
+| Yaw | Vessel yaw angle | `navigation.yaw` |
+| Date/Time | Clock / date from GNSS or server time | `navigation.datetime` |
 
 #### Depth & Environment
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| Depth | `environment.depth.belowSurface` (falls back to `belowTransducer` + `surfaceToTransducer`) |
-| Water Temperature | `environment.water.temperature` |
-| Atmospheric Pressure | `environment.outside.pressure` |
-| Air Temperature | `environment.outside.temperature` |
-| Tide | tide/current data |
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| Depth | Water depth below the surface | `environment.depth.belowSurface` (falls back to `belowTransducer` + `surfaceToTransducer`) |
+| Water Temperature | Sea-water temperature | `environment.water.temperature` |
+| Atmospheric Pressure | Barometric pressure | `environment.outside.pressure` |
+| Air Temperature | Outside air temperature | `environment.outside.temperature` |
+| Tide | Tide height / state | tide/current data |
 
 #### Engine & Propulsion
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| RPM | `propulsion.*.revolutions` |
-| Coolant Temperature | `propulsion.*.temperature` |
-| Oil Pressure | `propulsion.*.oilPressure` |
-| Oil Temperature | `propulsion.*.oilTemperature` |
-| Alternator Voltage | `propulsion.*.alternatorVoltage` |
-| Engine Runtime | `propulsion.*.runTime` |
-| Fuel Rate | `propulsion.*.fuelRate` |
-| Engine Load | `propulsion.*.engineLoad` |
-| Engine Torque | `propulsion.*.engineTorque` |
-| Fuel Economy | derived from fuel rate + speed |
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| RPM | Engine speed | `propulsion.*.revolutions` |
+| Coolant Temperature | Engine coolant temperature | `propulsion.*.temperature` |
+| Oil Pressure | Engine oil pressure | `propulsion.*.oilPressure` |
+| Oil Temperature | Engine oil temperature | `propulsion.*.oilTemperature` |
+| Alternator Voltage | Alternator output voltage | `propulsion.*.alternatorVoltage` |
+| Engine Runtime | Cumulative engine hours | `propulsion.*.runTime` |
+| Fuel Rate | Instantaneous fuel-consumption rate | `propulsion.*.fuelRate` |
+| Engine Load | Engine load (percentage) | `propulsion.*.engineLoad` |
+| Engine Torque | Engine torque (percentage) | `propulsion.*.engineTorque` |
+| Fuel Economy | Distance per volume (or volume per distance), computed from fuel rate and speed | derived from fuel rate + speed |
 
 `*` is a placeholder for the engine instance — configure `0`, `port`, `starboard`, or another instance in gauge settings.
 
 #### Tanks
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| Fuel | `tanks.fuel.*.currentLevel` |
-| Fresh Water | `tanks.freshWater.*.currentLevel` |
-| Black Water | `tanks.blackWater.*.currentLevel` |
-| Waste Water | `tanks.wasteWater.*.currentLevel` |
-| WavyTank | any `tanks.*.currentLevel` — animated "wavy" liquid-level display |
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| Fuel | Fuel-tank level | `tanks.fuel.*.currentLevel` |
+| Fresh Water | Fresh-water-tank level | `tanks.freshWater.*.currentLevel` |
+| Black Water | Black-water (sewage) tank level | `tanks.blackWater.*.currentLevel` |
+| Waste Water | Grey / waste-water tank level | `tanks.wasteWater.*.currentLevel` |
+| WavyTank | Any tank level, shown with an animated "wavy" liquid fill | any `tanks.*.currentLevel` |
 
 Both percentage and volume (liters/gallons) display modes are available. Configure the tank instance number in gauge settings.
 
 #### Electrical
 
-| Gauge | SignalK Path(s) |
-|-------|----------------|
-| Battery Voltage (1) | `electrical.batteries.1.voltage` |
-| Battery Voltage (2) | `electrical.batteries.2.voltage` |
-| Battery Voltage (24V) | `electrical.batteries.*.voltage` |
-| Amps | `electrical.batteries.*.current` |
-| Watts | `electrical.batteries.*.power` |
-| State of Charge | `electrical.batteries.*.capacity.stateOfCharge` |
-| Joules | `electrical.batteries.*.capacity.stateOfCharge` (energy) |
-| Charge Mode | `electrical.batteries.*.chargeState` |
-| Battery Overview | multi-path summary |
-| Electrical Overview | multi-path summary |
+| Gauge | Displays | SignalK Path(s) |
+|-------|----------|----------------|
+| Battery Voltage (1) | Battery 1 voltage | `electrical.batteries.1.voltage` |
+| Battery Voltage (2) | Battery 2 voltage | `electrical.batteries.2.voltage` |
+| Battery Voltage (24V) | Battery voltage on a 24 V scale | `electrical.batteries.*.voltage` |
+| Amps | Battery current (charge / discharge) | `electrical.batteries.*.current` |
+| Watts | Battery power | `electrical.batteries.*.power` |
+| State of Charge | Battery charge level (%) | `electrical.batteries.*.capacity.stateOfCharge` |
+| Joules | Stored energy (kWh), from state of charge | `electrical.batteries.*.capacity.stateOfCharge` (energy) |
+| Charge Mode | Charger state (e.g. bulk, absorption, float) | `electrical.batteries.*.chargeState` |
+| Battery Overview | Multi-value summary of one battery (voltage, current, state of charge) | multi-path summary |
+| Electrical Overview | Multi-value summary across batteries and charging | multi-path summary |
 
 #### Switches and Relays
 
