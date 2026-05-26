@@ -1,35 +1,36 @@
-/* WilhelmSK brand palette — mirrors wilhelmsk.com (near-black + brass/gold).
-   The site's dominant surface is #061E20 — effectively near-black with only a
-   faint cool undertone — with white text and brass/gold accents (#CFB57C). No
-   visible teal. Applied to Material's two color schemes (slate = dark default,
-   default = light) via `primary/accent: custom` in mkdocs.yml. */
+/* WilhelmSK brand palette — mirrors wilhelmsk.com (deep brown + brass/gold).
+   The site's body background is a deep brown (from its leather/wood token
+   family: #574035, #382A23), with white text and brass/gold accents (#CFB57C).
+   Applied to Material's two color schemes (slate = dark default, default =
+   light) via `primary/accent: custom` in mkdocs.yml. */
 :root {
-  --wsk-ink:        #061e20;  /* dominant near-black surface on the site */
-  --wsk-ink-raised: #0c2629;  /* slightly lifted: panels, code, header edge */
-  --wsk-ink-dark:   #04181a;  /* deepest shade */
-  --wsk-brass:      #cfb57c;  /* gold/sand accent — links on dark */
-  --wsk-brass-dark: #7e6e4c;  /* darker brass — readable links on light */
+  --wsk-brown:        #574035;  /* deep brown — main content background */
+  --wsk-brown-raised: #4a3629;  /* slightly lifted brown — cards, admonitions */
+  --wsk-brown-dark:   #382a23;  /* darker brown — header, code blocks */
+  --wsk-brown-deep:   #2c2019;  /* deepest shade */
+  --wsk-brass:        #cfb57c;  /* gold/sand accent — links on dark */
+  --wsk-brass-dark:   #7e6e4c;  /* darker brass — readable links on light */
 }
 
-/* Dark scheme — the default, matching the site's near-black look */
+/* Dark scheme — the default, matching the site's deep-brown body */
 [data-md-color-scheme="slate"] {
-  --md-default-bg-color:        var(--wsk-ink);
-  --md-default-bg-color--light: var(--wsk-ink-raised);
-  --md-code-bg-color:           var(--wsk-ink-raised);
-  --md-primary-fg-color:        var(--wsk-ink);          /* header: near-black, separated by its shadow */
-  --md-primary-fg-color--light: var(--wsk-ink-raised);
-  --md-primary-fg-color--dark:  var(--wsk-ink-dark);
-  --md-primary-bg-color:        #ffffff;                 /* header text/icons */
+  --md-default-bg-color:        var(--wsk-brown);
+  --md-default-bg-color--light: var(--wsk-brown-raised);
+  --md-code-bg-color:           var(--wsk-brown-dark);
+  --md-primary-fg-color:        var(--wsk-brown-dark);    /* header: darker brown */
+  --md-primary-fg-color--light: var(--wsk-brown);
+  --md-primary-fg-color--dark:  var(--wsk-brown-deep);
+  --md-primary-bg-color:        #ffffff;                  /* header text/icons */
   --md-primary-bg-color--light: rgba(255,255,255,0.7);
-  --md-accent-fg-color:         var(--wsk-brass);         /* hovered links, active nav */
-  --md-typeset-a-color:         var(--wsk-brass);         /* body links */
+  --md-accent-fg-color:         var(--wsk-brass);          /* hovered links, active nav */
+  --md-typeset-a-color:         var(--wsk-brass);          /* body links */
 }
 
-/* Light scheme — charcoal header + brass accents, so the toggle stays on-brand */
+/* Light scheme — brown header + brass accents, so the toggle stays on-brand */
 [data-md-color-scheme="default"] {
-  --md-primary-fg-color:        var(--wsk-ink);
-  --md-primary-fg-color--light: var(--wsk-ink-raised);
-  --md-primary-fg-color--dark:  var(--wsk-ink-dark);
+  --md-primary-fg-color:        var(--wsk-brown-dark);
+  --md-primary-fg-color--light: var(--wsk-brown);
+  --md-primary-fg-color--dark:  var(--wsk-brown-deep);
   --md-primary-bg-color:        #ffffff;
   --md-primary-bg-color--light: rgba(255,255,255,0.7);
   --md-accent-fg-color:         var(--wsk-brass-dark);
