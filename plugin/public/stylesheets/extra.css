@@ -1,15 +1,16 @@
 /* WilhelmSK brand palette — mirrors wilhelmsk.com. Exact colors sampled by David
-   with Digital Color Meter: dark teal-black title bar #0A1C1D (rgb 10,28,29) over
-   a deep-brown body #312520 (rgb 49,37,32), white text, and a brass accent
-   #A18A5C (rgb 161,138,92). Applied to Material's two schemes (slate = dark
-   default, default = light) via `primary/accent: custom` in mkdocs.yml. */
+   with Digital Color Meter in sRGB: dark teal-black title bar #081E20 (rgb 8,30,32)
+   over a deep-brown body #382A23 (rgb 56,42,35), white text, and a brass accent
+   #AB9567 (rgb 171,149,103). (These match the site's underlying Wix theme tokens.)
+   Applied to Material's two schemes (slate = dark default, default = light) via
+   `primary/accent: custom` in mkdocs.yml. */
 :root {
-  --wsk-body:        #312520;  /* deep brown — main content background */
-  --wsk-body-raised: #3d2e28;  /* slightly lifted brown — cards, admonitions */
-  --wsk-header:      #0a1c1d;  /* dark teal-black — title bar */
-  --wsk-header-light:#14302f;  /* lifted header — nav hover */
-  --wsk-header-dark: #06090a;  /* deepest header shade */
-  --wsk-brass:       #a18a5c;  /* brass accent — links/wordmark on dark */
+  --wsk-body:        #382a23;  /* deep brown — main content background */
+  --wsk-body-raised: #443429;  /* slightly lifted brown — cards, admonitions */
+  --wsk-header:      #081e20;  /* dark teal-black — title bar */
+  --wsk-header-light:#123233;  /* lifted header — nav hover */
+  --wsk-header-dark: #051315;  /* deepest header shade */
+  --wsk-brass:       #ab9567;  /* brass accent — links/wordmark on dark */
   --wsk-brass-dark:  #7e6e4c;  /* darker brass — readable links on light scheme */
 }
 
