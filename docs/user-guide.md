@@ -225,7 +225,7 @@ The **Yacht Devices YDWG-02** NMEA 2000 Wi-Fi gateway supports up to three confi
 
 ### Digital Yacht RAW
 
-The **Digital Yacht RAW** picker entry is functionally **identical to the [YDWG](#yacht-devices-ydwg) entry** — it's an alias of the same connection type, kept so that new products don't each need their own entry in the picker. Like YDWG, it reads NMEA 0183 sentences over a plain TCP socket; it has nothing to do with NMEA 2000. Pick whichever name matches your hardware — the behavior is the same.
+The **Digital Yacht RAW** picker entry is functionally **identical to the [YDWG](#yacht-devices-ydwg) entry** — it's an alias of the same connection type, kept so that new products don't each need their own entry in the picker. Pick whichever name matches your hardware — the behavior is the same.
 
 #### Setup
 
