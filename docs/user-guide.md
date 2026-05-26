@@ -939,19 +939,19 @@ The tables below list all gauge categories and types, a short description of wha
 
 | Gauge | Displays | SignalK Path(s) |
 |-------|----------|----------------|
-| AWA (Apparent Wind Angle) | Apparent wind angle on a wind dial | `environment.wind.angleApparent` |
-| AWA (Course Over Ground) | Apparent wind angle with a course-over-ground reference needle | `environment.wind.angleTrueGround` |
-| AWA (True Wind Angle) | Apparent and true wind angle together on one dial | `environment.wind.angleTrueWater` |
-| AWA (Ground Wind Angle) | Apparent and ground wind angle together on one dial | `environment.wind.angleGround` |
-| AWA (Compass Heading) | Apparent wind angle with a compass-heading reference needle | `environment.wind.angleApparent` + `navigation.headingMagnetic` |
-| AWS (Apparent Wind Speed) | Apparent wind speed | `environment.wind.speedApparent` |
-| TWA (True Wind Angle) | True wind angle on a wind dial | `environment.wind.angleTrueWater` |
-| TWS (True Wind Speed) | True wind speed | `environment.wind.speedTrue` |
-| TWD (True Wind Direction) | True wind direction (compass) | `environment.wind.directionTrue` |
-| GWA (Ground Wind Angle) | Ground wind angle on a wind dial | `environment.wind.angleGround` |
-| GWS (Ground Wind Speed) | Ground (over-ground) wind speed | `environment.wind.speedOverGround` |
-| GWD (Ground Wind Direction) | Ground wind direction (compass) | `environment.wind.directionGround` |
-| TWA or GWA | True wind angle when available, otherwise ground wind angle | `environment.wind.angleTrueWater` / `angleGround` |
+| AWA | Apparent wind angle on a wind dial | `environment.wind.angleApparent` |
+| AWA & COG | Apparent wind angle with a course-over-ground reference needle | `environment.wind.angleApparent` + `navigation.courseOverGroundTrue` |
+| AWA & TWA | Apparent and true wind angle together on one dial | `environment.wind.angleApparent` + `environment.wind.angleTrueWater` |
+| AWA & GWA | Apparent and ground wind angle together on one dial | `environment.wind.angleApparent` + `environment.wind.angleTrueGround` |
+| AWA CH (Close Hauled) | Apparent wind angle on a ±60° close-hauled scale (port red / starboard green) | `environment.wind.angleApparent` |
+| AWS | Apparent wind speed | `environment.wind.speedApparent` |
+| TWA | True wind angle on a wind dial | `environment.wind.angleTrueWater` |
+| TWS | True wind speed | `environment.wind.speedTrue` |
+| TWD | True wind direction (compass) | `environment.wind.directionTrue` |
+| GWA | Ground wind angle on a wind dial | `environment.wind.angleTrueGround` |
+| GWS | Ground (over-ground) wind speed | `environment.wind.speedOverGround` |
+| GWD | Ground wind direction (compass) | `environment.wind.directionGround` |
+| TWA or GWA | True wind angle when available, otherwise ground wind angle | `environment.wind.angleTrueWater` (falls back to `angleTrueGround`) |
 | Drift | Current speed (drift) | `environment.current.drift` |
 | Set | Current direction (set) | `environment.current.setTrue` |
 
