@@ -1,3 +1,42 @@
+/* WilhelmSK brand palette — mirrors wilhelmsk.com (deep teal + brass/gold).
+   Hues taken from the site's Wix theme tokens: deep teal #061E20 background,
+   teal panels, white text, brass/gold accents. Applied to Material's two color
+   schemes (slate = dark default, default = light) via `primary/accent: custom`
+   in mkdocs.yml. */
+:root {
+  --wsk-teal-deep:  #061e20;  /* dominant background on the site */
+  --wsk-teal-panel: #1e4c52;  /* header / raised panels */
+  --wsk-teal-mid:   #2e5d63;
+  --wsk-teal-light: #82acb1;
+  --wsk-brass:      #cfb57c;  /* gold/sand accent */
+  --wsk-brass-dark: #ab9567;  /* brass accent (readable on light) */
+}
+
+/* Dark scheme — the default, matching the site's deep-teal look */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color:        var(--wsk-teal-deep);
+  --md-default-bg-color--light: #0c2a2d;
+  --md-code-bg-color:           #0c2a2d;
+  --md-primary-fg-color:        var(--wsk-teal-panel);
+  --md-primary-fg-color--light: var(--wsk-teal-mid);
+  --md-primary-fg-color--dark:  var(--wsk-teal-deep);
+  --md-primary-bg-color:        #ffffff;          /* header text/icons */
+  --md-primary-bg-color--light: rgba(255,255,255,0.7);
+  --md-accent-fg-color:         var(--wsk-brass);  /* hovered links, active nav */
+  --md-typeset-a-color:         var(--wsk-brass);  /* body links */
+}
+
+/* Light scheme — same brand hues on a light ground, so the toggle stays on-brand */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        var(--wsk-teal-panel);
+  --md-primary-fg-color--light: var(--wsk-teal-mid);
+  --md-primary-fg-color--dark:  var(--wsk-teal-deep);
+  --md-primary-bg-color:        #ffffff;
+  --md-primary-bg-color--light: rgba(255,255,255,0.7);
+  --md-accent-fg-color:         var(--wsk-brass-dark);
+  --md-typeset-a-color:         var(--wsk-teal-mid);
+}
+
 /* Gauge Reference path tables.
    These three-column tables (Gauge | Displays | SignalK Path) are wrapped in
    <div class="gauge-ref" markdown> in user-guide.md. A fixed layout with
