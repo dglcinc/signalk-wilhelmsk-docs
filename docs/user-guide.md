@@ -1062,77 +1062,105 @@ The "Generic" gauges (Amps, Watts, Charge, kWh) and Voltage 24V ship with a unit
 
 #### Switches and Relays
 
-| Gauge | Notes |
-|-------|-------|
-| SwitchBank | **Control.** A bank/grid of switches from one switches subtree — toggle each on/off, with optional dimming and colored (hue / saturation / Kelvin) lighting |
-| SwitchGauge | **Control.** A single switch/relay you toggle on/off; also supports dimming and color |
-| SwitchLED | **Control + indicator.** A switch you toggle, paired with a separate LED that reflects a *different* feedback path |
-| LEDGauge | **Read-only.** A single LED status indicator with configurable on/off colors |
-| LEDBank | **Read-only.** A bank/grid of LED status indicators from one subtree |
-| MultiSwitch | **Control.** A single multi-state selector — choose one of several values; includes an accidental-tap guard |
-| Slider | **Control.** A dimmer/level slider for a continuous (ratio or ranged) value |
+<div class="gauge-ref" markdown="1">
 
-Switch paths follow `electrical.switches.{bank}.{switch}.state`. The Switch* / MultiSwitch / Slider gauges *write* values back to the server (the path must support PUT); LED gauges only display.
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| SwitchBank | **Control.** A bank/grid of switches from one switches subtree — toggle each on/off, with optional dimming and colored (hue / saturation / Kelvin) lighting | `electrical.switches.{bank}` subtree |
+| SwitchGauge | **Control.** A single switch/relay you toggle on/off; also supports dimming and color | `electrical.switches.{bank}.{switch}.state` |
+| SwitchLED | **Control + indicator.** A switch you toggle, paired with a separate LED that reflects a *different* feedback path | a switch `.state` path + a separate LED `.state` path |
+| LEDGauge | **Read-only.** A single LED status indicator with configurable on/off colors | any state path, e.g. `electrical.switches.*.state` |
+| LEDBank | **Read-only.** A bank/grid of LED status indicators from one subtree | `electrical.switches.{bank}` subtree |
+| MultiSwitch | **Control.** A single multi-state selector — choose one of several values; includes an accidental-tap guard | a multi-state path (with `possibleValues`) |
+| Slider | **Control.** A dimmer/level slider for a continuous (ratio or ranged) value | any PUT-able ratio/ranged path |
+
+</div>
+
+The Switch* / MultiSwitch / Slider gauges *write* values back to the server (the path must support PUT); LED gauges only display.
 
 #### Autopilot
 
-| Gauge | Notes |
-|-------|-------|
-| AutoPilotControl | **Control.** Full autopilot panel — engage/standby, auto/wind modes, adjust heading, tack/confirm; issues commands to the [Raymarine autopilot server plugin](#server-plugins). Can select among multiple pilots |
-| RudderAngle | **Read-only** analog dial of rudder angle (±45°, green→red zones) — `steering.rudderAngle` |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| AutoPilotControl | **Control.** Full autopilot panel — engage/standby, auto/wind modes, adjust heading, tack/confirm; issues commands to the [Raymarine autopilot server plugin](#server-plugins). Can select among multiple pilots | `steering.autopilot.state`, `steering.autopilot.target.*` (commands via plugin) |
+| RudderAngle | **Read-only** analog dial of rudder angle (±45°, green→red zones) | `steering.rudderAngle` |
+
+</div>
 
 #### AIS
 
-| Gauge | Notes |
-|-------|-------|
-| AIS Targets | Sortable table of nearby vessels — toggle columns for type, distance, speed, COG and state. Requires AIS data in SignalK (`vessels.*`) |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| AIS Targets | Sortable table of nearby vessels — toggle columns for type, distance, speed, COG and state | `vessels.*` (+ own `navigation.position`) |
+
+</div>
 
 AIS targets also appear as an overlay on the **Map**, **Google Map** and **Navionics** gauges. (The picker may list a second "AISTargetsTable" entry; it is a leftover with no gauge behind it and does nothing — use **AIS Targets**.)
 
 #### Maps and Charts
 
-| Gauge | Notes |
-|-------|-------|
-| Map (Apple Maps) | Embedded Apple Maps with own-vessel position, anchor circle, COG/heading and next waypoint; map/satellite/hybrid and course/head/north-up modes |
-| Google Map | The same position map rendered with Google Maps |
-| Navionics | Embedded Navionics marine chart — requires a Navionics chart subscription |
-| Freeboard-SK | Embedded web view of the server's Freeboard-SK chartplotter — requires the Freeboard-SK webapp on the server |
-| Raymarine MFD | Embedded view of a Raymarine multifunction display — requires a compatible Raymarine MFD on the network |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| Map (Apple Maps) | Embedded Apple Maps with own-vessel position, anchor circle, COG/heading and next waypoint; map/satellite/hybrid and course/head/north-up modes | `navigation.position` (+ anchor, COG, heading, next waypoint) |
+| Google Map | The same position map rendered with Google Maps | `navigation.position` (+ anchor, COG, heading, next waypoint) |
+| Navionics | Embedded Navionics marine chart — requires a Navionics chart subscription | `navigation.position` (+ anchor, COG, heading, next waypoint) |
+| Freeboard-SK | Embedded web view of the server's Freeboard-SK chartplotter — requires the Freeboard-SK webapp on the server | server URL (not a SignalK path) |
+| Raymarine MFD | Embedded view of a Raymarine multifunction display — requires a compatible Raymarine MFD on the network | MFD on the network (not a SignalK path) |
+
+</div>
 
 #### Camera
 
-| Gauge | Notes |
-|-------|-------|
-| IP Camera | Embedded live video from an IP camera — HTTP/MJPEG or RTSP (decoded with FFmpeg); enter the camera URL in gauge settings |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| IP Camera | Embedded live video from an IP camera — HTTP/MJPEG or RTSP (decoded with FFmpeg) | camera URL (not a SignalK path) |
+
+</div>
 
 #### Fusion Stereo
 
-| Gauge | Notes |
-|-------|-------|
-| Fusion | **Control.** Full Fusion stereo: power, source select, transport (play/pause/next/prev) and per-zone volume; sends commands through the [Fusion server plugin](#server-plugins) |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| Fusion | **Control.** Full Fusion stereo: power, source select, transport (play/pause/next/prev) and per-zone volume; sends commands through the [Fusion server plugin](#server-plugins) | `entertainment.device.fusion1.*` (commands via plugin) |
+
+</div>
 
 #### Utility
 
-| Gauge | Notes |
-|-------|-------|
-| Text | Generic **digital readout** for any SignalK path — numeric or string. The base for many built-in text gauges |
-| Ratio | Generic dial that shows a **decimal-ratio (0–1)** value as a percentage |
-| Percent | Generic dial for a value **already in 0–100 percent** (no ratio conversion) |
-| Volume | Volume readout (m³ source converted to your units), with bar/analog styles |
-| Image | Static image tile (no data) |
-| Label | Static text-label tile (no data) |
-| Web | Embedded web view — the configured value is a **URL**, not a data path |
-| Empty | Blank placeholder slot (no data) |
-| GaugeStack | Stacks multiple gauges vertically in one slot |
-| Scrollable | A scrollable/paged container holding several gauges |
-| Time HHMM | Formats a path value as `HH:mm` — seconds-of-day or an ISO-8601 time (12/24-hour), not a wall clock |
-| Thermostat | Thermostat **control** — reads temperature, state, setting, and mode, and writes the setpoint and mode back to the server (for compatible HVAC systems) |
-| StaticThermostat | **Read-only** thermostat — displays temperature, **relative humidity**, state, and setpoint. Unlike `Thermostat`, it does not write changes back and adds a humidity reading. Use this for an HVAC source that publishes humidity or that you don't want to control from the app. |
-| WatchGridGauge | Multi-value grid tile (default 6 cells); primarily used on Apple Watch layouts |
-| AnchorAlarmControl | **Control.** Drop/raise the anchor and set the alarm radius (works with the anchor-alarm server plugin) |
-| Anchor | **Read-only** anchor view — position, drag distance and track |
-| Tide | Tide height and prediction |
-| MultiGauge | Composite tile combining several readings in one slot |
+<div class="gauge-ref" markdown="1">
+
+| Gauge | Notes | SignalK Path(s) / Source |
+|-------|-------|--------------------------|
+| Text | Generic **digital readout** for any SignalK path — numeric or string. The base for many built-in text gauges | any path |
+| Ratio | Generic dial that shows a **decimal-ratio (0–1)** value as a percentage | any 0–1 ratio path |
+| Percent | Generic dial for a value **already in 0–100 percent** (no ratio conversion) | any percent path |
+| Volume | Volume readout (m³ source converted to your units), with bar/analog styles | any volume (m³) path |
+| Image | Static image tile | none — static |
+| Label | Static text-label tile | none — static |
+| Web | Embedded web view | a URL (not a SignalK path) |
+| Empty | Blank placeholder slot | none |
+| GaugeStack | Stacks multiple gauges vertically in one slot | none — container |
+| Scrollable | A scrollable/paged container holding several gauges | none — container |
+| Time HHMM | Formats a path value as `HH:mm` — seconds-of-day or an ISO-8601 time (12/24-hour), not a wall clock | any time / seconds path |
+| Thermostat | Thermostat **control** — reads temperature, state, setting and mode, and writes the setpoint and mode back to the server (for compatible HVAC systems) | `environment.inside.*` — temperature, state, `thermostat.setting`, `thermostat.mode` |
+| StaticThermostat | **Read-only** thermostat — displays temperature, **relative humidity**, state and setpoint. Unlike `Thermostat`, it does not write changes back and adds a humidity reading. Use this for an HVAC source that publishes humidity or that you don't want to control from the app | `environment.inside.*` — temperature, humidity, state, setting |
+| WatchGridGauge | Multi-value grid tile (default 6 cells); primarily used on Apple Watch layouts | the paths of its child gauges |
+| AnchorAlarmControl | **Control.** Drop/raise the anchor and set the alarm radius (works with the anchor-alarm server plugin) | `navigation.anchor.*` |
+| Anchor | **Read-only** anchor view — position, drag distance and track | `navigation.anchor.*`, `navigation.headingTrue` |
+| Tide | Tide height and prediction | `environment.tide` |
+| MultiGauge | Composite tile combining several readings in one slot | multiple (composite) |
+
+</div>
 
 ---
 
