@@ -14,18 +14,19 @@ theme:
   # font request fails and the browser falls back to a serif default; this keeps
   # the docs self-contained and sans-serif everywhere.
   font: false
+  # Default to the dark deep-teal scheme to mirror wilhelmsk.com; the toggle
+  # still offers a light variant. Colors are `custom` — defined in
+  # docs/stylesheets/extra.css (WilhelmSK teal + brass palette).
   palette:
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: blue grey
-      accent: light blue
+    - scheme: slate
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: blue grey
-      accent: light blue
+    - scheme: default
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
