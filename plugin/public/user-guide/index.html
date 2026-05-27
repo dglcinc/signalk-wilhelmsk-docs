@@ -3756,7 +3756,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <p>Examples:
 - <code>environment.inside.thermostat.KIDS_ROOM.temperature</code> — temperature at a named thermostat
 - <code>electrical.batteries.house.voltage</code> — house battery bank voltage
-- <code>propulsion.boiler.gasInput</code> — gas input to a boiler (non-marine)</p>
+- <code>hvac.boiler.sentry.gasInputValue</code> — gas input to a boiler (non-marine)</p>
 <p>The top-level segment is conventionally the vessel context (<code>vessels.self</code> is implied). Paths from the <a href="https://signalspec.signalk.org/">SignalK specification</a> are standardised. Custom paths — created by plugins or third-party integrations — can use any naming, as long as they are unique within the server.</p>
 <h4 id="units-and-metadata">Units and Metadata<a class="headerlink" href="#units-and-metadata" title="Permanent link">&para;</a></h4>
 <p>SignalK paths carry metadata alongside their values. The <code>meta.units</code> field tells clients what unit the value is in (e.g. <code>K</code> for Kelvin, <code>m/s</code> for speed). WilhelmSK uses this metadata to convert and display values in the units you select in preferences.</p>
@@ -3883,7 +3883,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <td>Return air temperature</td>
 </tr>
 <tr>
-<td><code>environment.inside.boiler.waterTemperature</code></td>
+<td><code>hvac.boiler.sentry.waterTemp</code></td>
 <td>Hydronic boiler water temperature</td>
 </tr>
 <tr>
@@ -3895,7 +3895,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <td>Potable domestic hot water pressure (PSI)</td>
 </tr>
 <tr>
-<td><code>propulsion.boiler.gasInput</code></td>
+<td><code>hvac.boiler.sentry.gasInputValue</code></td>
 <td>Gas input to boiler (BTU or flow rate)</td>
 </tr>
 <tr>
@@ -3910,7 +3910,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 </table>
 <h4 id="layout-configuration">Layout configuration<a class="headerlink" href="#layout-configuration" title="Permanent link">&para;</a></h4>
 <p>The pivac WilhelmSK layout (<code>wilhelmsk/iphone.wlyt</code>) demonstrates mixing gauge types on a single page:</p>
-<p><strong>Thermostat gauges</strong> read temperature, state, and setpoint from related paths under a shared prefix. There are two classes: <code>Thermostat</code>, which also reads <code>mode</code> and writes the setpoint/mode back to the server, and <code>StaticThermostat</code>, which is read-only and additionally reads <strong>humidity</strong>. Because pivac publishes a humidity reading and the gauge is for display only, this layout uses <code>StaticThermostat</code>:</p>
+<p><strong>Thermostat gauges</strong> read temperature, state, and setpoint from related paths under a shared prefix. There are two classes: <code>Thermostat</code>, which also reads <code>mode</code> and writes the setpoint/mode back to the server, and <code>StaticThermostat</code>, which additionally reads <strong>humidity</strong> and writes the setpoint but has no <code>mode</code> control. Because pivac publishes a per-room humidity reading, this layout uses <code>StaticThermostat</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">&quot;10&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;className&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;StaticThermostat&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kids Room&quot;</span><span class="p">,</span>

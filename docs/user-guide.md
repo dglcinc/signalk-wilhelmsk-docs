@@ -1445,7 +1445,7 @@ Every value in SignalK is identified by a dot-separated path. The structure foll
 Examples:
 - `environment.inside.thermostat.KIDS_ROOM.temperature` — temperature at a named thermostat
 - `electrical.batteries.house.voltage` — house battery bank voltage
-- `propulsion.boiler.gasInput` — gas input to a boiler (non-marine)
+- `hvac.boiler.sentry.gasInputValue` — gas input to a boiler (non-marine)
 
 The top-level segment is conventionally the vessel context (`vessels.self` is implied). Paths from the [SignalK specification](https://signalspec.signalk.org/) are standardised. Custom paths — created by plugins or third-party integrations — can use any naming, as long as they are unique within the server.
 
@@ -1524,10 +1524,10 @@ Key fields:
 | `environment.inside.thermostat.KIDS_ROOM.humidity` | Thermostat humidity reading, Kids Room |
 | `environment.inside.hvac.IN.temperature.value` | Air handler supply air temperature |
 | `environment.inside.hvac.OUT.temperature.value` | Return air temperature |
-| `environment.inside.boiler.waterTemperature` | Hydronic boiler water temperature |
+| `hvac.boiler.sentry.waterTemp` | Hydronic boiler water temperature |
 | `electrical.ac.arduinoThermPSI.psi` | Hydronic system pressure (PSI) |
 | `electrical.ac.arduinoPSI.psi` | Potable domestic hot water pressure (PSI) |
-| `propulsion.boiler.gasInput` | Gas input to boiler (BTU or flow rate) |
+| `hvac.boiler.sentry.gasInputValue` | Gas input to boiler (BTU or flow rate) |
 | `hvac.boiler.sentry.status` | Boiler control status (string) |
 | `electrical.ac.switch.utility` | Relay bank for utility control switches |
 
@@ -1535,7 +1535,7 @@ Key fields:
 
 The pivac WilhelmSK layout (`wilhelmsk/iphone.wlyt`) demonstrates mixing gauge types on a single page:
 
-**Thermostat gauges** read temperature, state, and setpoint from related paths under a shared prefix. There are two classes: `Thermostat`, which also reads `mode` and writes the setpoint/mode back to the server, and `StaticThermostat`, which is read-only and additionally reads **humidity**. Because pivac publishes a humidity reading and the gauge is for display only, this layout uses `StaticThermostat`:
+**Thermostat gauges** read temperature, state, and setpoint from related paths under a shared prefix. There are two classes: `Thermostat`, which also reads `mode` and writes the setpoint/mode back to the server, and `StaticThermostat`, which additionally reads **humidity** and writes the setpoint but has no `mode` control. Because pivac publishes a per-room humidity reading, this layout uses `StaticThermostat`:
 
 ```json
 "10": {
