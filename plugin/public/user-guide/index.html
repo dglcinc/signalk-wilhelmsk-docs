@@ -987,7 +987,7 @@
   <a href="#anchor-alarm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Anchor Alarm
+        Anchoring and the Anchor Alarm
       
     </span>
   </a>
@@ -1746,7 +1746,7 @@
   <a href="#anchor-alarm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Anchor Alarm
+        Anchoring and the Anchor Alarm
       
     </span>
   </a>
@@ -2468,7 +2468,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 </ul>
 <hr />
 <h4 id="anchor">Anchor<a class="headerlink" href="#anchor" title="Permanent link">&para;</a></h4>
-<p>Opens the anchor alarm control screen. See <a href="#anchor-alarm">Anchor Alarm</a> in the Alarms section for full detail.</p>
+<p>Opens the anchor alarm control screen. See <a href="#anchor-alarm">Anchoring and the Anchor Alarm</a> in the Alarms section for full detail.</p>
 <p>The settings screen also provides:
 - <strong>Mode</strong> — Automatic (the app calculates the anchor position from current GPS position when you tap Drop) or Manual (you enter latitude/longitude directly).
 - <strong>Drop Anchor</strong> — records the current position as the anchor location and activates monitoring.
@@ -3589,30 +3589,29 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 - <strong>Visual / Sound</strong> — whether the zone triggers a color change, an audio alert, or both.</p>
 <p>Zones you configure in the app are stored locally and applied on top of any metadata the server provides.</p>
 <hr />
-<h3 id="anchor-alarm">Anchor Alarm<a class="headerlink" href="#anchor-alarm" title="Permanent link">&para;</a></h3>
-<p>The anchor alarm lets you drop a virtual anchor and receive an alert if the vessel drifts beyond a set radius.</p>
+<h3 id="anchor-alarm">Anchoring and the Anchor Alarm<a class="headerlink" href="#anchor-alarm" title="Permanent link">&para;</a></h3>
+<p>WilhelmSK lets you drop a virtual anchor, watch your swing while you're hooked, and raise it again. While the anchor is down it monitors your position and sounds an alarm <strong>only if</strong> the vessel drifts beyond a radius you set.</p>
 <blockquote>
-<p><strong>Requires the server plugin:</strong> The anchor alarm depends on the <code>@signalk/signalk-anchoralarm-plugin</code> running on your SignalK server. Without it, the drop/raise commands have no effect.</p>
+<p><strong>Requires server plugins:</strong> anchoring depends on the <code>@signalk/signalk-anchoralarm-plugin</code> running on your SignalK server — without it the drop and raise commands have no effect. The Live Activity (below) additionally needs the <code>signalk-push-notifications</code> plugin; everything else works without it.</p>
 </blockquote>
-<h4 id="setting-the-anchor">Setting the anchor<a class="headerlink" href="#setting-the-anchor" title="Permanent link">&para;</a></h4>
+<h4 id="dropping-the-anchor">Dropping the anchor<a class="headerlink" href="#dropping-the-anchor" title="Permanent link">&para;</a></h4>
 <ol>
-<li>Open the <strong>Anchor Alarm</strong> panel (available as a gauge type, or from the top bar anchor button if shown).</li>
+<li>Open the <strong>Anchor Alarm</strong> panel (available as a gauge type, or from the top-bar anchor button if shown).</li>
 <li>Set the <strong>alarm radius</strong> in meters — the maximum distance the vessel is allowed to drift from the drop point.</li>
-<li>Tap <strong>Drop Anchor</strong>. The app sends the current GPS position and radius to the server plugin, which begins monitoring.</li>
+<li>Tap <strong>Drop Anchor</strong>. The app sends the current GPS position and radius to the server plugin, which begins monitoring. If the push-notifications plugin is installed, this also starts the <strong>Live Activity</strong> (below).</li>
 </ol>
-<p>The anchor button in the top bar changes color to confirm:
-- <strong>Green</strong> — anchor is down with a valid radius set.
-- <strong>Yellow</strong> — anchor is down but no radius has been configured.
-- <strong>Text color</strong> — no anchor is currently dropped.</p>
-<h4 id="when-the-alarm-fires">When the alarm fires<a class="headerlink" href="#when-the-alarm-fires" title="Permanent link">&para;</a></h4>
-<p>If the vessel drifts beyond the configured radius, the server plugin raises a <code>notifications.anchoralarm.*</code> notification. This appears in the alarm indicator (red) and the marquee text, and triggers a local alert on the device.</p>
-<h4 id="live-activity-lock-screen-dynamic-island-and-apple-watch">Live Activity (Lock Screen, Dynamic Island, and Apple Watch)<a class="headerlink" href="#live-activity-lock-screen-dynamic-island-and-apple-watch" title="Permanent link">&para;</a></h4>
-<p>While the anchor is down, WilhelmSK can show a <strong>Live Activity</strong> that tracks the anchor watch without opening the app — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the deployment phase (deploying, set, or dragging), distance from the bow, rode out, bearing, and the alarm radius, and updates live as the plugin reports new anchor data. It starts automatically when you drop the anchor and ends when you raise it.</p>
-<blockquote>
-<p><strong>Requires the server plugin:</strong> the Live Activity is driven by the <code>signalk-push-notifications</code> plugin (in addition to the anchor-alarm plugin). Without it the activity won't start.</p>
-</blockquote>
+<p>The anchor button in the top bar changes color to confirm:</p>
+<ul>
+<li><strong>Green</strong> — anchor is down with a valid radius set.</li>
+<li><strong>Yellow</strong> — anchor is down but no radius has been configured.</li>
+<li><strong>Text color</strong> — no anchor is currently dropped.</li>
+</ul>
+<h4 id="watching-the-swing-the-live-activity">Watching the swing — the Live Activity<a class="headerlink" href="#watching-the-swing-the-live-activity" title="Permanent link">&para;</a></h4>
+<p>When you drop the anchor, WilhelmSK starts a <strong>Live Activity</strong> so you can keep an eye on the anchor watch without opening the app — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the current phase (deploying, set, or dragging), distance from the bow, rode out, bearing, and the alarm radius, and updates live as new anchor data arrives. It ends automatically when you raise the anchor.</p>
+<h4 id="if-the-vessel-drifts">If the vessel drifts<a class="headerlink" href="#if-the-vessel-drifts" title="Permanent link">&para;</a></h4>
+<p>If the vessel drifts beyond the configured radius, the server plugin raises a <code>notifications.anchoralarm.*</code> notification: the Live Activity switches to its <strong>dragging</strong> phase, and the alarm shows in the top-bar alarm indicator (red) and the marquee text, and triggers a local alert on the device.</p>
 <h4 id="raising-the-anchor">Raising the anchor<a class="headerlink" href="#raising-the-anchor" title="Permanent link">&para;</a></h4>
-<p>Tap <strong>Raise Anchor</strong> in the anchor panel. This sends a raise command to the plugin, which clears the anchor position and stops monitoring.</p>
+<p>Tap <strong>Raise Anchor</strong> in the anchor panel. This sends a raise command to the plugin, which clears the anchor position, stops monitoring, and ends the Live Activity.</p>
 <hr />
 <h3 id="push-notifications_1">Push Notifications<a class="headerlink" href="#push-notifications_1" title="Permanent link">&para;</a></h3>
 <p>Push notifications let the app alert you even when it is in the background or the device screen is off.</p>
