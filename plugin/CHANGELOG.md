@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.8
+
+- Docs: reworked the anchor section for clarity — renamed "Anchor Alarm" to
+  **"Anchoring and the Anchor Alarm"** (it covers dropping and raising, not just
+  the alarm), folded the Live Activity into the drop→drift→raise flow (it starts
+  when you drop the anchor and ends when you raise it), and clarified that the
+  alarm fires *only* if the vessel drifts. The `#anchor-alarm` link target is
+  preserved.
+
 ## 0.1.7
 
 - Docs: **Anchor Alarm** — documented the new anchor-deployment **Live Activity**
