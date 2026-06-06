@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.7
+
+- Docs: **Anchor Alarm** — documented the new anchor-deployment **Live Activity**
+  (iPhone Lock Screen, Dynamic Island, and the Apple Watch Smart Stack on
+  watchOS 11+); requires the `signalk-push-notifications` plugin.
+- Docs: **Alarms** — documented the Silence / Acknowledge / Clear-All bulk
+  actions in the Alerts list.
+- Docs: **Maps** — the Navionics gauge now supports North/Head/Course Up
+  orientation.
+- Docs: **Pages** — noted that map pages page with a two-finger swipe (a single
+  finger pans the chart).
+
 ## 0.1.6
 
 - Docs: comprehensive **Gauge Reference** overhaul. Added five gauge types that
