@@ -2205,6 +2205,9 @@
 <hr />
 <h3 id="pages-and-the-gauge-grid">Pages and the Gauge Grid<a class="headerlink" href="#pages-and-the-gauge-grid" title="Permanent link">&para;</a></h3>
 <p>Within a layout, data is organized into <em>pages</em>. Swipe left and right (iPhone/iPad portrait) or up and down (iPad landscape) to move between pages. Each page displays a configurable grid of gauges.</p>
+<blockquote>
+<p><strong>On a map page,</strong> a one-finger swipe pans the chart rather than changing pages. Use a <strong>two-finger</strong> left/right swipe to move to the next or previous page.</p>
+</blockquote>
 <p>Pages use named templates that control how space is divided:</p>
 <table>
 <thead>
@@ -3346,7 +3349,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 </tr>
 <tr>
 <td>Navionics</td>
-<td>Embedded Navionics marine chart — requires a Navionics chart subscription</td>
+<td>Embedded Navionics marine chart — requires a Navionics chart subscription; supports North/Head/Course Up orientation</td>
 <td><code>navigation.position</code> (+ anchor, COG, heading, next waypoint)</td>
 </tr>
 <tr>
@@ -3516,7 +3519,7 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 <li><strong>Gray / dimmed</strong> — no active alarms, or all notifications have been acknowledged.</li>
 </ul>
 <p>When alarms are active, a scrolling marquee next to the button shows the vessel name and the notification message. If multiple alarms are active, it cycles through them every four seconds. The background color of the marquee matches the severity: yellow for warnings, red for alarms.</p>
-<p>Tapping the alarm button opens the <strong>Alerts list</strong>, which shows every active notification with its path, message, and timestamp. From there you can act on each alarm individually.</p>
+<p>Tapping the alarm button opens the <strong>Alerts list</strong>, which shows every active notification with its path, message, and timestamp. Each row has its own <strong>silence</strong>, <strong>acknowledge</strong>, and <strong>clear</strong> buttons, and a title bar at the top of the list offers <strong>Silence All</strong>, <strong>Acknowledge All</strong>, and <strong>Clear All</strong> to act on every alert at once. Each bulk action is enabled only when at least one alert supports it — so on a read-only connection they appear disabled.</p>
 <hr />
 <h3 id="server-side-alarms">Server-Side Alarms<a class="headerlink" href="#server-side-alarms" title="Permanent link">&para;</a></h3>
 <p>SignalK represents alarms and notifications as values under the <code>notifications.*</code> path hierarchy. Any value published there — by the server itself, by an instrument, or by a plugin — appears in WilhelmSK as a notification.</p>
@@ -3603,6 +3606,11 @@ The format is JSON. Open it in any text editor. The top-level <code>layout</code
 - <strong>Text color</strong> — no anchor is currently dropped.</p>
 <h4 id="when-the-alarm-fires">When the alarm fires<a class="headerlink" href="#when-the-alarm-fires" title="Permanent link">&para;</a></h4>
 <p>If the vessel drifts beyond the configured radius, the server plugin raises a <code>notifications.anchoralarm.*</code> notification. This appears in the alarm indicator (red) and the marquee text, and triggers a local alert on the device.</p>
+<h4 id="live-activity-lock-screen-dynamic-island-and-apple-watch">Live Activity (Lock Screen, Dynamic Island, and Apple Watch)<a class="headerlink" href="#live-activity-lock-screen-dynamic-island-and-apple-watch" title="Permanent link">&para;</a></h4>
+<p>While the anchor is down, WilhelmSK can show a <strong>Live Activity</strong> that tracks the anchor watch without opening the app — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the deployment phase (deploying, set, or dragging), distance from the bow, rode out, bearing, and the alarm radius, and updates live as the plugin reports new anchor data. It starts automatically when you drop the anchor and ends when you raise it.</p>
+<blockquote>
+<p><strong>Requires the server plugin:</strong> the Live Activity is driven by the <code>signalk-push-notifications</code> plugin (in addition to the anchor-alarm plugin). Without it the activity won't start.</p>
+</blockquote>
 <h4 id="raising-the-anchor">Raising the anchor<a class="headerlink" href="#raising-the-anchor" title="Permanent link">&para;</a></h4>
 <p>Tap <strong>Raise Anchor</strong> in the anchor panel. This sends a raise command to the plugin, which clears the anchor position and stops monitoring.</p>
 <hr />
