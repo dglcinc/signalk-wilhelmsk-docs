@@ -603,7 +603,7 @@ Provides access to layouts created in an older format. If you have layouts from 
 
 #### Anchor
 
-Opens the anchor alarm control screen. See [Anchor Alarm](#anchor-alarm) in the Alarms section for full detail.
+Opens the anchor alarm control screen. See [Anchoring and the Anchor Alarm](#anchor-alarm) in the Alarms section for full detail.
 
 The settings screen also provides:
 - **Mode** — Automatic (the app calculates the anchor position from current GPS position when you tap Drop) or Manual (you enter latitude/longitude directly).
@@ -1282,36 +1282,35 @@ Zones you configure in the app are stored locally and applied on top of any meta
 
 ---
 
-### Anchor Alarm
+### Anchoring and the Anchor Alarm { #anchor-alarm }
 
-The anchor alarm lets you drop a virtual anchor and receive an alert if the vessel drifts beyond a set radius.
+WilhelmSK lets you drop a virtual anchor, watch your swing while you're hooked, and raise it again. While the anchor is down it monitors your position and sounds an alarm **only if** the vessel drifts beyond a radius you set.
 
-> **Requires the server plugin:** The anchor alarm depends on the `@signalk/signalk-anchoralarm-plugin` running on your SignalK server. Without it, the drop/raise commands have no effect.
+> **Requires server plugins:** anchoring depends on the `@signalk/signalk-anchoralarm-plugin` running on your SignalK server — without it the drop and raise commands have no effect. The Live Activity (below) additionally needs the `signalk-push-notifications` plugin; everything else works without it.
 
-#### Setting the anchor
+#### Dropping the anchor
 
-1. Open the **Anchor Alarm** panel (available as a gauge type, or from the top bar anchor button if shown).
+1. Open the **Anchor Alarm** panel (available as a gauge type, or from the top-bar anchor button if shown).
 2. Set the **alarm radius** in meters — the maximum distance the vessel is allowed to drift from the drop point.
-3. Tap **Drop Anchor**. The app sends the current GPS position and radius to the server plugin, which begins monitoring.
+3. Tap **Drop Anchor**. The app sends the current GPS position and radius to the server plugin, which begins monitoring. If the push-notifications plugin is installed, this also starts the **Live Activity** (below).
 
 The anchor button in the top bar changes color to confirm:
+
 - **Green** — anchor is down with a valid radius set.
 - **Yellow** — anchor is down but no radius has been configured.
 - **Text color** — no anchor is currently dropped.
 
-#### When the alarm fires
+#### Watching the swing — the Live Activity
 
-If the vessel drifts beyond the configured radius, the server plugin raises a `notifications.anchoralarm.*` notification. This appears in the alarm indicator (red) and the marquee text, and triggers a local alert on the device.
+When you drop the anchor, WilhelmSK starts a **Live Activity** so you can keep an eye on the anchor watch without opening the app — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the current phase (deploying, set, or dragging), distance from the bow, rode out, bearing, and the alarm radius, and updates live as new anchor data arrives. It ends automatically when you raise the anchor.
 
-#### Live Activity (Lock Screen, Dynamic Island, and Apple Watch)
+#### If the vessel drifts
 
-While the anchor is down, WilhelmSK can show a **Live Activity** that tracks the anchor watch without opening the app — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the deployment phase (deploying, set, or dragging), distance from the bow, rode out, bearing, and the alarm radius, and updates live as the plugin reports new anchor data. It starts automatically when you drop the anchor and ends when you raise it.
-
-> **Requires the server plugin:** the Live Activity is driven by the `signalk-push-notifications` plugin (in addition to the anchor-alarm plugin). Without it the activity won't start.
+If the vessel drifts beyond the configured radius, the server plugin raises a `notifications.anchoralarm.*` notification: the Live Activity switches to its **dragging** phase, and the alarm shows in the top-bar alarm indicator (red) and the marquee text, and triggers a local alert on the device.
 
 #### Raising the anchor
 
-Tap **Raise Anchor** in the anchor panel. This sends a raise command to the plugin, which clears the anchor position and stops monitoring.
+Tap **Raise Anchor** in the anchor panel. This sends a raise command to the plugin, which clears the anchor position, stops monitoring, and ends the Live Activity.
 
 ---
 

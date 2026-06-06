@@ -1,6 +1,6 @@
 {
   "name": "signalk-wilhelmsk-docs",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Serves the WilhelmSK app documentation from your SignalK server, so in-app help and direct browser access work without an internet connection. Open it from the Webapps menu or browse to /signalk-wilhelmsk-docs/.",
   "main": "index.js",
   "signalk-plugin-enabled-by-default": true,
