@@ -372,6 +372,8 @@ Each layout is independent — its pages, gauge arrangement, and gauge configura
 
 Within a layout, data is organized into *pages*. Swipe left and right (iPhone/iPad portrait) or up and down (iPad landscape) to move between pages. Each page displays a configurable grid of gauges.
 
+> **On a map page,** a one-finger swipe pans the chart rather than changing pages. Use a **two-finger** left/right swipe to move to the next or previous page.
+
 Pages use named templates that control how space is divided:
 
 | Template | Description |
@@ -1150,7 +1152,7 @@ AIS targets also appear as an overlay on the **Map**, **Google Map** and **Navio
 |-------|-------|--------------------------|
 | Map (Apple Maps) | Embedded Apple Maps with own-vessel position, anchor circle, COG/heading and next waypoint; map/satellite/hybrid and course/head/north-up modes | `navigation.position` (+ anchor, COG, heading, next waypoint) |
 | Google Map | The same position map rendered with Google Maps | `navigation.position` (+ anchor, COG, heading, next waypoint) |
-| Navionics | Embedded Navionics marine chart — requires a Navionics chart subscription | `navigation.position` (+ anchor, COG, heading, next waypoint) |
+| Navionics | Embedded Navionics marine chart — requires a Navionics chart subscription; supports North/Head/Course Up orientation | `navigation.position` (+ anchor, COG, heading, next waypoint) |
 | Freeboard-SK | Embedded web view of the server's Freeboard-SK chartplotter — requires the Freeboard-SK webapp on the server | server URL (not a SignalK path) |
 | Raymarine MFD | Embedded view of a Raymarine multifunction display — requires a compatible Raymarine MFD on the network | MFD on the network (not a SignalK path) |
 
@@ -1221,7 +1223,7 @@ The alarm button in the top bar gives you a persistent status summary:
 
 When alarms are active, a scrolling marquee next to the button shows the vessel name and the notification message. If multiple alarms are active, it cycles through them every four seconds. The background color of the marquee matches the severity: yellow for warnings, red for alarms.
 
-Tapping the alarm button opens the **Alerts list**, which shows every active notification with its path, message, and timestamp. From there you can act on each alarm individually.
+Tapping the alarm button opens the **Alerts list**, which shows every active notification with its path, message, and timestamp. Each row has its own **silence**, **acknowledge**, and **clear** buttons, and a title bar at the top of the list offers **Silence All**, **Acknowledge All**, and **Clear All** to act on every alert at once. Each bulk action is enabled only when at least one alert supports it — so on a read-only connection they appear disabled.
 
 ---
 
@@ -1300,6 +1302,12 @@ The anchor button in the top bar changes color to confirm:
 #### When the alarm fires
 
 If the vessel drifts beyond the configured radius, the server plugin raises a `notifications.anchoralarm.*` notification. This appears in the alarm indicator (red) and the marquee text, and triggers a local alert on the device.
+
+#### Live Activity (Lock Screen, Dynamic Island, and Apple Watch)
+
+While the anchor is down, WilhelmSK can show a **Live Activity** that tracks the anchor watch without opening the app — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the deployment phase (deploying, set, or dragging), distance from the bow, rode out, bearing, and the alarm radius, and updates live as the plugin reports new anchor data. It starts automatically when you drop the anchor and ends when you raise it.
+
+> **Requires the server plugin:** the Live Activity is driven by the `signalk-push-notifications` plugin (in addition to the anchor-alarm plugin). Without it the activity won't start.
 
 #### Raising the anchor
 
