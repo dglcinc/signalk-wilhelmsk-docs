@@ -1300,17 +1300,17 @@ The anchor button in the top bar changes color to confirm:
 - **Yellow** — anchor is down but no radius has been configured.
 - **Text color** — no anchor is currently dropped.
 
-#### Watching the swing — the Live Activity
+#### Tracking the deployment — the Live Activity
 
-When you drop the anchor, WilhelmSK starts a **Live Activity** so you can keep an eye on the anchor watch without opening the app — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the current phase (deploying, set, or dragging), distance from the bow, rode out, bearing, and the alarm radius, and updates live as new anchor data arrives. It ends automatically when you raise the anchor.
+When you drop the anchor, WilhelmSK starts a **Live Activity** that tracks the deployment — on the iPhone Lock Screen and in the Dynamic Island, and (watchOS 11 and later) in the Apple Watch Smart Stack. It shows the current phase, distance from the bow, rode out, bearing, and the alarm radius, updating live as you pay out rode. Once you lock the alarm radius — confirming the anchor is set — the Live Activity shows a final **set** state and ends. It deliberately stops there rather than running the whole time you are at anchor; ongoing drag monitoring is handled by the anchor alarm (below).
 
 #### If the vessel drifts
 
-If the vessel drifts beyond the configured radius, the server plugin raises a `notifications.anchoralarm.*` notification: the Live Activity switches to its **dragging** phase, and the alarm shows in the top-bar alarm indicator (red) and the marquee text, and triggers a local alert on the device.
+If the vessel drifts beyond the configured radius, the server plugin raises a `notifications.anchoralarm.*` notification: the alarm shows in the top-bar alarm indicator (red) and the marquee text, and triggers a local alert on the device (and a push notification when remote push is enabled). Because the Live Activity ends once the anchor is set, a drag while you are anchored is delivered through these alarm notifications rather than the Live Activity.
 
 #### Raising the anchor
 
-Tap **Raise Anchor** in the anchor panel. This sends a raise command to the plugin, which clears the anchor position, stops monitoring, and ends the Live Activity.
+Tap **Raise Anchor** in the anchor panel. This sends a raise command to the plugin, which clears the anchor position and stops monitoring. (If you raise before ever locking a radius, this also ends the deployment Live Activity.)
 
 ---
 
